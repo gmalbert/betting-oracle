@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Machine Learning Models — Betting Oracle</title>
+	<link rel="icon" type="image/x-icon" href="data_files/fav.ico">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<header class="site-header">
+		<div class="container">
+			<div class="header-brand">
+				<img class="logo" src="data_files/logo.png" alt="Logo">
+				<h1>Machine Learning Models</h1>
+			</div>
+			<nav class="site-nav site-nav--boxed">
+				<a href="index.html">Home</a>
+				<a href="packages.html">Packages</a>
+				<a href="machine-learning-models.html">Models</a>
+			</nav>
+		</div>
+	</header>
+
+	<main class="container">
+		<p class="lead">Overview of core ML models used across projects, why each is chosen, and the types of insights you can extract from them.</p>
+
+		<section class="grid">
+
+			<article class="card">
+				<div class="card-left">
+					<a href="#"><img src="data_files/XGBoost.png" alt="XGBoost"></a>
+				</div>
+				<div class="card-body">
+					<h2><a href="https://xgboost.readthedocs.io/" target="_blank" rel="noopener">XGBoost</a></h2>
+					<p class="desc">Why: Fast, regularized gradient boosting with strong performance on tabular data and good handling of missing values.</p>
+					<p class="desc">Insights: Feature importance, SHAP values for per-prediction explanations, partial dependence to show marginal feature effects.</p>
+				</div>
+			</article>
+
+			<article class="card">
+				<div class="card-left">
+					<a href="#"><img src="data_files/lightgbm.png" alt="LightGBM"></a>
+				</div>
+				<div class="card-body">
+					<h2><a href="https://lightgbm.readthedocs.io/" target="_blank" rel="noopener">LightGBM</a></h2>
+					<p class="desc">Why: Highly optimized gradient-boosting implementation that trains quickly on large datasets and supports categorical features efficiently.</p>
+					<p class="desc">Insights: Fast experiments for hyperparameter tuning, feature importance, and sub-sample analyses for large-scale pipelines.</p>
+				</div>
+			</article>
+
+			<article class="card">
+				<div class="card-left">
+					<a href="#"><img src="data_files/random-forest.png" alt="Random Forest"></a>
+				</div>
+				<div class="card-body">
+					<h2><a href="https://scikit-learn.org/stable/modules/ensemble.html#random-forests" target="_blank" rel="noopener">Random Forest</a></h2>
+					<p class="desc">Why: Robust ensemble baseline that reduces variance; useful where interpretability and stability matter.</p>
+					<p class="desc">Insights: Out-of-bag error estimates, permutation feature importance, and per-tree diagnostics to understand variance.</p>
+				</div>
+			</article>
+
+			<article class="card">
+				<div class="card-left">
+					<a href="#"><img src="data_files/neural-network.png" alt="Neural Network"></a>
+				</div>
+				<div class="card-body">
+					<h2><a href="https://www.tensorflow.org/" target="_blank" rel="noopener">Neural Networks</a></h2>
+					<p class="desc">Why: Flexible models for learning complex, non-linear relationships; useful for time-series, embeddings, or when combining many inputs.</p>
+					<p class="desc">Insights: Layer activations and embeddings, saliency maps, and sequence-level attention weights for interpretability.</p>
+				</div>
+			</article>
+
+			<article class="card">
+				<div class="card-left">
+					<a href="#"><img src="data_files/ensemble.png" alt="Ensemble"></a>
+				</div>
+				<div class="card-body">
+					<h2><a href="https://scikit-learn.org/stable/modules/ensemble.html" target="_blank" rel="noopener">Ensembles</a></h2>
+					<p class="desc">Why: Combine strengths of multiple algorithms to improve robustness and accuracy, reduce model-specific biases.</p>
+					<p class="desc">Insights: Consensus/confidence across models, model-level contribution analysis, and ensemble calibration diagnostics.</p>
+				</div>
+			</article>
+
+		</section>
+
+		<p>If you want, I can add links to example notebooks, SHAP plots, or a `requirements.txt` for each model.</p>
+	</main>
+
+	<footer class="site-footer">
+		<div class="container">© <span id="year"></span> Betting Oracle</div>
+	</footer>
+
+	<script>
+		document.getElementById('year').textContent = new Date().getFullYear();
+	</script>
+</body>
+</html>
