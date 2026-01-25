@@ -1,14 +1,13 @@
 <img src="data_files/logo.png" alt="Logo" width="220" />
 
-# Betting Oracle — Links
+# Betting Oracle — Data Analysis for Sports Betting
 
-> Betting Oracle is a compact hub that collects and showcases my sports‑prediction projects and dashboards in one place. Each section below links to a repository or app and includes a short summary so you can quickly explore the model, data sources, and how to run the project. Click a link to open the repo or follow the quick‑start steps in each README to run the Streamlit apps locally.
+> Betting Oracle is a compact hub that collects and showcases my sports‑prediction projects and dashboards in one place. Each card below links to a repository or app and includes a short summary so you can quickly explore the model, data sources, and how to run the project. Click an icon to open the repo or follow the quick‑start steps in each README to run the Streamlit apps locally.
 
 ---
 
-## Horse Racing Predictions
-
-[Repository](https://github.com/gmalbert/horse-racing-predictions)
+## Equine Edge - Horse Racing Predictions
+### [www.equine-edge.horse](http://equine-edge.horse)
 
 A comprehensive ML system for UK horse-racing with a Streamlit dashboard, data pipeline, and XGBoost win prediction model. Includes a race profitability scorer, fixture calendar with predicted scores, and utilities to convert probabilities into betting odds.
 
@@ -16,9 +15,8 @@ The system identifies the most profitable races to bet on using a smart scoring 
 
 ---
 
-## Premier League Predictor
-
-[Repository](https://github.com/gmalbert/premier-league)
+## Pitch Oracle - Premier League Predictor
+### [www.pitch-oracle.com](http://pitch-oracle.com)
 
 A Premier League match predictor with a Streamlit UI and ensemble modeling (XGBoost, Random Forest, Gradient Boosting, Logistic Regression) plus optional neural/LSTM support. Shows upcoming fixtures, predicted probabilities, referee/manager statistics, and model-comparison metrics with scripts to fetch and process fixtures.
 
@@ -26,9 +24,8 @@ This project goes deeper than just match outcomes—it analyzes referee tendenci
 
 ---
 
-## NFL Predictions
-
-[Repository](https://github.com/gmalbert/nfl-predictions)
+## Gridiron Oracle - NFL Predictions
+### [www.gridiron-oracle.com](http://gridiron-oracle.com)
 
 A sophisticated NFL analytics platform with multi-model ML pipelines and a multi-page Streamlit dashboard. Offers player props, DraftKings Pick 6 tools, automated nightly prediction updates, and production-ready features for generating and exporting betting insights.
 
@@ -36,9 +33,8 @@ This is one of the most feature-rich systems—it can predict spreads, moneyline
 
 ---
 
-## F1 Analysis
-
-[Repository](https://github.com/gmalbert/f1Analysis)
+## Gridlocked Oracle - F1 Analysis
+### [www.gridlocked.racing](http://gridlocked.racing)
 
 Formula 1 data analysis tools and a Streamlit app that generate race analytics from F1DB and FastF1 sources. Includes generators for CSV/JSON datasets, multiple model support, email notifications, and extensive feature engineering for predictive modeling.
 
@@ -46,9 +42,8 @@ With 86+ engineered features and support for four different ML algorithms (XGBoo
 
 ---
 
-## March Madness Predictor
-
-[Repository](https://github.com/gmalbert/march-madness)
+## Bracket Oracle - March Madness Predictor
+### [www.bracket-oracle.com](http://bracket-oracle.com)
 
 A March Madness betting prediction system that integrates historical data, KenPom and BartTorvik efficiency ratings, and ML models. Provides real-time predictions, underdog value detection, Kelly Criterion sizing, and automated data pipelines for tournament analytics.
 

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Packages — Betting Oracle</title>
+		<link rel="icon" type="image/x-icon" href="data_files/fav.ico">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<header class="site-header">
+		<div class="container">
+			<div class="header-brand">
+				<img class="logo" src="data_files/logo.png" alt="Logo">
+				<h1>Packages Used</h1>
+			</div>
+			<nav class="site-nav site-nav--boxed">
+				<a href="index.html">Home</a>
+				<a href="packages.html">Packages</a>
+				<a href="machine-learning-models.html">Models</a>
+			</nav>
+		</div>
+	</header>
+
+	<main class="container">
+		<p class="lead">Common packages used across the Betting Oracle projects, with a short description and typical usage.</p>
+
+		<section class="grid">
+			<article class="card">
+				<div class="card-left">
+					<a href="#"><img src="data_files/python.png" alt="Python"></a>
+				</div>
+				<div class="card-body">
+					<h2>Python / Machine Learning</h2>
+					<ul>
+						<li><strong><a href="https://pypi.org/project/pandas">pandas</a></strong>: data manipulation and I/O for CSV/JSON/SQL.</li>
+					<li><strong><a href="https://pypi.org/project/numpy">numpy</a></strong>: numerical arrays and fast computations.</li>
+					<li><strong><a href="https://pypi.org/project/scikit-learn">scikit-learn</a></strong>: model building, validation, and preprocessing utilities.</li>
+					<li><strong><a href="https://pypi.org/project/xgboost">xgboost</a></strong>: gradient-boosted trees for classification/regression.</li>
+					<li><strong><a href="https://pypi.org/project/lightgbm">lightgbm</a></strong>: fast gradient boosting optimized for large datasets.</li>
+					<li><strong><a href="https://pypi.org/project/catboost">catboost</a></strong>: gradient boosting that handles categorical features.</li>
+					<li><strong><a href="https://pypi.org/project/streamlit">streamlit</a></strong>: build and run interactive dashboards and apps.</li>
+					<li><strong><a href="https://pypi.org/project/tensorflow">tensorflow</a></strong> / <strong><a href="https://pypi.org/project/torch">torch</a></strong>: optional deep learning frameworks for neural models.</li>
+					</ul>
+				</div>
+			</article>
+
+			<article class="card">
+				<div class="card-left">
+					<a href="#"><img src="data_files/data.png" alt="Data"></a>
+				</div>
+				<div class="card-body">
+					<h2>Data &amp; Web</h2>
+					<ul>
+						<li><strong><a href="https://pypi.org/project/requests">requests</a></strong>: HTTP requests for fetching APIs and pages.</li>
+						<li><strong><a href="https://pypi.org/project/beautifulsoup4">beautifulsoup4</a></strong>: HTML parsing and scraping utilities.</li>
+						<li><strong><a href="https://pypi.org/project/fastf1">fastf1</a></strong>: F1 telemetry and session data (used in F1 projects).</li>
+						<li><strong><a href="https://pypi.org/project/SQLAlchemy">sqlalchemy</a></strong>: database access and ORM helpers.</li>
+					</ul>
+				</div>
+			</article>
+
+			<article class="card">
+				<div class="card-left">
+					<a href="#"><img src="data_files/utilities.png" alt="Utilities"></a>
+				</div>
+				<div class="card-body">
+					<h2>Utilities & Testing</h2>
+					<ul>
+						<li><strong><a href="https://pypi.org/project/pytest">pytest</a></strong>: tests and assertions.</li>
+						<li><strong><a href="https://pypi.org/project/black">black</a></strong> / <strong><a href="https://pypi.org/project/ruff">ruff</a></strong>: code formatting and linting.</li>
+					</ul>
+				</div>
+			</article>
+		</section>
+
+		<p>If you want a requirements file for a specific project, check that repository's README or ask me to generate one.</p>
+	</main>
+
+	<footer class="site-footer">
+		<div class="container">© <span id="year"></span> Betting Oracle</div>
+	</footer>
+
+	<script>
+		document.getElementById('year').textContent = new Date().getFullYear();
+	</script>
+</body>
+</html>
