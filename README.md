@@ -1,4 +1,4 @@
-![Logo](data_files/logo.png)
+<img src="data_files/logo.png" alt="Logo" width="220" />
 
 # Betting Oracle — Links
 
