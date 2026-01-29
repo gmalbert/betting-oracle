@@ -51,4 +51,43 @@ This system combines a decade of tournament data with advanced efficiency metric
 
 ---
 
+## Shared Components
+
+For consistent branding across all Betting Oracle applications, use the shared footer component. This provides a footer with the Betting Oracle logo and a link back to this portfolio site.
+
+**Option 1: Copy the footer.py file to each app repository**
+```python
+# Copy footer.py from this repository to your app's directory
+from footer import add_betting_oracle_footer
+
+# At the end of your Streamlit app
+add_betting_oracle_footer()
+```
+
+**Option 2: Copy the HTML directly into your app**
+```python
+import streamlit as st
+
+# At the end of your app
+footer_html = """
+<div style="text-align: center; padding: 20px 0; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+    <p style="margin: 0 0 10px 0; font-size: 14px; color: #666; font-family: sans-serif;">
+        Powered by <a href="https://www.betting-oracle.com" target="_blank" style="color: #3b82f6; text-decoration: none; font-weight: bold;">Betting Oracle</a>
+    </p>
+    <p style="margin: 0 0 15px 0; font-size: 12px; color: #888; font-family: sans-serif;">
+        Sports Prediction Analytics
+    </p>
+    <a href="https://www.betting-oracle.com" target="_blank">
+        <img src="https://raw.githubusercontent.com/gmalbert/betting-oracle/main/data_files/logo.png"
+             alt="Betting Oracle Logo"
+             style="height: 60px; width: auto; border: none;">
+    </a>
+</div>
+"""
+
+st.markdown(footer_html, unsafe_allow_html=True)
+```
+
+---
+
 © 2026 Betting Oracle
