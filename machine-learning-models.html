@@ -26,20 +26,20 @@
 	<header class="site-header">
 		<div class="container">
 			<div class="header-brand">
-				<img class="logo" src="data_files/logo.png" alt="Logo">
-				<h1>Machine Learning Models</h1>
-			</div>
-			<nav class="site-nav site-nav--boxed">
-				<a href="index.html">Home</a>
-				<a href="packages.html">Packages</a>
-				<a href="machine-learning-models.html">Models</a>
+				<a href="index.html"><img class="logo" src="data_files/logo.png" alt="Logo"></a>
+				<nav class="site-nav site-nav--boxed">
+				[<a href="index.html">Home</a>]
+				[<a href="packages.html">Packages</a>]
+				[<a href="machine-learning-models.html">Models</a>]
 			</nav>
+			</div>
+			
 		</div>
 	</header>
 
 	<main class="container">
-		<p class="lead">Overview of core ML models used across projects, why each is chosen, and the types of insights you can extract from them.</p>
-
+		<h1>Machine Learning (ML) models</h1>
+		<br>
 		<section class="grid">
 
 			<article class="card">
@@ -48,8 +48,8 @@
 				</div>
 				<div class="card-body">
 					<h2><a href="https://xgboost.readthedocs.io/" target="_blank" rel="noopener">XGBoost</a></h2>
-					<p class="desc">Why: Fast, regularized gradient boosting with strong performance on tabular data and good handling of missing values.</p>
-					<p class="desc">Insights: Feature importance, SHAP values for per-prediction explanations, partial dependence to show marginal feature effects.</p>
+					<p class="desc">Why: Fast gradient boosting with strong tabular performance and good missing-value handling.</p>
+					<p class="desc">Insights: Feature importance, SHAP explanations, and regularization pathways for model stability.</p>
 				</div>
 			</article>
 
@@ -59,8 +59,8 @@
 				</div>
 				<div class="card-body">
 					<h2><a href="https://lightgbm.readthedocs.io/" target="_blank" rel="noopener">LightGBM</a></h2>
-					<p class="desc">Why: Highly optimized gradient-boosting implementation that trains quickly on large datasets and supports categorical features efficiently.</p>
-					<p class="desc">Insights: Fast experiments for hyperparameter tuning, feature importance, and sub-sample analyses for large-scale pipelines.</p>
+					<p class="desc">Why: High-speed, memory-efficient boosting with native categorical support and large dataset handling.</p>
+					<p class="desc">Insights: Leaf-wise tree growth, model size tuning, and fast hyperparameter sweeps.</p>
 				</div>
 			</article>
 
@@ -70,19 +70,30 @@
 				</div>
 				<div class="card-body">
 					<h2><a href="https://scikit-learn.org/stable/modules/ensemble.html#random-forests" target="_blank" rel="noopener">Random Forest</a></h2>
-					<p class="desc">Why: Robust ensemble baseline that reduces variance; useful where interpretability and stability matter.</p>
-					<p class="desc">Insights: Out-of-bag error estimates, permutation feature importance, and per-tree diagnostics to understand variance.</p>
+					<p class="desc">Why: Stable, interpretable ensemble baseline with built-in out-of-bag scoring.</p>
+					<p class="desc">Insights: Permutation importance, tree structure profiling, and low variance behavior on noisy tabular data.</p>
 				</div>
 			</article>
 
 			<article class="card">
 				<div class="card-left">
-					<a href="#"><img src="data_files/neural-network.png" alt="Neural Network"></a>
+					<a href="#"><img src="data_files/catboost.png" alt="CatBoost"></a>
 				</div>
 				<div class="card-body">
-					<h2><a href="https://www.tensorflow.org/" target="_blank" rel="noopener">Neural Networks</a></h2>
-					<p class="desc">Why: Flexible models for learning complex, non-linear relationships; useful for time-series, embeddings, or when combining many inputs.</p>
-					<p class="desc">Insights: Layer activations and embeddings, saliency maps, and sequence-level attention weights for interpretability.</p>
+					<h2><a href="https://catboost.ai/" target="_blank" rel="noopener">CatBoost</a></h2>
+					<p class="desc">Why: Handles categorical features natively and reduces need for manual preprocessing.</p>
+					<p class="desc">Insights: Ordered boosting for overfitting resistance and built-in feature and permutation importance.</p>
+				</div>
+			</article>
+
+			<article class="card">
+				<div class="card-left">
+					<a href="#"><img src="data_files/neural-network.png" alt="Neural Networks"></a>
+				</div>
+				<div class="card-body">
+					<h2><a href="https://www.tensorflow.org/" target="_blank" rel="noopener">Neural Networks / LSTM</a></h2>
+					<p class="desc">Why: Captures complex non-linear patterns in time-series and sequence features.</p>
+					<p class="desc">Insights: Feature embeddings, attention/sequence activations, and hybrid model stacking with tree learners.</p>
 				</div>
 			</article>
 
@@ -91,9 +102,26 @@
 					<a href="#"><img src="data_files/ensemble.png" alt="Ensemble"></a>
 				</div>
 				<div class="card-body">
-					<h2><a href="https://scikit-learn.org/stable/modules/ensemble.html" target="_blank" rel="noopener">Ensembles</a></h2>
-					<p class="desc">Why: Combine strengths of multiple algorithms to improve robustness and accuracy, reduce model-specific biases.</p>
-					<p class="desc">Insights: Consensus/confidence across models, model-level contribution analysis, and ensemble calibration diagnostics.</p>
+					<h2><a href="https://scikit-learn.org/stable/modules/ensemble.html" target="_blank" rel="noopener">Ensembles and Calibration</a></h2>
+					<p class="desc">Why: Combine multiple models and calibrate probabilities for more reliable edge detection.</p>
+					<p class="desc">Insights: Stacked models, bagging/boosting hybrid, probability calibration (Platt scaling, isotonic).</p>
+				</div>
+			</article>
+
+			<article class="card">
+				<div class="card-left">
+					<a href="#"><img src="data_files/repo-specific-models.png" alt="Repo specific models"></a>
+				</div>
+				<div class="card-body">
+					<h2>Repo-specific Models</h2>
+					<p class="desc">Specialized model types used in each project, from logistic regression to ELO and player prop scoring.</p>
+					<ul>
+						<li><strong>Logistic Regression</strong>: value probability modeling, manager/referee effect analysis (premier-league).</li>
+						<li><strong>ELO + custom ratings</strong>: team/player form and matchup strength (all sports models).</li>
+						<li><strong>Poisson/Score-based regressions</strong>: player prop and goal prediction pipelines (hockey, soccer).</li>
+						<li><strong>Gradient Boosting variants</strong>: domain-specific feature-discrete handling (gridiron, tennis, golf).</li>
+						<li><strong>Time-series growth</strong>: sequential injury trend and live tracking models (nba-predictions).</li>
+					</ul>
 				</div>
 			</article>
 
