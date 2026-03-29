@@ -32,3 +32,5 @@ node_modules/
 # Misc
 *.pyc
 .github/
+tmp_dep_scan.py
+tmp_pkglist.py
