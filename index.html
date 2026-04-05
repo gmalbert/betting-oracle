@@ -21,6 +21,80 @@
 
 	<link rel="icon" type="image/x-icon" href="data_files/fav.ico">
 	<link rel="stylesheet" href="styles.css">
+	<style>
+		.projects-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+			gap: 16px;
+		}
+		.project-tile {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			background: var(--card);
+			padding: 20px 18px;
+			box-shadow: 0 2px 8px rgba(15,23,42,0.08);
+			border-radius: 8px;
+			border: 1px solid rgba(15,23,42,0.06);
+			gap: 8px;
+		}
+		.project-tile img.proj-icon {
+			width: 150px;
+			height: 150px;
+			object-fit: contain;
+			transition: transform .12s ease;
+		}
+		.project-tile img.proj-icon:hover { transform: translateY(-3px); }
+		.project-tile .proj-title {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+			margin: 0;
+			font-size: 15px;
+			font-weight: 700;
+			color: var(--accent);
+			line-height: 1.25;
+		}
+		.project-tile .proj-title a {
+			color: inherit;
+			text-decoration: none;
+		}
+		.project-tile .proj-title a:hover { text-decoration: underline; }
+		.project-tile .proj-url {
+			line-height: 1.3;
+		}
+		.project-tile .proj-url a {
+			color: inherit;
+			text-decoration: none;
+		}
+		.project-tile .proj-url {
+			font-size: 12px;
+			line-height: 1.4;
+			opacity: 0.75;
+			margin: 0;
+		}
+		.project-tile .proj-url a {
+			color: inherit;
+			text-decoration: none;
+		}
+		.project-tile .proj-url a:hover {
+			text-decoration: underline;
+		}
+		.project-tile p.proj-desc {
+			margin: 0;
+			font-size: 13px;
+			line-height: 1.5;
+			color: var(--muted);
+		}
+		.github-icon-sm {
+			width: 16px;
+			height: auto;
+			opacity: 0.85;
+			flex-shrink: 0;
+		}
+	</style>
 </head>
 <body>
 	<header class="site-header">
@@ -38,149 +112,119 @@
 	</header>
 
 	<main class="container">
-		<!-- <p class="lead">A compact hub that collects and showcases my sports‑prediction projects and dashboards in one place.</p> -->
 
-		<section class="grid">
-			<article class="card">
-				<div class="card-left">
-					<a href="http://equine-edge.horse" target="_blank" rel="noopener noreferrer"><img class="card-icon" src="data_files/equine-edge.png" alt="Equine Edge"></a>
-				</div>
-				<div class="card-body">
-					<h2>
-						<a href="http://equine-edge.horse" target="_blank" rel="noopener noreferrer">Equine Edge - Horse Racing Predictions<br>(www.equine-edge.horse)</a>
-						<a class="github-link" href="https://github.com/gmalbert/horse-racing-predictions" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub repository"><img class="github-icon" src="data_files/github.png" alt="GitHub"></a>
-					</h2>
-					<p class="desc">A comprehensive ML system for UK horse-racing with a Streamlit dashboard, data pipeline, and XGBoost win prediction model. Includes a race profitability scorer, fixture calendar with predicted scores, and utilities to convert probabilities into betting odds.</p>
-					<p class="desc">The system identifies the most profitable races to bet on using a smart scoring algorithm that factors in class quality, prize money, course tier, and field size. The XGBoost model predicts win probabilities with 18 carefully engineered features, and the dashboard lets you filter by year, course, and horse to explore patterns and compare model odds against bookmaker odds for value bets.</p>
-				</div>
+		<section class="projects-grid">
+
+			<article class="project-tile">
+				<a href="http://equine-edge.horse" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/equine-edge.png" alt="Equine Edge"></a>
+				<h2 class="proj-title">
+					<a href="http://equine-edge.horse" target="_blank" rel="noopener noreferrer">Equine Edge</a>
+					<a href="https://github.com/gmalbert/horse-racing-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
+				</h2>
+				<p class="proj-url"><a href="http://equine-edge.horse" target="_blank" rel="noopener noreferrer">equine-edge.horse &mdash; Horse Racing</a></p>
+				<p class="proj-desc">XGBoost win-probability model for UK horse racing with a profitability scorer that weights class, prize money, course tier, and field size. Filter by year, course, or horse to compare model odds against bookmaker lines for value bets.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="http://pitch-oracle.com" target="_blank" rel="noopener noreferrer"><img class="card-icon" src="data_files/pitch-oracle.png" alt="Pitch Oracle"></a>
-				</div>
-				<div class="card-body">
-					<h2>
-						<a href="http://pitch-oracle.com" target="_blank" rel="noopener noreferrer">Pitch Oracle - Premier League Predictor<br>(www.pitch-oracle.com)</a>
-						<a class="github-link" href="https://github.com/gmalbert/premier-league" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub repository"><img class="github-icon" src="data_files/github.png" alt="GitHub"></a>
-					</h2>
-					<p class="desc">A Premier League match predictor with a Streamlit UI and ensemble modeling (XGBoost, Random Forest, Gradient Boosting, Logistic Regression) plus optional neural/LSTM support. Shows upcoming fixtures, predicted probabilities, referee/manager statistics, and model-comparison metrics with scripts to fetch and process fixtures.</p>
-					<p class="desc">This project goes deeper than just match outcomes—it analyzes referee tendencies, manager performance trends, and how recent team form impacts results. The ensemble approach combines multiple algorithms and achieves 3.5% higher accuracy than using XGBoost alone. You can explore historical data, see detailed statistics by referee or manager, and understand the confidence level behind each prediction.</p>
-				</div>
+			<article class="project-tile">
+				<a href="http://pitch-oracle.com" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/pitch-oracle.png" alt="Pitch Oracle"></a>
+				<h2 class="proj-title">
+					<a href="http://pitch-oracle.com" target="_blank" rel="noopener noreferrer">Pitch Oracle</a>
+					<a href="https://github.com/gmalbert/premier-league" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
+				</h2>
+				<p class="proj-url"><a href="http://pitch-oracle.com" target="_blank" rel="noopener noreferrer">pitch-oracle.com &mdash; Premier League</a></p>
+				<p class="proj-desc">Ensemble predictor (XGBoost, Random Forest, Gradient Boosting, Logistic Regression) analyzing referee tendencies and manager trends &mdash; 3.5% more accurate than a single XGBoost model. Shows fixtures, probabilities, and historical stats by referee or manager.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="http://gridiron-oracle.com" target="_blank" rel="noopener noreferrer"><img class="card-icon" src="data_files/gridiron-oracle.png" alt="Gridiron Oracle"></a>
-					
-				</div>
-				<div class="card-body">
-					<h2>
-						<a href="http://gridiron-oracle.com" target="_blank" rel="noopener noreferrer">Gridiron Oracle - NFL Predictions<br>(www.gridiron-oracle.com)</a>
-						<a class="github-link" href="https://github.com/gmalbert/nfl-predictions" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub repository"><img class="github-icon" src="data_files/github.png" alt="GitHub"></a>
-					</h2>
-					<p class="desc">A sophisticated NFL analytics platform with multi-model ML pipelines and a multi-page Streamlit dashboard. Offers player props, DraftKings Pick 6 tools, automated nightly prediction updates, and production-ready features for generating and exporting betting insights.</p>
-					<p class="desc">This is one of the most feature-rich systems—it can predict spreads, moneylines, and player prop performances with separate specialized models. The dashboard includes a bankroll management tool to calculate optimal bet sizes, an in-app notification system to alert you about high-confidence opportunities, and automated nightly updates that regenerate predictions using the latest game data and betting lines. There's even a per-game detail view with shareable links and historical play-by-play analysis.</p>
-				</div>
+			<article class="project-tile">
+				<a href="http://gridiron-oracle.com" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/gridiron-oracle.png" alt="Gridiron Oracle"></a>
+				<h2 class="proj-title">
+					<a href="http://gridiron-oracle.com" target="_blank" rel="noopener noreferrer">Gridiron Oracle</a>
+					<a href="https://github.com/gmalbert/nfl-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
+				</h2>
+				<p class="proj-url"><a href="http://gridiron-oracle.com" target="_blank" rel="noopener noreferrer">gridiron-oracle.com &mdash; NFL</a></p>
+				<p class="proj-desc">Multi-model NFL platform covering spreads, moneylines, and player props, with bankroll management, DraftKings Pick 6 tools, in-app high-confidence alerts, and automated nightly prediction updates from the latest game data and betting lines.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="http://gridlocked.racing" target="_blank" rel="noopener noreferrer"><img class="card-icon" src="data_files/gridlocked-logo-with-text.png" alt="F1 Analysis"></a>
-				</div>
-				<div class="card-body">
-					<h2>
-						<a href="http://gridlocked.racing" target="_blank" rel="noopener noreferrer">Gridlocked Oracle - F1 Analysis<br>(www.gridlocked.racing)</a>
-						<a class="github-link" href="https://github.com/gmalbert/f1Analysis" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub repository"><img class="github-icon" src="data_files/github.png" alt="GitHub"></a>
-					</h2>
-					<p class="desc">Formula 1 data analysis tools and a Streamlit app that generate race analytics from F1DB and FastF1 sources. Includes generators for CSV/JSON datasets, multiple model support, email notifications, and extensive feature engineering for predictive modeling.</p>
-					<p class="desc">With 86+ engineered features and support for four different ML algorithms (XGBoost, LightGBM, CatBoost, Ensemble), this system achieves a Mean Absolute Error of 1.94 for predicting race finishes. It pulls data from F1DB's massive historical dataset plus real-time race control messages from FastF1, and includes advanced filtering for over 30 different parameters. Email notifications deliver pre-race predictions with team colors and driver rankings, making it easy to stay updated on every Grand Prix.</p>
-				</div>
+			<article class="project-tile">
+				<a href="http://gridlocked.racing" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/gridlocked-logo-with-text.png" alt="Gridlocked Oracle"></a>
+				<h2 class="proj-title">
+					<a href="http://gridlocked.racing" target="_blank" rel="noopener noreferrer">Gridlocked Oracle</a>
+					<a href="https://github.com/gmalbert/f1Analysis" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
+				</h2>
+				<p class="proj-url"><a href="http://gridlocked.racing" target="_blank" rel="noopener noreferrer">gridlocked.racing &mdash; Formula 1</a></p>
+				<p class="proj-desc">F1 race-finish predictor with 86+ engineered features and XGBoost, LightGBM, CatBoost, and Ensemble support (MAE 1.94). Pulls from F1DB and FastF1, with email notifications delivering pre-race predictions with team colors and driver rankings.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="http://bracket-oracle.com" target="_blank" rel="noopener noreferrer"><img class="card-icon" src="data_files/bracket-oracle.png" alt="March Madness Predictor"></a>
-				</div>
-				<div class="card-body">
-					<h2>
-						<a href="http://bracket-oracle.com" target="_blank" rel="noopener noreferrer">Bracket Oracle - March Madness Predictor<br>(www.bracket-oracle.com)</a>
-						<a class="github-link" href="https://github.com/gmalbert/march-madness" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub repository"><img class="github-icon" src="data_files/github.png" alt="GitHub"></a>
-					</h2>
-					<p class="desc">A March Madness betting prediction system that integrates historical data, KenPom and BartTorvik efficiency ratings, and ML models. Provides real-time predictions, underdog value detection, Kelly Criterion sizing, and automated data pipelines for tournament analytics.</p>
-					<p class="desc">This system combines a decade of tournament data with advanced efficiency metrics from KenPom and BartTorvik to improve spread predictions by 8.4%. It automatically detects underdog value bets where the model disagrees with the sportsbook odds, calculates optimal bet sizing using Kelly Criterion, and continuously updates as new team data arrives. The NCAA selection is populated in real time, and the system automatically canonicalizes team names across all data sources so you get consistent, clean predictions.</p>
-				</div>
+			<article class="project-tile">
+				<a href="http://bracket-oracle.com" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/bracket-oracle.png" alt="Bracket Oracle"></a>
+				<h2 class="proj-title">
+					<a href="http://bracket-oracle.com" target="_blank" rel="noopener noreferrer">Bracket Oracle</a>
+					<a href="https://github.com/gmalbert/march-madness" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
+				</h2>
+				<p class="proj-url"><a href="http://bracket-oracle.com" target="_blank" rel="noopener noreferrer">bracket-oracle.com &mdash; March Madness</a></p>
+				<p class="proj-desc">Combines a decade of tournament data with KenPom and BartTorvik efficiency ratings to improve spread predictions by 8.4%. Auto-detects underdog value bets, applies Kelly Criterion sizing, and canonicalizes team names across all data sources in real time.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="http://oracle-on-ice.com" target="_blank" rel="noopener noreferrer"><img class="card-icon" src="data_files/oracle-on-ice.png" alt="Oracle on Ice"></a>
-				</div>
-				<div class="card-body">
-					<h2>
-						<a href="http://oracle-on-ice.com" target="_blank" rel="noopener noreferrer">Oracle on Ice - NHL Predictor<br>(www.oracle-on-ice.com)</a>
-						<a class="github-link" href="https://github.com/gmalbert/hockey-predictions" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub repository"><img class="github-icon" src="data_files/github.png" alt="GitHub"></a>
-					</h2>
-					<p class="desc">A Streamlit-powered analytics platform designed to provide data-driven insights for NHL sports betting. This application aggregates real-time and historical NHL data to help bettors make informed decisions.</p>
-					<p class="desc">The app pulls comprehensive statistics from NHL APIs, identifies betting value by surfacing statistical edges, visualizes patterns in historical performance and trends, and tracks prediction accuracy over time. Features include today's games with real-time odds, team stats, standings, value finder for betting opportunities, player props analysis, and performance tracking.</p>
-				</div>
+			<article class="project-tile">
+				<a href="http://oracle-on-ice.com" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/oracle-on-ice.png" alt="Oracle on Ice"></a>
+				<h2 class="proj-title">
+					<a href="http://oracle-on-ice.com" target="_blank" rel="noopener noreferrer">Oracle on Ice</a>
+					<a href="https://github.com/gmalbert/hockey-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
+				</h2>
+				<p class="proj-url"><a href="http://oracle-on-ice.com" target="_blank" rel="noopener noreferrer">oracle-on-ice.com &mdash; NHL</a></p>
+				<p class="proj-desc">Streamlit NHL platform with real-time odds, team stats, standings, value finder, and player props. Aggregates data from NHL APIs to surface statistical edges, visualize historical trends, and track prediction accuracy over time.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="http://www.fairway-oracle.com" target="_blank" rel="noopener noreferrer"><img class="card-icon" src="data_files/fairway-oracle.png" alt="Fairway Oracle"></a>
-				</div>
-				<div class="card-body">
-					<h2>
-						<a href="http://www.fairway-oracle.com" target="_blank" rel="noopener noreferrer">Fairway Oracle - Golf Predictor<br>(www.fairway-oracle.com)</a>
-						<a class="github-link" href="https://github.com/gmalbert/golf-predictions" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub repository"><img class="github-icon" src="data_files/github.png" alt="GitHub"></a>
-					</h2>
-					<p class="desc">Fairway Oracle is a research-focused PGA tournament winner predictor built with Streamlit. It trains ML models on multiple years of historical data to produce top-N winner probabilities, player analytics (strokes-gained, form, course history), and identifies value bets by comparing model probabilities with market odds.</p>
-					<p class="desc">Features include backtesting, live tracking during events, automated scraping of free public sources (PGA Tour, ESPN, OWGR, Wikipedia, weather), and simple deployment via streamlit. Not financial advice — intended for analytics and research.</p>
-				</div>
+			<article class="project-tile">
+				<a href="http://www.fairway-oracle.com" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/fairway-oracle.png" alt="Fairway Oracle"></a>
+				<h2 class="proj-title">
+					<a href="http://www.fairway-oracle.com" target="_blank" rel="noopener noreferrer">Fairway Oracle</a>
+					<a href="https://github.com/gmalbert/golf-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
+				</h2>
+				<p class="proj-url"><a href="http://www.fairway-oracle.com" target="_blank" rel="noopener noreferrer">fairway-oracle.com &mdash; PGA Golf</a></p>
+				<p class="proj-desc">PGA tournament winner predictor with strokes-gained analytics, course history, backtesting, live event tracking, and automated scraping from PGA Tour, ESPN, OWGR, and weather sources. Highlights value bets where model probability exceeds market odds.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="http://www.breakpoint-oracle.com" target="_blank" rel="noopener noreferrer"><img class="card-icon" src="data_files/breakpoint-oracle.png" alt="Breakpoint Oracle"></a>
-				</div>
-				<div class="card-body">
-					<h2>
-						<a href="http://www.breakpoint-oracle.com" target="_blank" rel="noopener noreferrer">Breakpoint Oracle - Tennis Predictor<br>(www.breakpoint-oracle.com)</a>
-						<a class="github-link" href="https://github.com/gmalbert/tennis-predictions" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub repository"><img class="github-icon" src="data_files/github.png" alt="GitHub"></a>
-					</h2>
-					<p class="desc">Breakpoint Oracle is a comprehensive tennis match‑prediction system with a Streamlit interface powered by historical data (TennisMyLife, tennis-data.co.uk) and live pre‑match odds via Matchstat/RapidAPI. A full feature engineering pipeline generates ELO ratings, serve/return statistics, surface‑specific form, head‑to‑head counts, and market probabilities; a trained ML model produces top‑N winner probabilities and highlights betting edge when model confidence exceeds market odds.</p>
-					<p class="desc">The app includes three tabs—Today’s Matches (live odds & edge), Match Explorer (filterable historical dataset), and ELO Rankings—and supports backtesting, automated daily updates through GitHub Actions, and easy local or Streamlit‑Cloud deployment. Not financial advice; intended for analysis and research.</p>
-				</div>
+			<article class="project-tile">
+				<a href="http://www.breakpoint-oracle.com" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/breakpoint-oracle.png" alt="Breakpoint Oracle"></a>
+				<h2 class="proj-title">
+					<a href="http://www.breakpoint-oracle.com" target="_blank" rel="noopener noreferrer">Breakpoint Oracle</a>
+					<a href="https://github.com/gmalbert/tennis-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
+				</h2>
+				<p class="proj-url"><a href="http://www.breakpoint-oracle.com" target="_blank" rel="noopener noreferrer">breakpoint-oracle.com &mdash; Tennis</a></p>
+				<p class="proj-desc">Tennis predictor with ELO ratings, surface-specific form, serve/return stats, and live pre-match odds via RapidAPI. Three tabs &mdash; Today's Matches, Match Explorer, and ELO Rankings &mdash; with daily automated updates via GitHub Actions.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="http://www.betting-cleanup.com" target="_blank" rel="noopener noreferrer"><img class="card-icon" src="data_files/betting-cleanup.png" alt="Betting Cleanup"></a>
-				</div>
-				<div class="card-body">
-					<h2>
-						<a href="http://www.betting-cleanup.com" target="_blank" rel="noopener noreferrer">Betting Cleanup - Baseball Predictor<br>(www.betting-cleanup.com)</a>
-						<a class="github-link" href="https://github.com/gmalbert/baseball-predictions" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub repository"><img class="github-icon" src="data_files/github.png" alt="GitHub"></a>
-					</h2>
-					<p class="desc">Betting Cleanup is a powerful baseball match‑prediction system now maintained in its own GitHub repo. It features a Streamlit interface powered by up‑to‑date historical data (Baseball-Reference, FanGraphs) along with live pre‑match odds pulled from Matchstat/RapidAPI. The full data pipeline engineers ELO ratings, batting/pitching analytics, surface‑specific form, head‑to‑head records, and implied market probabilities; an ML model then generates top‑N winner probabilities and flags potential betting edges when model confidence outpaces market lines.</p>
-					<p class="desc">Recent updates add a fourth dashboard tab—Live Tracker—for real‑time in‑game odds, plus improved backtesting, automated nightly updates via GitHub Actions, and simplified deployment on Streamlit Cloud or locally. Always for research and analysis; not financial advice.</p>
-				</div>
+			<article class="project-tile">
+				<a href="http://www.betting-cleanup.com" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/betting-cleanup.png" alt="Betting Cleanup"></a>
+				<h2 class="proj-title">
+					<a href="http://www.betting-cleanup.com" target="_blank" rel="noopener noreferrer">Betting Cleanup</a>
+					<a href="https://github.com/gmalbert/baseball-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
+				</h2>
+				<p class="proj-url"><a href="http://www.betting-cleanup.com" target="_blank" rel="noopener noreferrer">betting-cleanup.com &mdash; MLB Baseball</a></p>
+				<p class="proj-desc">Baseball predictor using ELO ratings, FanGraphs batting/pitching analytics, and live odds from RapidAPI. Includes a Live Tracker tab for real-time in-game odds, value-edge detection, backtesting, and automated nightly updates via GitHub Actions.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="http://www.betting-baseline.com" target="_blank" rel="noopener noreferrer"><img class="card-icon" src="data_files/betting-baseline.png" alt="Betting Baseline"></a>
-				</div>
-				<div class="card-body">
-					<h2>
-						<a href="http://www.betting-baseline.com" target="_blank" rel="noopener noreferrer">Betting Baseline - NBA Predictor<br>(www.betting-baseline.com)</a>
-						<a class="github-link" href="https://github.com/gmalbert/nba-predictions" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub repository"><img class="github-icon" src="data_files/github.png" alt="GitHub"></a>
-					</h2>
-						<p class="desc">Betting Baseline is a Streamlit app for NBA game and DraftKings Pick 6 predictions, built on a robust pipeline that pulls NBA data from nba_api, Basketball Reference, and market lines from The Odds API. It offers game-level forecasts (win probability, spread, total), team/player trends, and player prop probability models with value-edge detection versus sportsbook odds.</p>
-						<p class="desc">The platform includes injury and lineup monitoring, referee assignment cleanup, daily automated data refresh via GitHub Actions, model calibration tracking, and historical backtesting reports. It is designed for analytics research and transparent model evaluation rather than betting advice.</p>
-				</div>
+			<article class="project-tile">
+				<a href="http://www.betting-baseline.com" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/betting-baseline.png" alt="Betting Baseline"></a>
+				<h2 class="proj-title">
+					<a href="http://www.betting-baseline.com" target="_blank" rel="noopener noreferrer">Betting Baseline</a>
+					<a href="https://github.com/gmalbert/nba-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
+				</h2>
+				<p class="proj-url"><a href="http://www.betting-baseline.com" target="_blank" rel="noopener noreferrer">betting-baseline.com &mdash; NBA</a></p>
+				<p class="proj-desc">NBA predictor with win probability, spreads, totals, and DraftKings Pick 6 models using nba_api and Basketball Reference data. Includes injury monitoring, referee tracking, model calibration, and daily automated refresh via GitHub Actions.</p>
 			</article>
+
+			<article class="project-tile">
+				<a href="http://www.tailgate-edge.com" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/tailgate-edge.png" alt="Tailgate Edge"></a>
+				<h2 class="proj-title">
+					<a href="http://www.tailgate-edge.com" target="_blank" rel="noopener noreferrer">Tailgate Edge</a>
+					<a href="https://github.com/gmalbert/college-football-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
+				</h2>
+				<p class="proj-url"><a href="http://www.tailgate-edge.com" target="_blank" rel="noopener noreferrer">tailgate-edge.com &mdash; College Football</a></p>
+				<p class="proj-desc">Full-stack college football analytics app with five seasons of CFBD data, XGBoost and Ridge models covering win probability, spread, and totals. Features weekly predictions, value bets, team explorer pages, and Kelly-criterion bankroll sizing for FBS matchups.</p>
+			</article>
+
 		</section>
 	</main>
 
