@@ -21,6 +21,72 @@
 
 	<link rel="icon" type="image/x-icon" href="data_files/fav.ico">
 	<link rel="stylesheet" href="styles.css">
+	<style>
+		.models-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+			gap: 16px;
+		}
+		.model-tile {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			background: var(--card);
+			padding: 20px 18px;
+			box-shadow: 0 2px 8px rgba(15,23,42,0.08);
+			border-radius: 8px;
+			border: 1px solid rgba(15,23,42,0.06);
+			gap: 10px;
+		}
+		.model-tile img {
+			width: 150px;
+			height: 150px;
+			object-fit: contain;
+		}
+		.model-tile h2 {
+			margin: 0;
+			font-size: 16px;
+			color: var(--accent);
+			font-weight: 700;
+		}
+		.model-tile h2 a {
+			color: inherit;
+			text-decoration: none;
+		}
+		.model-tile h2 a:hover { text-decoration: underline; }
+		.model-tile p {
+			margin: 0;
+			font-size: 13px;
+			line-height: 1.45;
+			color: var(--muted);
+		}
+		.model-tile ul {
+			margin: 0;
+			padding-left: 16px;
+			text-align: left;
+			font-size: 13px;
+			line-height: 1.55;
+			color: var(--muted);
+		}
+		.model-tile.wide {
+			grid-column: 1 / -1;
+			flex-direction: row;
+			text-align: left;
+			align-items: flex-start;
+			gap: 18px;
+		}
+		.model-tile.wide img {
+			flex-shrink: 0;
+			align-self: center;
+		}
+		.model-tile.wide .tile-body { flex: 1; }
+		.model-tile.wide h2 { margin-bottom: 6px; }
+		@media (max-width: 600px) {
+			.model-tile.wide { flex-direction: column; align-items: center; text-align: center; }
+			.model-tile.wide ul { text-align: left; }
+		}
+	</style>
 </head>
 <body>
 	<header class="site-header">
@@ -40,87 +106,60 @@
 	<main class="container">
 		<h1>Machine Learning (ML) models</h1>
 		<br>
-		<section class="grid">
+		<section class="models-grid">
 
-			<article class="card">
-				<div class="card-left">
-					<a href="#"><img src="data_files/XGBoost.png" alt="XGBoost"></a>
-				</div>
-				<div class="card-body">
-					<h2><a href="https://xgboost.readthedocs.io/" target="_blank" rel="noopener">XGBoost</a></h2>
-					<p class="desc">Why: Fast gradient boosting with strong tabular performance and good missing-value handling.</p>
-					<p class="desc">Insights: Feature importance, SHAP explanations, and regularization pathways for model stability.</p>
-				</div>
+			<article class="model-tile">
+				<img src="data_files/XGBoost.png" alt="XGBoost">
+				<h2><a href="https://xgboost.readthedocs.io/" target="_blank" rel="noopener">XGBoost</a></h2>
+				<p>Fast gradient boosting with strong tabular performance, missing-value handling, and SHAP-based feature explanations.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="#"><img src="data_files/lightgbm.png" alt="LightGBM"></a>
-				</div>
-				<div class="card-body">
-					<h2><a href="https://lightgbm.readthedocs.io/" target="_blank" rel="noopener">LightGBM</a></h2>
-					<p class="desc">Why: High-speed, memory-efficient boosting with native categorical support and large dataset handling.</p>
-					<p class="desc">Insights: Leaf-wise tree growth, model size tuning, and fast hyperparameter sweeps.</p>
-				</div>
+			<article class="model-tile">
+				<img src="data_files/lightgbm.png" alt="LightGBM">
+				<h2><a href="https://lightgbm.readthedocs.io/" target="_blank" rel="noopener">LightGBM</a></h2>
+				<p>High-speed, memory-efficient boosting with native categorical support, leaf-wise growth, and fast hyperparameter sweeps.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="#"><img src="data_files/random-forest.png" alt="Random Forest"></a>
-				</div>
-				<div class="card-body">
-					<h2><a href="https://scikit-learn.org/stable/modules/ensemble.html#random-forests" target="_blank" rel="noopener">Random Forest</a></h2>
-					<p class="desc">Why: Stable, interpretable ensemble baseline with built-in out-of-bag scoring.</p>
-					<p class="desc">Insights: Permutation importance, tree structure profiling, and low variance behavior on noisy tabular data.</p>
-				</div>
+			<article class="model-tile">
+				<img src="data_files/random-forest.png" alt="Random Forest">
+				<h2><a href="https://scikit-learn.org/stable/modules/ensemble.html#random-forests" target="_blank" rel="noopener">Random Forest</a></h2>
+				<p>Stable ensemble baseline with built-in out-of-bag scoring, permutation importance, and low variance on noisy data.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="#"><img src="data_files/catboost.png" alt="CatBoost"></a>
-				</div>
-				<div class="card-body">
-					<h2><a href="https://catboost.ai/" target="_blank" rel="noopener">CatBoost</a></h2>
-					<p class="desc">Why: Handles categorical features natively and reduces need for manual preprocessing.</p>
-					<p class="desc">Insights: Ordered boosting for overfitting resistance and built-in feature and permutation importance.</p>
-				</div>
+			<article class="model-tile">
+				<img src="data_files/catboost.png" alt="CatBoost">
+				<h2><a href="https://catboost.ai/" target="_blank" rel="noopener">CatBoost</a></h2>
+				<p>Handles categorical features natively with ordered boosting for overfitting resistance and built-in permutation importance.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="#"><img src="data_files/neural-network.png" alt="Neural Networks"></a>
-				</div>
-				<div class="card-body">
-					<h2><a href="https://www.tensorflow.org/" target="_blank" rel="noopener">Neural Networks / LSTM</a></h2>
-					<p class="desc">Why: Captures complex non-linear patterns in time-series and sequence features.</p>
-					<p class="desc">Insights: Feature embeddings, attention/sequence activations, and hybrid model stacking with tree learners.</p>
-				</div>
+			<article class="model-tile">
+				<img src="data_files/neural-network.png" alt="Neural Networks">
+				<h2><a href="https://www.tensorflow.org/" target="_blank" rel="noopener">Neural Networks / LSTM</a></h2>
+				<p>Captures complex non-linear patterns in time-series data with embeddings, attention activations, and hybrid tree stacking.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="#"><img src="data_files/ensemble.png" alt="Ensemble"></a>
-				</div>
-				<div class="card-body">
-					<h2><a href="https://scikit-learn.org/stable/modules/ensemble.html" target="_blank" rel="noopener">Ensembles and Calibration</a></h2>
-					<p class="desc">Why: Combine multiple models and calibrate probabilities for more reliable edge detection.</p>
-					<p class="desc">Insights: Stacked models, bagging/boosting hybrid, probability calibration (Platt scaling, isotonic).</p>
-				</div>
+			<article class="model-tile">
+				<img src="data_files/ensemble.png" alt="Ensemble">
+				<h2><a href="https://scikit-learn.org/stable/modules/ensemble.html" target="_blank" rel="noopener">Ensembles &amp; Calibration</a></h2>
+				<p>Stacks multiple models and calibrates probabilities (Platt scaling, isotonic) for more reliable edge detection.</p>
 			</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="#"><img src="data_files/repo-specific-models.png" alt="Repo specific models"></a>
-				</div>
-				<div class="card-body">
+			<article class="model-tile">
+				<img src="data_files/ridge.png" alt="Ridge Regression">
+				<h2><a href="https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression" target="_blank" rel="noopener">Ridge Regression</a></h2>
+				<p>Regularized linear model (L2) for spread and totals regression — stable under multicollinearity with interpretable coefficients.</p>
+			</article>
+
+			<article class="model-tile wide">
+				<img src="data_files/repo-specific-models.png" alt="Repo specific models">
+				<div class="tile-body">
 					<h2>Repo-specific Models</h2>
-					<p class="desc">Specialized model types used in each project, from logistic regression to ELO and player prop scoring.</p>
 					<ul>
 						<li><strong>Logistic Regression</strong>: value probability modeling, manager/referee effect analysis (premier-league).</li>
 						<li><strong>ELO + custom ratings</strong>: team/player form and matchup strength (all sports models).</li>
 						<li><strong>Poisson/Score-based regressions</strong>: player prop and goal prediction pipelines (hockey, soccer).</li>
 						<li><strong>Gradient Boosting variants</strong>: domain-specific feature-discrete handling (gridiron, tennis, golf).</li>
-						<li><strong>Time-series growth</strong>: sequential injury trend and live tracking models (nba-predictions).</li>
+						<li><strong>Time-series models</strong>: sequential injury trend and live tracking models (nba-predictions).</li>
 					</ul>
 				</div>
 			</article>
