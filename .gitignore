@@ -34,3 +34,4 @@ node_modules/
 .github/
 tmp_dep_scan.py
 tmp_pkglist.py
+*code-workspace
