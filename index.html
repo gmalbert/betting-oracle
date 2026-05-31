@@ -24,8 +24,17 @@
 	<style>
 		.projects-grid {
 			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-			gap: 16px;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 14px;
+		}
+		@media (max-width: 1200px) {
+			.projects-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+		}
+		@media (max-width: 900px) {
+			.projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		}
+		@media (max-width: 600px) {
+			.projects-grid { grid-template-columns: 1fr; }
 		}
 		.project-tile {
 			display: flex;
@@ -33,15 +42,15 @@
 			align-items: center;
 			text-align: center;
 			background: var(--card);
-			padding: 20px 18px;
+			padding: 16px 14px;
 			box-shadow: 0 2px 8px rgba(15,23,42,0.08);
 			border-radius: 8px;
 			border: 1px solid rgba(15,23,42,0.06);
 			gap: 8px;
 		}
 		.project-tile img.proj-icon {
-			width: 150px;
-			height: 150px;
+			width: 128px;
+			height: 128px;
 			object-fit: contain;
 			transition: transform .12s ease;
 		}
@@ -122,7 +131,7 @@
 					<a href="https://github.com/gmalbert/horse-racing-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://equine-edge.horse" target="_blank" rel="noopener noreferrer">equine-edge.horse &mdash; Horse Racing</a></p>
-				<p class="proj-desc">UK horse racing predictor built on 245K Class 1&ndash;4 races (2015&ndash;2025). A Race Profitability Scorer classifies races into Tier 1 Focus / Value / Avoid based on class, prize money, course tier, and field size. An XGBoost classifier (ROC-AUC 0.69) stacked with LightGBM and ExtraTrees predicts win probability per horse, with fractional odds conversion and bookmaker comparison to flag value bets; daily predictions refreshed automatically via GitHub Actions.</p>
+				<!-- <p class="proj-desc">UK horse racing predictor built on 245K Class 1&ndash;4 races (2015&ndash;2025). A Race Profitability Scorer classifies races into Tier 1 Focus / Value / Avoid based on class, prize money, course tier, and field size. An XGBoost classifier (ROC-AUC 0.69) stacked with LightGBM and ExtraTrees predicts win probability per horse, with fractional odds conversion and bookmaker comparison to flag value bets; daily predictions refreshed automatically via GitHub Actions.</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -132,7 +141,7 @@
 					<a href="https://github.com/gmalbert/premier-league" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://pitch-oracle.com" target="_blank" rel="noopener noreferrer">pitch-oracle.com &mdash; Premier League</a></p>
-				<p class="proj-desc">Premier League match predictor with a four-model soft-voting ensemble (XGBoost, Random Forest, Gradient Boosting, Logistic Regression) scoring 3.5% above single-model XGBoost, plus optional PyTorch neural network and LSTM time-series models (+4.9% vs baseline). A Statistics tab profiles referee disciplinary tendencies, manager win rates, and team form; upcoming fixtures are fetched from ESPN API with kickoff times in Eastern Time.</p>
+				<!-- <p class="proj-desc">Premier League match predictor with a four-model soft-voting ensemble (XGBoost, Random Forest, Gradient Boosting, Logistic Regression) scoring 3.5% above single-model XGBoost, plus optional PyTorch neural network and LSTM time-series models (+4.9% vs baseline). A Statistics tab profiles referee disciplinary tendencies, manager win rates, and team form; upcoming fixtures are fetched from ESPN API with kickoff times in Eastern Time.</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -142,7 +151,7 @@
 					<a href="https://github.com/gmalbert/nfl-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://gridiron-oracle.com" target="_blank" rel="noopener noreferrer">gridiron-oracle.com &mdash; NFL</a></p>
-				<p class="proj-desc">Three specialized XGBoost models for spread (91.9% win rate at &ge;54% confidence, 75.5% ROI), moneyline (59.5% win rate, 65.4% ROI), and over/under, plus an XGBoost + LightGBM ensemble for DraftKings Pick 6 player props (Passing, Rushing, Receiving yards, TDs). Trained on 50+ leak-free temporal features from NFLverse play-by-play (2020&ndash;2024) with F1-score threshold optimization; nightly GitHub Actions pipeline with Kelly Criterion bankroll management and in-app Elite/Strong bet notifications.</p>
+				<!-- <p class="proj-desc">Three specialized XGBoost models for spread (91.9% win rate at &ge;54% confidence, 75.5% ROI), moneyline (59.5% win rate, 65.4% ROI), and over/under, plus an XGBoost + LightGBM ensemble for DraftKings Pick 6 player props (Passing, Rushing, Receiving yards, TDs). Trained on 50+ leak-free temporal features from NFLverse play-by-play (2020&ndash;2024) with F1-score threshold optimization; nightly GitHub Actions pipeline with Kelly Criterion bankroll management and in-app Elite/Strong bet notifications.</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -152,7 +161,7 @@
 					<a href="https://github.com/gmalbert/f1Analysis" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://gridlocked.racing" target="_blank" rel="noopener noreferrer">gridlocked.racing &mdash; Formula 1</a></p>
-				<p class="proj-desc">F1 race-finish predictor with 86+ engineered features (practice deltas, qualifying gaps, teammate deltas, circuit type, altitude, weather). Supports XGBoost, LightGBM, CatBoost, Ensemble, and a Position-Group model routing predictions between podium, points, and backmarker sub-models &mdash; MAE improved from 1.94 to &asymp;1.48 in the March 2026 rewrite. Data from F1DB JSON and FastF1 (safety cars, flags); Monte Carlo + RFE + Boruta + SHAP feature selection; email notifications deliver per-race predictions.</p>
+				<!-- <p class="proj-desc">F1 race-finish predictor with 86+ engineered features (practice deltas, qualifying gaps, teammate deltas, circuit type, altitude, weather). Supports XGBoost, LightGBM, CatBoost, Ensemble, and a Position-Group model routing predictions between podium, points, and backmarker sub-models &mdash; MAE improved from 1.94 to &asymp;1.48 in the March 2026 rewrite. Data from F1DB JSON and FastF1 (safety cars, flags); Monte Carlo + RFE + Boruta + SHAP feature selection; email notifications deliver per-race predictions.</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -162,7 +171,7 @@
 					<a href="https://github.com/gmalbert/march-madness" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://bracket-oracle.com" target="_blank" rel="noopener noreferrer">bracket-oracle.com &mdash; March Madness</a></p>
-				<p class="proj-desc">March Madness predictor trained on 15,961 complete games (2016&ndash;2025) with 11 features from CBBD, KenPom (NetRtg, ORtg, DRtg, AdjT, Luck, SOS), and BartTorvik (AdjOE, AdjDE) &mdash; improving spread MAE by 8.4% and moneyline accuracy by 2.7 points versus the 3-feature baseline. XGBoost, Random Forest, and Logistic Regression ensemble with Kelly Criterion sizing, underdog value detection, and automated team-name canonicalization across all sources (99.7% coverage across 364 teams).</p>
+				<!-- <p class="proj-desc">March Madness predictor trained on 15,961 complete games (2016&ndash;2025) with 11 features from CBBD, KenPom (NetRtg, ORtg, DRtg, AdjT, Luck, SOS), and BartTorvik (AdjOE, AdjDE) &mdash; improving spread MAE by 8.4% and moneyline accuracy by 2.7 points versus the 3-feature baseline. XGBoost, Random Forest, and Logistic Regression ensemble with Kelly Criterion sizing, underdog value detection, and automated team-name canonicalization across all sources (99.7% coverage across 364 teams).</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -172,7 +181,7 @@
 					<a href="https://github.com/gmalbert/hockey-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://oracle-on-ice.com" target="_blank" rel="noopener noreferrer">oracle-on-ice.com &mdash; NHL</a></p>
-				<p class="proj-desc">NHL analytics platform pulling real-time data from the NHL Stats REST API and ESPN odds. An Expected Goals model blends raw goals-per-game with NHL xGF/xGA data (50/50), with goalie adjustments via GSAA, HD SV%, and SV% weighting. Eleven pages cover today&apos;s matchups, advanced team metrics (xGF%, CF%, FF%), Value Finder, per-60 player props, shooting-% regression watch, goalie comparisons, injury impact scoring, line movement with sharp-action signals, and model backtesting.</p>
+				<!-- <p class="proj-desc">NHL analytics platform pulling real-time data from the NHL Stats REST API and ESPN odds. An Expected Goals model blends raw goals-per-game with NHL xGF/xGA data (50/50), with goalie adjustments via GSAA, HD SV%, and SV% weighting. Eleven pages cover today&apos;s matchups, advanced team metrics (xGF%, CF%, FF%), Value Finder, per-60 player props, shooting-% regression watch, goalie comparisons, injury impact scoring, line movement with sharp-action signals, and model backtesting.</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -182,7 +191,7 @@
 					<a href="https://github.com/gmalbert/golf-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://www.fairway-oracle.com" target="_blank" rel="noopener noreferrer">fairway-oracle.com &mdash; PGA Golf</a></p>
-				<p class="proj-desc">PGA tournament winner predictor using an XGBoost ensemble trained on OWGR rankings and strokes-gained features (2018&ndash;2025). Scrapes PGA Tour, ESPN, and OWGR data with no paid APIs required; weather from Open-Meteo, market odds from The Odds API. Supports LSTM/Transformer sequence models for player time-series, course embedding clustering, fractional-Kelly walk-forward backtesting, live tournament re-ranking, and a value-bet tab highlighting model edge above market-implied probability.</p>
+				<!-- <p class="proj-desc">PGA tournament winner predictor using an XGBoost ensemble trained on OWGR rankings and strokes-gained features (2018&ndash;2025). Scrapes PGA Tour, ESPN, and OWGR data with no paid APIs required; weather from Open-Meteo, market odds from The Odds API. Supports LSTM/Transformer sequence models for player time-series, course embedding clustering, fractional-Kelly walk-forward backtesting, live tournament re-ranking, and a value-bet tab highlighting model edge above market-implied probability.</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -192,7 +201,7 @@
 					<a href="https://github.com/gmalbert/tennis-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://www.breakpoint-oracle.com" target="_blank" rel="noopener noreferrer">breakpoint-oracle.com &mdash; Tennis</a></p>
-				<p class="proj-desc">Comprehensive tennis predictor using ELO ratings, surface-specific form, serve/return stats, and H2H counts built from TennisMyLife (2020&ndash;present) and tennis-data.co.uk odds with 81.5% name-match coverage. Live pre-match odds from Matchstat RapidAPI with a 500-call/month budget guard. Three app tabs &mdash; Today&apos;s Matches (model vs. market edge highlighted in green), Match Explorer, and ELO Rankings &mdash; rebuilt daily via GitHub Actions.</p>
+				<!-- <p class="proj-desc">Comprehensive tennis predictor using ELO ratings, surface-specific form, serve/return stats, and H2H counts built from TennisMyLife (2020&ndash;present) and tennis-data.co.uk odds with 81.5% name-match coverage. Live pre-match odds from Matchstat RapidAPI with a 500-call/month budget guard. Three app tabs &mdash; Today&apos;s Matches (model vs. market edge highlighted in green), Match Explorer, and ELO Rankings &mdash; rebuilt daily via GitHub Actions.</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -202,7 +211,7 @@
 					<a href="https://github.com/gmalbert/baseball-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://www.betting-cleanup.com" target="_blank" rel="noopener noreferrer">betting-cleanup.com &mdash; MLB Baseball</a></p>
-				<p class="proj-desc">Seven-page MLB analytics platform (Today, Stats, Matchup Analysis, Models, Performance, Pick 6, Info) with XGBoost and LightGBM ensemble models for moneyline, run line, and totals. Integrates MLB Stats API, PyBaseball, Retrosheet, and FanGraphs park factors + Guts! weights; in-game context factors include umpire run environment, bullpen workload, platoon advantage, and park factor. Live odds from ESPN and The Odds API with 30-minute caching; Kelly Criterion bankroll calculator and nightly GitHub Actions pipeline.</p>
+				<!-- <p class="proj-desc">Seven-page MLB analytics platform (Today, Stats, Matchup Analysis, Models, Performance, Pick 6, Info) with XGBoost and LightGBM ensemble models for moneyline, run line, and totals. Integrates MLB Stats API, PyBaseball, Retrosheet, and FanGraphs park factors + Guts! weights; in-game context factors include umpire run environment, bullpen workload, platoon advantage, and park factor. Live odds from ESPN and The Odds API with 30-minute caching; Kelly Criterion bankroll calculator and nightly GitHub Actions pipeline.</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -212,7 +221,7 @@
 					<a href="https://github.com/gmalbert/nba-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://www.betting-baseline.com" target="_blank" rel="noopener noreferrer">betting-baseline.com &mdash; NBA</a></p>
-				<p class="proj-desc">Streamlit NBA analytics platform with win probability, spread, totals, and DraftKings Pick 6 player-prop models built on XGBoost and LightGBM. Pulls from nba_api, sportsdataverse hoopR (PBP-derived team features), Basketball Reference advanced metrics, and The Odds API. Referee assignments from nba_official with ESPN fallback, injury monitoring with positional impact scoring, and automated GitHub Actions pipelines for nightly prediction caching, hoopR refresh, and referee data.</p>
+				<!-- <p class="proj-desc">Streamlit NBA analytics platform with win probability, spread, totals, and DraftKings Pick 6 player-prop models built on XGBoost and LightGBM. Pulls from nba_api, sportsdataverse hoopR (PBP-derived team features), Basketball Reference advanced metrics, and The Odds API. Referee assignments from nba_official with ESPN fallback, injury monitoring with positional impact scoring, and automated GitHub Actions pipelines for nightly prediction caching, hoopR refresh, and referee data.</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -222,7 +231,7 @@
 					<a href="https://github.com/gmalbert/college-football-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://www.tailgate-edge.com" target="_blank" rel="noopener noreferrer">tailgate-edge.com &mdash; College Football</a></p>
-				<p class="proj-desc">Full-stack college football analytics app with five seasons of CFBD data, XGBoost and Ridge models covering win probability, spread, and totals. Features weekly predictions, value bets, team explorer pages, and Kelly-criterion bankroll sizing for FBS matchups.</p>
+				<!-- <p class="proj-desc">Full-stack college football analytics app with five seasons of CFBD data, XGBoost and Ridge models covering win probability, spread, and totals. Features weekly predictions, value bets, team explorer pages, and Kelly-criterion bankroll sizing for FBS matchups.</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -232,17 +241,17 @@
 					<a href="https://github.com/gmalbert/mls-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://www.mls-oracle.com" target="_blank" rel="noopener noreferrer">mls-oracle.com &mdash; MLS</a></p>
-				<p class="proj-desc">MLS match predictor built around the structural quirks that generic soccer models miss — salary-cap parity, cross-country travel fatigue, artificial turf, and Designated Player availability. Uses an XGBoost/Random Forest/Gradient Boosting/Logistic Regression ensemble with American Soccer Analysis xG data, great-circle travel distance, and playoff-race flags to predict Home Win, Draw, and Away Win probabilities with risk scoring and betting tips.</p>
+				<!-- <p class="proj-desc">MLS match predictor built around the structural quirks that generic soccer models miss — salary-cap parity, cross-country travel fatigue, artificial turf, and Designated Player availability. Uses an XGBoost/Random Forest/Gradient Boosting/Logistic Regression ensemble with American Soccer Analysis xG data, great-circle travel distance, and playoff-race flags to predict Home Win, Draw, and Away Win probabilities with risk scoring and betting tips.</p> -->
 			</article>
 
 			<article class="project-tile">
-				<a href="http://www.bet-bundesliga.com" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/bundesliga.png" alt="Bundesliga Oracle"></a>
+				<a href="http://www.bet-bundesliga.com" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/bundesliga.png" alt="Bet Bundesliga"></a>
 				<h2 class="proj-title">
-					<a href="http://www.bet-bundesliga.com" target="_blank" rel="noopener noreferrer">Bundesliga Oracle</a>
+					<a href="http://www.bet-bundesliga.com" target="_blank" rel="noopener noreferrer">Bet Bundesliga</a>
 					<a href="https://github.com/gmalbert/bundesliga" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://www.bet-bundesliga.com" target="_blank" rel="noopener noreferrer">bet-bundesliga.com &mdash; Bundesliga</a></p>
-				<p class="proj-desc">Bundesliga match predictor built on the same architecture as the Betting Oracle soccer suite. Uses a soft-voting ensemble (XGBoost, Random Forest, Gradient Boosting, Logistic Regression) trained on multiple seasons of historical results, with rolling form averages, vig-removed implied probabilities, and Shannon entropy risk scoring. Pages cover upcoming predictions, fixtures &amp; standings, team deep dives, bookmaker markets, and value best-bet alerts.</p>
+				<!-- <p class="proj-desc">Bundesliga match predictor built on the same architecture as the Betting Oracle soccer suite. Uses a soft-voting ensemble (XGBoost, Random Forest, Gradient Boosting, Logistic Regression) trained on multiple seasons of historical results, with rolling form averages, vig-removed implied probabilities, and Shannon entropy risk scoring. Pages cover upcoming predictions, fixtures &amp; standings, team deep dives, bookmaker markets, and value best-bet alerts.</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -252,7 +261,7 @@
 					<a href="https://github.com/gmalbert/la-liga" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://www.laliga-linea.com" target="_blank" rel="noopener noreferrer">laliga-linea.com &mdash; La Liga</a></p>
-				<p class="proj-desc">La Liga (Primera División) predictor using 10 seasons of football-data.co.uk results and a weighted soft-voting ensemble (XGBoost ×2, Random Forest ×1.5, Gradient Boosting ×1, Logistic Regression ×0.5). Features xG rankings from FBref, last-5 form, Copa del Rey congestion flags, H2H analyzer, bookmaker market odds, and a Best Bets tab that surfaces value plays where model edge exceeds 4% versus the market.</p>
+				<!-- <p class="proj-desc">La Liga (Primera División) predictor using 10 seasons of football-data.co.uk results and a weighted soft-voting ensemble (XGBoost ×2, Random Forest ×1.5, Gradient Boosting ×1, Logistic Regression ×0.5). Features xG rankings from FBref, last-5 form, Copa del Rey congestion flags, H2H analyzer, bookmaker market odds, and a Best Bets tab that surfaces value plays where model edge exceeds 4% versus the market.</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -262,7 +271,7 @@
 					<a href="https://github.com/gmalbert/darts" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://www.bullziq.com" target="_blank" rel="noopener noreferrer">bullziq.com &mdash; Darts</a></p>
-				<p class="proj-desc">PDC darts analytics platform (BullzIQ) with Elo-based player ratings, match and props modeling, and real-data-first odds ingestion from DraftKings and BetMGM via odds-api.io. Pages cover daily picks ranked by model edge, Elo rankings and history charts, upcoming fixtures with odds movement, a steam move feed, and tools including an edge calculator, 180s calculator, format variance explorer, and parlay edge helper. Scraped historical data from dartsdatabase.co.uk; nightly GitHub Actions pipeline for odds and fixture refresh.</p>
+				<!-- <p class="proj-desc">PDC darts analytics platform (BullzIQ) with Elo-based player ratings, match and props modeling, and real-data-first odds ingestion from DraftKings and BetMGM via odds-api.io. Pages cover daily picks ranked by model edge, Elo rankings and history charts, upcoming fixtures with odds movement, a steam move feed, and tools including an edge calculator, 180s calculator, format variance explorer, and parlay edge helper. Scraped historical data from dartsdatabase.co.uk; nightly GitHub Actions pipeline for odds and fixture refresh.</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -272,7 +281,7 @@
 					<a href="https://github.com/gmalbert/world-cup" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://www.goallineiq.com" target="_blank" rel="noopener noreferrer">goallineiq.com &mdash; World Cup</a></p>
-				<p class="proj-desc">World Cup 2026 analytics platform (GoallineIQ) aggregating historical data from 2010&ndash;2026 with a live Elo + Poisson prediction model. Win/Draw/Loss probabilities are derived from a bivariate Poisson scoreline distribution; value-bet detection compares model-implied odds against multi-bookmaker lines from API-Football. A Monte Carlo simulator runs up to 25,000 full 48-team tournament simulations with confederation filtering. Additional pages cover pre-match deep dives, odds comparison with overround analysis, group standings, knockout-bracket visualization, scoring leaders, and xG trends. Nightly GitHub Actions data refresh during the tournament window (June&ndash;July 2026).</p>
+				<!-- <p class="proj-desc">World Cup 2026 analytics platform (GoallineIQ) aggregating historical data from 2010&ndash;2026 with a live Elo + Poisson prediction model. Win/Draw/Loss probabilities are derived from a bivariate Poisson scoreline distribution; value-bet detection compares model-implied odds against multi-bookmaker lines from API-Football. A Monte Carlo simulator runs up to 25,000 full 48-team tournament simulations with confederation filtering. Additional pages cover pre-match deep dives, odds comparison with overround analysis, group standings, knockout-bracket visualization, scoring leaders, and xG trends. Nightly GitHub Actions data refresh during the tournament window (June&ndash;July 2026).</p> -->
 			</article>
 
 			<article class="project-tile">
@@ -282,7 +291,17 @@
 					<a href="https://github.com/gmalbert/boxing" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
 				</h2>
 				<p class="proj-url"><a href="http://www.knockoutiq.com" target="_blank" rel="noopener noreferrer">KnockoutIQ.com &mdash; Boxing</a></p>
-				<p class="proj-desc">KnockOutIQ is a Streamlit boxing analytics app with fight cards, fighter profiles, matchup analysis, live odds tracking, and bet tracking. It combines historical boxing data, Elo ratings with KO bonuses, logistic/XGBoost win-probability models, and live DraftKings/FanDuel/BetMGM odds from The Odds API. The app includes a model dashboard, odds movement charts, Kelly bet tracker, and searchable fight database, with daily/weekly GitHub Actions refresh jobs for live odds and Elo recalculation.</p>
+				<!-- <p class="proj-desc">KnockOutIQ is a Streamlit boxing analytics app with fight cards, fighter profiles, matchup analysis, live odds tracking, and bet tracking. It combines historical boxing data, Elo ratings with KO bonuses, logistic/XGBoost win-probability models, and live DraftKings/FanDuel/BetMGM odds from The Odds API. The app includes a model dashboard, odds movement charts, Kelly bet tracker, and searchable fight database, with daily/weekly GitHub Actions refresh jobs for live odds and Elo recalculation.</p> -->
+			</article>
+
+			<article class="project-tile">
+				<a href="http://www.ligue-odds.com" target="_blank" rel="noopener noreferrer"><img class="proj-icon" src="data_files/ligue-1.png" alt="Ligue Odds"></a>
+				<h2 class="proj-title">
+					<a href="http://www.ligue-odds.com" target="_blank" rel="noopener noreferrer">Ligue Odds</a>
+					<a href="https://github.com/gmalbert/ligue-1" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="github-icon-sm" src="data_files/github.png" alt="GitHub"></a>
+				</h2>
+				<p class="proj-url"><a href="http://www.ligue-odds.com" target="_blank" rel="noopener noreferrer">Ligue-Odds.com &mdash; Ligue 1</a></p>
+				<!-- <p class="proj-desc">Ligue Odds is a Streamlit football analytics app with match previews, team profiles, matchup analysis, live odds tracking, and bet tracking. It combines historical football data, Elo ratings, logistic/XGBoost win-probability models, and live DraftKings/FanDuel/BetMGM odds from The Odds API. The app includes a model dashboard, odds movement charts, Kelly bet tracker, and searchable match database, with daily/weekly GitHub Actions refresh jobs for live odds and Elo recalculation.</p> -->
 			</article>
 
 		</section>
