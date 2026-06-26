@@ -35,6 +35,5 @@ node_modules/
 tmp_dep_scan.py
 tmp_pkglist.py
 *code-workspace
-
-# Old/archived pages
+.commandcode/
 old/
