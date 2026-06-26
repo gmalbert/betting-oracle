@@ -22,6 +22,12 @@
 	<link rel="icon" type="image/x-icon" href="data_files/fav.ico">
 	<link rel="stylesheet" href="styles.css">
 	<style>
+		.site-header .container { flex-direction: row; align-items: flex-end; justify-content: flex-start; gap: 16px; min-height: 0; padding: 8px 20px 4px; }
+		.header-brand { flex-direction: row; align-items: flex-end; gap: 16px; }
+		.logo { height: 120px; }
+		.site-nav { width: auto; gap: 6px; }
+		.site-nav--boxed a { padding: 8px 14px; font-size: 14px; border-bottom: 2px solid transparent; transition: border-color .12s ease, color .12s ease; border-radius: 0; }
+		.site-nav--boxed a:hover { transform: none; box-shadow: none; background: transparent; border-bottom-color: var(--accent); }
 		.models-grid {
 			display: grid;
 			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -94,9 +100,9 @@
 			<div class="header-brand">
 				<a href="index.html"><img class="logo" src="data_files/logo.png" alt="Logo"></a>
 				<nav class="site-nav site-nav--boxed">
-				[<a href="index.html">Home</a>]
-				[<a href="packages.html">Packages</a>]
-				[<a href="machine-learning-models.html">Models</a>]
+				<a href="index.html">Home</a>
+				<a href="packages.html">Packages</a>
+				<a href="machine-learning-models.html">Models</a>
 			</nav>
 			</div>
 			
