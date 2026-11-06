@@ -3,845 +3,960 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
-	<title>Projects — Betting Oracle</title>
+	<title>Betting Oracle — Open-Source Sports Prediction Apps</title>
+	<meta name="description" content="27 free, open-source sports prediction apps across the NFL, NBA, MLB, NHL, world soccer, F1, golf and more — powered by XGBoost, Elo and ensemble models." />
+	<meta name="theme-color" content="#070b14" />
 
-	<!-- Open Graph / Facebook -->
-	<meta property="og:title" content="Projects — Betting Oracle" />
-	<meta property="og:description" content="Browse every Betting Oracle sports prediction app by sport, league, and model type." />
+	<meta property="og:title" content="Betting Oracle — Open-Source Sports Prediction Apps" />
+	<meta property="og:description" content="Free, open-source prediction apps for every sport — XGBoost, Elo and ensemble models, updated daily." />
 	<meta property="og:image" content="/data_files/logo.png" />
 	<meta property="og:image:alt" content="Betting Oracle logo" />
-	<meta property="og:url" content="http://www.betting-oracle.com/projects.html" />
+	<meta property="og:url" content="http://www.betting-oracle.com/" />
 	<meta property="og:type" content="website" />
 
-	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Projects — Betting Oracle" />
-	<meta name="twitter:description" content="Browse every Betting Oracle sports prediction app by sport, league, and model type." />
+	<meta name="twitter:title" content="Betting Oracle — Open-Source Sports Prediction Apps" />
+	<meta name="twitter:description" content="Free, open-source prediction apps for every sport — XGBoost, Elo and ensemble models, updated daily." />
 	<meta name="twitter:image" content="/data_files/logo.png" />
 
 	<link rel="icon" type="image/x-icon" href="data_files/fav.ico">
-	<link rel="stylesheet" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<style>
-		/* thin top bar header */
-		.site-header .container { flex-direction: row; align-items: flex-end; justify-content: flex-start; gap: 16px; min-height: 0; padding: 8px 20px 4px; }
-		.header-brand { flex-direction: row; align-items: flex-end; gap: 16px; }
-		.logo { height: 120px; }
-		.site-nav { width: auto; gap: 6px; }
-		.site-nav--boxed a { padding: 8px 14px; font-size: 14px; border-bottom: 2px solid transparent; transition: border-color .12s ease, color .12s ease; border-radius: 0; }
-		.site-nav--boxed a:hover { transform: none; box-shadow: none; background: transparent; border-bottom-color: var(--accent); }
+		:root{
+			color-scheme:dark;
+			--bg:#070b14;
+			--panel:rgba(13,20,36,.6);
+			--card:#0e1626;
+			--plate:#e8edf4;
+			--plate-off:#dde3eb;
+			--border:rgba(148,163,184,.16);
+			--border-strong:rgba(148,163,184,.32);
+			--text:#e9eef7;
+			--muted:#8b97ab;
+			--faint:#5d6a80;
+			--accent:#38e07b;
+			--accent-dim:rgba(56,224,123,.13);
+			--accent-border:rgba(56,224,123,.45);
+			--sky:#6cb8ff;
+			--ink:#04150b;
+			--glow-1:rgba(56,224,123,.10);
+			--glow-2:rgba(108,184,255,.08);
+			--grid-line:rgba(148,163,184,.05);
+			--chrome:rgba(7,11,20,.85);
+			--chrome-solid:rgba(7,11,20,.93);
+			--hover-bg:rgba(148,163,184,.08);
+			--field-bg:rgba(148,163,184,.07);
+			--card-sheen:rgba(148,163,184,.04);
+			--shadow-lift:0 18px 44px rgba(2,6,16,.55);
+			--scroll-thumb:#1b2842;
+			--footer-bg:rgba(10,16,29,.65);
+			--pulse-ring:rgba(56,224,123,.55);
+			--font-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+			--font-body:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+			--font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Consolas,monospace;
+			--header-h:108px;
+		}
+		html[data-theme="light"]{
+			color-scheme:light;
+			--bg:#f5f8fc;
+			--panel:rgba(255,255,255,.72);
+			--card:#ffffff;
+			--plate:#eef2f8;
+			--plate-off:#e3e9f1;
+			--border:rgba(15,23,42,.10);
+			--border-strong:rgba(15,23,42,.24);
+			--text:#101b2d;
+			--muted:#4e5d73;
+			--faint:#7e8ca0;
+			--accent:#0b8a4b;
+			--accent-dim:rgba(11,138,75,.10);
+			--accent-border:rgba(11,138,75,.40);
+			--sky:#2563ab;
+			--ink:#ffffff;
+			--glow-1:rgba(11,138,75,.07);
+			--glow-2:rgba(46,119,201,.06);
+			--grid-line:rgba(15,23,42,.045);
+			--chrome:rgba(247,250,253,.88);
+			--chrome-solid:rgba(247,250,253,.95);
+			--hover-bg:rgba(15,23,42,.05);
+			--field-bg:rgba(15,23,42,.045);
+			--card-sheen:rgba(15,23,42,.02);
+			--shadow-lift:0 18px 40px rgba(15,23,42,.14);
+			--scroll-thumb:#c3cedd;
+			--footer-bg:rgba(238,243,249,.85);
+			--pulse-ring:rgba(11,138,75,.40);
+		}
+		*{box-sizing:border-box}
+		html{scroll-padding-top:calc(var(--header-h) + 16px)}
+		body{margin:0;min-height:100vh;font-family:var(--font-body);color:var(--text);background:radial-gradient(1100px 520px at 78% -6%,var(--glow-1),transparent 62%),radial-gradient(900px 480px at 8% 2%,var(--glow-2),transparent 58%),var(--bg);-webkit-font-smoothing:antialiased}
+		body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 25%,transparent 78%);mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 25%,transparent 78%)}
+		::selection{background:var(--accent);color:var(--ink)}
+		::-webkit-scrollbar{width:11px}
+		::-webkit-scrollbar-track{background:var(--bg)}
+		::-webkit-scrollbar-thumb{background:var(--scroll-thumb);border-radius:6px;border:3px solid var(--bg)}
+		:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+		.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
 
-		.page-header { margin-bottom: 20px; }
-		.page-header h1 { margin: 0 0 6px; font-size: 28px; color: var(--accent); }
-		.page-header .lead { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.45; }
+		.site-header{position:sticky;top:0;z-index:40;background:var(--chrome);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+		.header-in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:var(--header-h)}
+		.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+		.brand img{display:block;height:90px;width:auto}
+		.nav{display:flex;align-items:center;gap:2px}
+		.nav a{font:600 12px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:10px 13px;border-radius:8px;transition:color .15s,background .15s}
+		.nav a:hover{color:var(--text);background:var(--hover-bg)}
+		.nav a[aria-current="page"]{color:var(--accent);background:var(--accent-dim)}
+		.nav-gh{display:inline-flex;align-items:center;justify-content:center;margin-left:8px}
+		.nav-gh svg{width:17px;height:17px;fill:currentColor}
+		.nav-theme{display:inline-flex;align-items:center;justify-content:center;margin-left:8px;padding:10px 13px;border-radius:8px;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:color .15s,background .15s}
+		.nav-theme:hover{color:var(--text);background:var(--hover-bg)}
+		.nav-theme svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+		html[data-theme="light"] .icon-sun{display:none}
+		html:not([data-theme="light"]) .icon-moon{display:none}
 
-		.toolbar {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 12px;
-			align-items: center;
-			margin-bottom: 22px;
-			padding: 14px 16px;
-			background: var(--card);
-			border-radius: 8px;
-			border: 1px solid rgba(15,23,42,0.06);
-			box-shadow: 0 2px 8px rgba(15,23,42,0.06);
-		}
-		.search {
-			flex: 1 1 220px;
-			min-width: 180px;
-			padding: 10px 14px;
-			font-size: 15px;
-			border: 1px solid rgba(15,23,42,0.12);
-			border-radius: 8px;
-			background: #fff;
-			color: #0f172a;
-			outline: none;
-		}
-		.search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
-		.filter-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-		.chip {
-			padding: 8px 14px;
-			font-size: 13px;
-			font-weight: 600;
-			border: 1px solid rgba(15,23,42,0.1);
-			border-radius: 999px;
-			background: #fff;
-			color: var(--accent);
-			cursor: pointer;
-			transition: transform .1s ease, box-shadow .1s ease, background .1s ease, color .1s ease;
-		}
-		.chip:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(15,23,42,0.06); }
-		.chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+		.hero{padding:84px 0 52px}
+		.eyebrow{display:flex;align-items:center;gap:10px;font:600 12px var(--font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin:0 0 20px}
+		.pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite}
+		.hero-title{font-family:var(--font-display);font-weight:800;font-size:clamp(46px,9vw,102px);line-height:.92;letter-spacing:.015em;margin:0 0 22px;text-transform:uppercase}
+		.hero-title .stroke{color:var(--accent)}
+		@supports (-webkit-text-stroke:1px #000){.hero-title .stroke{color:transparent;-webkit-text-stroke:2px var(--accent)}}
+		.hero-sub{max-width:660px;margin:0 0 38px;color:var(--muted);font-size:17px;line-height:1.65}
+		.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:12px;background:var(--panel);overflow:hidden}
+		.stat{padding:18px 22px;border-left:1px solid var(--border)}
+		.stat:first-child{border-left:0}
+		.stat-num{display:block;font:600 25px/1.1 var(--font-mono);color:var(--text)}
+		.stat-num.accent{color:var(--accent)}
+		.stat-label{font:600 10px var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+		@keyframes pulse{0%{box-shadow:0 0 0 0 var(--pulse-ring)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
 
-		.catalog-grid {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: 14px;
-		}
-		.project-card {
-			display: flex;
-			gap: 16px;
-			background: var(--card);
-			padding: 14px;
-			border-radius: 8px;
-			border: 1px solid rgba(15,23,42,0.06);
-			box-shadow: 0 2px 8px rgba(15,23,42,0.06);
-			transition: transform .12s ease, box-shadow .12s ease;
-		}
-		.project-card:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(15,23,42,0.08); }
-		.project-card.hidden { display: none; }
+		.controls-sticky{position:sticky;top:var(--header-h);z-index:30;background:var(--chrome-solid);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+		.controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:12px 0}
+		.search-wrap{position:relative;flex:1 1 250px;max-width:430px}
+		.search-wrap svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--faint);pointer-events:none}
+		.search{width:100%;padding:11px 40px 11px 38px;font:500 14px var(--font-body);color:var(--text);background:var(--field-bg);border:1px solid var(--border);border-radius:9px;outline:none;transition:border-color .15s,box-shadow .15s}
+		.search::placeholder{color:var(--faint)}
+		.search:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+		.search-kbd{position:absolute;right:11px;top:50%;transform:translateY(-50%);font:600 10px var(--font-mono);color:var(--faint);border:1px solid var(--border-strong);border-radius:4px;padding:2px 6px;pointer-events:none}
+		.search-wrap:focus-within .search-kbd{display:none}
+		.chips{display:flex;flex-wrap:wrap;gap:8px}
+		.chip{font:700 11px var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:999px;padding:9px 14px;cursor:pointer;transition:color .15s,border-color .15s,background .15s}
+		.chip:hover{color:var(--text);border-color:var(--border-strong)}
+		.chip.active{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+		.count{margin-left:auto;font:600 11px var(--font-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
 
-		.card-logo {
-			width: 96px;
-			height: 96px;
-			object-fit: contain;
-			flex-shrink: 0;
-		}
-		.card-info {
-			flex: 1;
-			display: flex;
-			flex-direction: column;
-			gap: 6px;
-			min-width: 0;
-		}
-		.card-header {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-			flex-wrap: wrap;
-		}
-		.card-title {
-			margin: 0;
-			font-size: 17px;
-			line-height: 1.3;
-			color: var(--accent);
-		}
-		.card-title a { color: inherit; text-decoration: none; }
-		.card-title a:hover { text-decoration: underline; }
+		.catalog{display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:16px;padding:24px 0 8px}
+		.project-card{display:flex;flex-direction:column;background:linear-gradient(180deg,var(--card-sheen),transparent 45%),var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+		.project-card:hover,.project-card:focus-within{transform:translateY(-4px);border-color:var(--accent-border);box-shadow:var(--shadow-lift)}
+		.project-card.hidden{display:none}
+		.card-top{display:flex;align-items:center;justify-content:space-between;min-height:16px;margin-bottom:10px}
+		.card-index{font:600 11px var(--font-mono);letter-spacing:.12em;color:var(--faint)}
+		.card-status{display:inline-flex;align-items:center;gap:6px}
+		.status-dot{width:7px;height:7px;border-radius:50%;background:var(--faint)}
+		.status-text{font:700 10px var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+		.is-live .status-dot{background:var(--accent);animation:pulse 2.4s infinite}
+		.is-live .status-text{color:var(--accent)}
+		.is-year .status-dot{background:var(--sky)}
+		.is-year .status-text{color:var(--sky)}
+		.is-off .logo-plate{background:var(--plate-off)}
+		.is-off .logo-plate img{opacity:.9}
+		.logo-plate{height:116px;display:flex;align-items:center;justify-content:center;padding:14px;background:var(--plate);border-radius:10px;margin-bottom:12px;overflow:hidden}
+		.logo-plate img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;transition:transform .18s ease}
+		.project-card:hover .logo-plate img,.project-card:focus-within .logo-plate img{transform:scale(1.05)}
+		.card-league{margin:0 0 5px;font:600 10.5px var(--font-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+		.card-name{margin:0 0 10px;font-family:var(--font-display);font-weight:700;font-size:26px;line-height:1.02;letter-spacing:.02em;text-transform:uppercase}
+		.card-name a{color:var(--text);text-decoration:none}
+		.card-name a:hover{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+		.card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+		.tag{font:500 10.5px var(--font-mono);color:var(--muted);border:1px solid var(--border);border-radius:5px;padding:3px 8px;white-space:nowrap}
+		.tag:first-child{color:var(--accent);border-color:var(--accent-border);background:var(--accent-dim)}
+		.card-foot{margin-top:auto;display:flex;gap:8px}
+		.btn-open{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;height:38px;font:700 11px var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);background:transparent;border:1px solid var(--accent-border);border-radius:8px;text-decoration:none;transition:background .15s,color .15s,border-color .15s}
+		.btn-open .arrow{transition:transform .15s}
+		.btn-open:hover{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+		.btn-open:hover .arrow{transform:translate(2px,-2px)}
+		.btn-gh{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:8px;transition:color .15s,border-color .15s}
+		.btn-gh svg{width:16px;height:16px;fill:currentColor}
+		.btn-gh:hover{color:var(--text);border-color:var(--border-strong)}
+		.empty{display:none;grid-column:1/-1;text-align:center;padding:64px 24px;border:1px dashed var(--border-strong);border-radius:12px}
+		.empty.visible{display:block}
+		.empty-title{margin:0 0 6px;font-family:var(--font-display);font-weight:700;font-size:34px;letter-spacing:.04em;text-transform:uppercase}
+		.empty-sub{margin:0 0 20px;color:var(--muted);font-size:14.5px}
+		#reset-btn{font:700 11px var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:transparent;border:1px solid var(--accent-border);border-radius:999px;padding:10px 18px;cursor:pointer;transition:background .15s,color .15s}
+		#reset-btn:hover{background:var(--accent);color:var(--ink)}
 
-		.season-badge {
-			font-size: 11px;
-			font-weight: 700;
-			padding: 2px 8px;
-			border-radius: 999px;
-			background: rgba(22,163,74,0.12);
-			color: #16a34a;
-			white-space: nowrap;
-		}
+		.how{margin:56px 0 0;border-top:1px solid var(--border);padding-top:44px}
+		.how .eyebrow{margin-bottom:22px}
+		.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+		.how-item{border:1px solid var(--border);border-radius:12px;background:var(--panel);padding:24px}
+		.how-num{font:700 11px var(--font-mono);letter-spacing:.22em;color:var(--accent)}
+		.how-item h2{margin:10px 0 8px;font-family:var(--font-display);font-weight:700;font-size:25px;letter-spacing:.03em;text-transform:uppercase}
+		.how-item p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.62}
 
-		.card-actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
-		.card-actions a {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			width: 28px;
-			height: 28px;
-			border-radius: 6px;
-			transition: background .12s ease;
-		}
-		.card-actions a:hover { background: rgba(15,23,42,0.05); }
-		.card-actions img { width: 18px; height: auto; opacity: 0.9; }
+		.site-footer{margin-top:72px;border-top:1px solid var(--border);background:var(--footer-bg)}
+		.footer-in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:22px 24px;font:600 10.5px var(--font-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+		.footer-in p{margin:0}
 
-		.sport-chip {
-			align-self: flex-start;
-			padding: 3px 10px;
-			font-size: 11px;
-			font-weight: 700;
-			letter-spacing: 0.01em;
-			border-radius: 6px;
-			background: rgba(59,130,246,0.08);
-			color: var(--accent);
+		@media (max-width:880px){
+			.hero{padding:64px 0 44px}
+			.stats{grid-template-columns:1fr 1fr}
+			.stat:nth-child(odd){border-left:0}
+			.stat:nth-child(n+3){border-top:1px solid var(--border)}
+			.how-grid{grid-template-columns:1fr}
 		}
-
-		.meta-chips {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 5px;
+		@media (max-width:620px){
+			.nav a{font-size:11px;padding:8px 10px}
+			.nav-theme{padding:8px 10px}
+			.count{display:none}
+			.controls{gap:8px}
+			.footer-in{flex-direction:column;align-items:center;text-align:center}
 		}
-		.meta {
-			padding: 2px 8px;
-			font-size: 11px;
-			line-height: 1.4;
-			border-radius: 4px;
-			background: rgba(15,23,42,0.04);
-			color: var(--muted);
-		}
-
-		.btn-primary {
-			align-self: flex-start;
-			margin-top: 2px;
-			padding: 7px 14px;
-			font-size: 13px;
-			font-weight: 700;
-			border-radius: 8px;
-			background: var(--accent);
-			color: #fff;
-			text-decoration: none;
-			transition: transform .1s ease, box-shadow .1s ease, opacity .1s ease;
-		}
-		.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(59,130,246,0.25); opacity: 0.95; }
-
-		.empty-state {
-			display: none;
-			grid-column: 1 / -1;
-			text-align: center;
-			padding: 40px 20px;
-			color: var(--muted);
-		}
-		.empty-state.visible { display: block; }
-
-		@media (max-width: 800px) {
-			.catalog-grid { grid-template-columns: 1fr; }
-		}
-		@media (max-width: 700px) {
-			.toolbar { flex-direction: column; align-items: stretch; }
-			.search { width: 100%; }
-			.project-card { flex-direction: column; align-items: center; text-align: center; }
-			.card-header { justify-content: center; }
-			.sport-chip { align-self: center; }
-			.btn-primary { align-self: center; }
-			.card-actions { align-self: flex-end; }
-		}
-		@media (prefers-color-scheme: dark) {
-			.search { background: #0f172a; color: #f8fafc; border-color: rgba(255,255,255,0.1); }
-			.chip { background: #0f172a; border-color: rgba(255,255,255,0.1); }
-			.meta { background: rgba(255,255,255,0.04); }
+		@media (prefers-reduced-motion:reduce){
+			*,*::before,*::after{animation:none!important;transition:none!important}
 		}
 	</style>
+	<script>(function(){var t;try{t=localStorage.getItem("bo-theme")}catch(e){}if(t!=="light"&&t!=="dark"){var h=new Date().getHours();t=h>=6&&h<18?"light":"dark"}if(t==="light"){document.documentElement.setAttribute("data-theme","light")}})();</script>
 </head>
 <body>
+	<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+		<symbol id="gh-mark" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></symbol>
+		<symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+		<symbol id="icon-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></symbol>
+	</svg>
+
 	<header class="site-header">
-		<div class="container">
-			<div class="header-brand">
-				<a href="index.html"><img class="logo" src="data_files/logo.png" alt="Logo"></a>
-				<nav class="site-nav site-nav--boxed">
-					<a href="index.html">Home</a>
-					<a href="packages.html">Packages</a>
-					<a href="machine-learning-models.html">Models</a>
-				</nav>
-			</div>
+		<div class="wrap header-in">
+			<a class="brand" href="index.html">
+				<img src="data_files/logo.png" alt="Betting Oracle">
+			</a>
+			<nav class="nav" aria-label="Primary">
+				<a href="index.html" aria-current="page">Home</a>
+				<a href="packages.html">Packages</a>
+				<a href="machine-learning-models.html">Models</a>
+				<a class="nav-gh" href="https://github.com/gmalbert" target="_blank" rel="noopener noreferrer" aria-label="Betting Oracle on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+				<button class="nav-theme" id="theme-toggle" type="button" aria-label="Toggle light and dark theme">
+					<svg class="icon-sun" aria-hidden="true"><use href="#icon-sun"></use></svg>
+					<svg class="icon-moon" aria-hidden="true"><use href="#icon-moon"></use></svg>
+				</button>
+			</nav>
 		</div>
 	</header>
 
-	<main class="container">
-		<div class="page-header">
-			<h1>Project Explorer</h1>
-			<p class="lead">Browse every Betting Oracle app by sport, league, or model type. <strong id="season-count"></strong></p>
+	<section class="hero">
+		<div class="wrap">
+			<p class="eyebrow"><span class="pulse-dot"></span>The open-source sports modeling network</p>
+			<h1 class="hero-title">Every sport.<br><span class="stroke">Every edge.</span></h1>
+			<p class="hero-sub">Free, open-source prediction apps for the NFL, NBA, MLB, NHL, world soccer, F1, golf and more — every model built in public, every pick backed by data.</p>
+			<div class="stats">
+				<div class="stat"><span class="stat-num" id="stat-total">27</span><span class="stat-label">Apps</span></div>
+				<div class="stat"><span class="stat-num accent" id="stat-live">–</span><span class="stat-label">Live now</span></div>
+				<div class="stat"><span class="stat-num">14</span><span class="stat-label">Sports</span></div>
+				<div class="stat"><span class="stat-num">100%</span><span class="stat-label">Open source</span></div>
+			</div>
 		</div>
+	</section>
 
-		<div class="toolbar">
-			<input type="search" class="search" id="project-search" placeholder="Search apps, leagues, or tags…" aria-label="Search projects">
-			<div class="filter-chips" id="filter-chips">
-				<button class="chip active" data-filter="all">All</button>
-				<button class="chip" data-filter="in-season">In Season</button>
-				<button class="chip" data-filter="major-us">Major US Sports</button>
-				<button class="chip" data-filter="soccer">Soccer</button>
-				<button class="chip" data-filter="racing">Racing</button>
-				<button class="chip" data-filter="individual">Individual / Match</button>
+	<main>
+		<div class="controls-sticky">
+			<div class="wrap controls">
+				<div class="search-wrap">
+					<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+					<input type="search" class="search" id="project-search" placeholder="Search apps, leagues, models…" aria-label="Search apps">
+					<span class="search-kbd">/</span>
+				</div>
+				<div class="chips" id="filter-chips" role="group" aria-label="Filter apps">
+					<button class="chip active" data-filter="all" aria-pressed="true">All</button>
+					<button class="chip" data-filter="in-season" aria-pressed="false">In Season</button>
+					<button class="chip" data-filter="major-us" aria-pressed="false">US Sports</button>
+					<button class="chip" data-filter="soccer" aria-pressed="false">Soccer</button>
+					<button class="chip" data-filter="individual" aria-pressed="false">Individual</button>
+				</div>
+				<p class="count">Showing <span id="shown">27</span>/<span id="total">27</span></p>
 			</div>
 		</div>
 
-		<section class="catalog-grid" id="catalog" aria-live="polite">
+		<div class="wrap">
+			<section class="catalog" id="catalog" aria-live="polite">
 
-			<article class="project-card" data-category="racing" data-season="year-round" data-keywords="horse racing uk equine edge value bets daily">
-				<img class="card-logo" src="data_files/equine-edge.png" alt="Equine Edge">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://equine-edge.horse" target="_blank" rel="noopener noreferrer">Equine Edge</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/horse-racing-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
+				<article class="project-card" data-category="racing" data-season="year-round" data-keywords="horse racing uk equine edge value bets daily">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
 					</div>
-					<span class="sport-chip">Horse Racing</span>
-					<div class="meta-chips">
-						<span class="meta">XGBoost</span>
-						<span class="meta">Value bets</span>
-						<span class="meta">Daily</span>
+					<div class="logo-plate"><img src="data_files/equine-edge.png" alt="Equine Edge" loading="lazy" decoding="async"></div>
+					<p class="card-league">Horse Racing</p>
+					<h2 class="card-name"><a href="http://equine-edge.horse" target="_blank" rel="noopener noreferrer">Equine Edge</a></h2>
+					<div class="card-tags">
+						<span class="tag">XGBoost</span>
+						<span class="tag">Value bets</span>
+						<span class="tag">Daily</span>
 					</div>
-					<a href="http://equine-edge.horse" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
+					<div class="card-foot">
+						<a class="btn-open" href="http://equine-edge.horse" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/horse-racing-predictions" target="_blank" rel="noopener noreferrer" aria-label="Equine Edge on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="soccer" data-season-start="08-10" data-season-end="05-25" data-keywords="premier league soccer football pitch oracle ensemble">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/pitch-oracle.png" alt="Pitch Oracle" loading="lazy" decoding="async"></div>
+					<p class="card-league">Premier League</p>
+					<h2 class="card-name"><a href="http://pitch-oracle.com" target="_blank" rel="noopener noreferrer">Pitch Oracle</a></h2>
+					<div class="card-tags">
+						<span class="tag">Ensemble</span>
+						<span class="tag">ESPN fixtures</span>
+						<span class="tag">Off season</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://pitch-oracle.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/premier-league" target="_blank" rel="noopener noreferrer" aria-label="Pitch Oracle on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="major-us" data-season-start="09-05" data-season-end="02-10" data-keywords="nfl football gridiron oracle props xgboost">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/gridiron-oracle.png" alt="Gridiron Oracle" loading="lazy" decoding="async"></div>
+					<p class="card-league">NFL</p>
+					<h2 class="card-name"><a href="http://gridiron-oracle.com" target="_blank" rel="noopener noreferrer">Gridiron Oracle</a></h2>
+					<div class="card-tags">
+						<span class="tag">XGBoost</span>
+						<span class="tag">Props</span>
+						<span class="tag">Kelly sizing</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://gridiron-oracle.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/nfl-predictions" target="_blank" rel="noopener noreferrer" aria-label="Gridiron Oracle on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="racing" data-season-start="03-15" data-season-end="12-10" data-keywords="formula 1 f1 gridlocked racing ensemble">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/gridlocked-logo-with-text.png" alt="Gridlocked Oracle" loading="lazy" decoding="async"></div>
+					<p class="card-league">Formula 1</p>
+					<h2 class="card-name"><a href="http://gridlocked.racing" target="_blank" rel="noopener noreferrer">Gridlocked Oracle</a></h2>
+					<div class="card-tags">
+						<span class="tag">Ensemble</span>
+						<span class="tag">86+ features</span>
+						<span class="tag">Race email</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://gridlocked.racing" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/f1Analysis" target="_blank" rel="noopener noreferrer" aria-label="Gridlocked Oracle on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="major-us" data-season-start="03-15" data-season-end="04-10" data-keywords="march madness college basketball bracket oracle">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/bracket-oracle.png" alt="Bracket Oracle" loading="lazy" decoding="async"></div>
+					<p class="card-league">March Madness</p>
+					<h2 class="card-name"><a href="http://bracket-oracle.com" target="_blank" rel="noopener noreferrer">Bracket Oracle</a></h2>
+					<div class="card-tags">
+						<span class="tag">Ensemble</span>
+						<span class="tag">KenPom</span>
+						<span class="tag">Kelly sizing</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://bracket-oracle.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/march-madness" target="_blank" rel="noopener noreferrer" aria-label="Bracket Oracle on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="major-us" data-season-start="10-10" data-season-end="06-20" data-keywords="nhl hockey oracle on ice xg expected goals">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/oracle-on-ice.png" alt="Oracle on Ice" loading="lazy" decoding="async"></div>
+					<p class="card-league">NHL</p>
+					<h2 class="card-name"><a href="http://oracle-on-ice.com" target="_blank" rel="noopener noreferrer">Oracle on Ice</a></h2>
+					<div class="card-tags">
+						<span class="tag">xG model</span>
+						<span class="tag">11 pages</span>
+						<span class="tag">Live odds</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://oracle-on-ice.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/hockey-predictions" target="_blank" rel="noopener noreferrer" aria-label="Oracle on Ice on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="individual" data-season="year-round" data-keywords="pga golf fairway oracle xgboost lstm weather">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/fairway-oracle.png" alt="Fairway Oracle" loading="lazy" decoding="async"></div>
+					<p class="card-league">PGA Golf</p>
+					<h2 class="card-name"><a href="http://www.fairway-oracle.com" target="_blank" rel="noopener noreferrer">Fairway Oracle</a></h2>
+					<div class="card-tags">
+						<span class="tag">XGBoost</span>
+						<span class="tag">LSTM</span>
+						<span class="tag">Weather</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.fairway-oracle.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/golf-predictions" target="_blank" rel="noopener noreferrer" aria-label="Fairway Oracle on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="individual" data-season="year-round" data-keywords="tennis breakpoint oracle elo surface form live odds">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/breakpoint-oracle.png" alt="Breakpoint Oracle" loading="lazy" decoding="async"></div>
+					<p class="card-league">Tennis</p>
+					<h2 class="card-name"><a href="http://www.breakpoint-oracle.com" target="_blank" rel="noopener noreferrer">Breakpoint Oracle</a></h2>
+					<div class="card-tags">
+						<span class="tag">ELO</span>
+						<span class="tag">Surface form</span>
+						<span class="tag">Live odds</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.breakpoint-oracle.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/tennis-predictions" target="_blank" rel="noopener noreferrer" aria-label="Breakpoint Oracle on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="major-us" data-season-start="04-01" data-season-end="10-31" data-keywords="mlb baseball betting cleanup xgboost 7 pages live odds">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/betting-cleanup.png" alt="Betting Cleanup" loading="lazy" decoding="async"></div>
+					<p class="card-league">MLB</p>
+					<h2 class="card-name"><a href="http://www.betting-cleanup.com" target="_blank" rel="noopener noreferrer">Betting Cleanup</a></h2>
+					<div class="card-tags">
+						<span class="tag">XGBoost</span>
+						<span class="tag">7 pages</span>
+						<span class="tag">Live odds</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.betting-cleanup.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/baseball-predictions" target="_blank" rel="noopener noreferrer" aria-label="Betting Cleanup on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="major-us" data-season-start="10-15" data-season-end="06-20" data-keywords="nba basketball betting baseline xgboost pick 6 nightly">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/betting-baseline.png" alt="Betting Baseline" loading="lazy" decoding="async"></div>
+					<p class="card-league">NBA</p>
+					<h2 class="card-name"><a href="http://www.betting-baseline.com" target="_blank" rel="noopener noreferrer">Betting Baseline</a></h2>
+					<div class="card-tags">
+						<span class="tag">XGBoost</span>
+						<span class="tag">Pick 6</span>
+						<span class="tag">Nightly</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.betting-baseline.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/nba-predictions" target="_blank" rel="noopener noreferrer" aria-label="Betting Baseline on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="major-us" data-season-start="08-25" data-season-end="01-10" data-keywords="college football tailgate edge xgboost value bets">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/tailgate-edge.png" alt="Tailgate Edge" loading="lazy" decoding="async"></div>
+					<p class="card-league">College Football</p>
+					<h2 class="card-name"><a href="http://www.tailgate-edge.com" target="_blank" rel="noopener noreferrer">Tailgate Edge</a></h2>
+					<div class="card-tags">
+						<span class="tag">XGBoost</span>
+						<span class="tag">Value bets</span>
+						<span class="tag">CFBD</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.tailgate-edge.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/college-football-predictions" target="_blank" rel="noopener noreferrer" aria-label="Tailgate Edge on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="soccer" data-season-start="02-22" data-season-end="10-20" data-keywords="mls oracle soccer ensemble travel fatigue playoff race">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/mls.png" alt="MLS Oracle" loading="lazy" decoding="async"></div>
+					<p class="card-league">MLS</p>
+					<h2 class="card-name"><a href="http://www.mls-oracle.com" target="_blank" rel="noopener noreferrer">MLS Oracle</a></h2>
+					<div class="card-tags">
+						<span class="tag">Ensemble</span>
+						<span class="tag">Travel fatigue</span>
+						<span class="tag">Playoff race</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.mls-oracle.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/mls-predictions" target="_blank" rel="noopener noreferrer" aria-label="MLS Oracle on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="soccer" data-season-start="08-15" data-season-end="05-20" data-keywords="bundesliga bet bundesliga soccer ensemble value bets">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/bundesliga.png" alt="Bet Bundesliga" loading="lazy" decoding="async"></div>
+					<p class="card-league">Bundesliga</p>
+					<h2 class="card-name"><a href="http://www.bet-bundesliga.com" target="_blank" rel="noopener noreferrer">Bet Bundesliga</a></h2>
+					<div class="card-tags">
+						<span class="tag">Ensemble</span>
+						<span class="tag">Value bets</span>
+						<span class="tag">Shannon entropy</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.bet-bundesliga.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/bundesliga" target="_blank" rel="noopener noreferrer" aria-label="Bet Bundesliga on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="soccer" data-season-start="08-15" data-season-end="05-25" data-keywords="la liga linea soccer ensemble best bets">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/laliga.png" alt="La Liga Linea" loading="lazy" decoding="async"></div>
+					<p class="card-league">La Liga</p>
+					<h2 class="card-name"><a href="http://www.laliga-linea.com" target="_blank" rel="noopener noreferrer">La Liga Linea</a></h2>
+					<div class="card-tags">
+						<span class="tag">Weighted ensemble</span>
+						<span class="tag">xG rankings</span>
+						<span class="tag">Best Bets</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.laliga-linea.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/la-liga" target="_blank" rel="noopener noreferrer" aria-label="La Liga Linea on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="individual" data-season="year-round" data-keywords="darts bullziq elo steam moves nightly">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/darts.png" alt="Bullziq" loading="lazy" decoding="async"></div>
+					<p class="card-league">Darts</p>
+					<h2 class="card-name"><a href="http://www.bullziq.com" target="_blank" rel="noopener noreferrer">Bullziq</a></h2>
+					<div class="card-tags">
+						<span class="tag">ELO</span>
+						<span class="tag">Steam moves</span>
+						<span class="tag">Nightly</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.bullziq.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/darts" target="_blank" rel="noopener noreferrer" aria-label="Bullziq on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="soccer" data-season-start="06-11" data-season-end="07-19" data-keywords="world cup goallineiq elo poisson monte carlo tournament">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/world-cup.png" alt="GoallineIQ" loading="lazy" decoding="async"></div>
+					<p class="card-league">World Cup</p>
+					<h2 class="card-name"><a href="http://www.goallineiq.com" target="_blank" rel="noopener noreferrer">GoallineIQ</a></h2>
+					<div class="card-tags">
+						<span class="tag">Elo + Poisson</span>
+						<span class="tag">Monte Carlo</span>
+						<span class="tag">Tournament</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.goallineiq.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/world-cup" target="_blank" rel="noopener noreferrer" aria-label="GoallineIQ on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="individual" data-season="year-round" data-keywords="boxing knockoutiq elo live odds bet tracker">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/boxing.png" alt="KnockoutIQ" loading="lazy" decoding="async"></div>
+					<p class="card-league">Boxing</p>
+					<h2 class="card-name"><a href="http://www.knockoutiq.com" target="_blank" rel="noopener noreferrer">KnockoutIQ</a></h2>
+					<div class="card-tags">
+						<span class="tag">ELO</span>
+						<span class="tag">Live odds</span>
+						<span class="tag">Bet tracker</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.knockoutiq.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/boxing" target="_blank" rel="noopener noreferrer" aria-label="KnockoutIQ on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="soccer" data-season-start="08-10" data-season-end="05-20" data-keywords="ligue 1 ligue odds elo kelly tracker">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/ligue-1.png" alt="Ligue Odds" loading="lazy" decoding="async"></div>
+					<p class="card-league">Ligue 1</p>
+					<h2 class="card-name"><a href="http://www.ligue-odds.com" target="_blank" rel="noopener noreferrer">Ligue Odds</a></h2>
+					<div class="card-tags">
+						<span class="tag">ELO</span>
+						<span class="tag">Kelly tracker</span>
+						<span class="tag">Odds movement</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.ligue-odds.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/ligue-1" target="_blank" rel="noopener noreferrer" aria-label="Ligue Odds on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="individual" data-season-start="08-20" data-season-end="06-25" data-keywords="wnba her hoops edge women basketball soccer womens xgboost props">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/her-hoops-edge.png" alt="Her Hoops Edge" loading="lazy" decoding="async"></div>
+					<p class="card-league">WNBA</p>
+					<h2 class="card-name"><a href="http://www.herhoopsedge.com" target="_blank" rel="noopener noreferrer">Her Hoops Edge</a></h2>
+					<div class="card-tags">
+						<span class="tag">XGBoost</span>
+						<span class="tag">Props</span>
+						<span class="tag">Nightly</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.herhoopsedge.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/wnba-predictions" target="_blank" rel="noopener noreferrer" aria-label="Her Hoops Edge on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="individual" data-season="year-round" data-keywords="table tennis pong odds ping pong nightly forecasts win probability">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/pong-odds.png" alt="Pong Odds" loading="lazy" decoding="async"></div>
+					<p class="card-league">Table Tennis</p>
+					<h2 class="card-name"><a href="http://www.pongodds.com" target="_blank" rel="noopener noreferrer">Pong Odds</a></h2>
+					<div class="card-tags">
+						<span class="tag">Win probability</span>
+						<span class="tag">Factor breakdown</span>
+						<span class="tag">Nightly</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.pongodds.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/table-tennis" target="_blank" rel="noopener noreferrer" aria-label="Pong Odds on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="individual" data-season="year-round" data-keywords="cricket wicket odds ipl playoff simulator xgboost lightgbm monte carlo player props">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/wicket-odds.png" alt="Wicket Odds" loading="lazy" decoding="async"></div>
+					<p class="card-league">Cricket</p>
+					<h2 class="card-name"><a href="http://www.wicketodds.com" target="_blank" rel="noopener noreferrer">Wicket Odds</a></h2>
+					<div class="card-tags">
+						<span class="tag">XGBoost + LightGBM</span>
+						<span class="tag">Monte Carlo</span>
+						<span class="tag">Value bets</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.wicketodds.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/cricket" target="_blank" rel="noopener noreferrer" aria-label="Wicket Odds on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="individual" data-season="year-round" data-keywords="rugby scrum bet six nations dixon coles elo try scorer draftkings">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/scrumbet.png" alt="ScrumBet" loading="lazy" decoding="async"></div>
+					<p class="card-league">Rugby</p>
+					<h2 class="card-name"><a href="http://www.scrumbet.com" target="_blank" rel="noopener noreferrer">ScrumBet</a></h2>
+					<div class="card-tags">
+						<span class="tag">Elo + Dixon-Coles</span>
+						<span class="tag">Try scorers</span>
+						<span class="tag">Parlay builder</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.scrumbet.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/rugby" target="_blank" rel="noopener noreferrer" aria-label="ScrumBet on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="soccer" data-season-start="08-05" data-season-end="05-25" data-keywords="turkey super lig superliggoals soccer ensemble xgboost neural networks">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/super-lig.png" alt="Super Lig Goals" loading="lazy" decoding="async"></div>
+					<p class="card-league">Süper Lig</p>
+					<h2 class="card-name"><a href="http://www.superliggoals.com" target="_blank" rel="noopener noreferrer">Super Lig Goals</a></h2>
+					<div class="card-tags">
+						<span class="tag">Ensemble</span>
+						<span class="tag">Neural network</span>
+						<span class="tag">xG features</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.superliggoals.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/turkey-soccer" target="_blank" rel="noopener noreferrer" aria-label="Super Lig Goals on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="soccer" data-season-start="08-01" data-season-end="05-25" data-keywords="scotland premiership kilt the odds soccer elo value bets">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/kilt-the-odds.png" alt="Kilt The Odds" loading="lazy" decoding="async"></div>
+					<p class="card-league">Scottish Premiership</p>
+					<h2 class="card-name"><a href="http://www.kilttheodds.com" target="_blank" rel="noopener noreferrer">Kilt The Odds</a></h2>
+					<div class="card-tags">
+						<span class="tag">Value bets</span>
+						<span class="tag">xG proxy</span>
+						<span class="tag">Odds adapter</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.kilttheodds.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/scotland-premiership" target="_blank" rel="noopener noreferrer" aria-label="Kilt The Odds on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="soccer" data-season-start="07-25" data-season-end="05-25" data-keywords="netherlands eredivisie windmill wagers soccer neural models value bets">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/windmill-wagers.png" alt="Windmill Wagers" loading="lazy" decoding="async"></div>
+					<p class="card-league">Eredivisie</p>
+					<h2 class="card-name"><a href="http://www.windmillwagers.com" target="_blank" rel="noopener noreferrer">Windmill Wagers</a></h2>
+					<div class="card-tags">
+						<span class="tag">Neural models</span>
+						<span class="tag">xG proxy</span>
+						<span class="tag">Value bets</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.windmillwagers.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/netherlands-soccer" target="_blank" rel="noopener noreferrer" aria-label="Windmill Wagers on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="soccer" data-season-start="08-10" data-season-end="05-25" data-keywords="belgium pro league waffle wagers soccer value bets shot based xg">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/waffle-wagers.png" alt="Waffle Wagers" loading="lazy" decoding="async"></div>
+					<p class="card-league">Belgian Pro League</p>
+					<h2 class="card-name"><a href="http://www.wafflewagers.com" target="_blank" rel="noopener noreferrer">Waffle Wagers</a></h2>
+					<div class="card-tags">
+						<span class="tag">Value bets</span>
+						<span class="tag">xG proxy</span>
+						<span class="tag">Odds adapter</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.wafflewagers.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/belgium-soccer" target="_blank" rel="noopener noreferrer" aria-label="Waffle Wagers on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<article class="project-card" data-category="soccer" data-season-start="08-10" data-season-end="05-25" data-keywords="portugal primeira liga primeira goals soccer value bets bet predict win">
+					<div class="card-top">
+						<span class="card-index"></span>
+						<span class="card-status"><span class="status-dot"></span><span class="status-text"></span></span>
+					</div>
+					<div class="logo-plate"><img src="data_files/primeira-goals.png" alt="Primeira Goals" loading="lazy" decoding="async"></div>
+					<p class="card-league">Primeira Liga</p>
+					<h2 class="card-name"><a href="http://www.primeiragoals.com" target="_blank" rel="noopener noreferrer">Primeira Goals</a></h2>
+					<div class="card-tags">
+						<span class="tag">Value bets</span>
+						<span class="tag">xG proxy</span>
+						<span class="tag">Goal markets</span>
+					</div>
+					<div class="card-foot">
+						<a class="btn-open" href="http://www.primeiragoals.com" target="_blank" rel="noopener noreferrer">Open App<span class="arrow" aria-hidden="true">↗</span></a>
+						<a class="btn-gh" href="https://github.com/gmalbert/portugal-soccer" target="_blank" rel="noopener noreferrer" aria-label="Primeira Goals on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+					</div>
+				</article>
+
+				<div class="empty" id="empty-state">
+					<p class="empty-title">No matches</p>
+					<p class="empty-sub">No apps fit that search or filter.</p>
+					<button id="reset-btn" type="button">Clear filters</button>
 				</div>
-			</article>
+			</section>
 
-			<article class="project-card" data-category="soccer" data-season-start="08-10" data-season-end="05-25" data-keywords="premier league soccer football pitch oracle ensemble">
-				<img class="card-logo" src="data_files/pitch-oracle.png" alt="Pitch Oracle">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://pitch-oracle.com" target="_blank" rel="noopener noreferrer">Pitch Oracle</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/premier-league" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
+			<section class="how" id="how">
+				<p class="eyebrow">How the edge is made</p>
+				<div class="how-grid">
+					<div class="how-item">
+						<span class="how-num">01</span>
+						<h2>Data ingest</h2>
+						<p>Fixtures, results, standings, weather and live odds flow in from ESPN, CFBD, KenPom and book feeds — cached, retried and cleaned automatically.</p>
 					</div>
-					<span class="sport-chip">Premier League</span>
-					<div class="meta-chips">
-						<span class="meta">Ensemble</span>
-						<span class="meta">ESPN fixtures</span>
-						<span class="meta">Off season</span>
+					<div class="how-item">
+						<span class="how-num">02</span>
+						<h2>Model layer</h2>
+						<p>XGBoost, LightGBM, Elo, Poisson and weighted ensembles — tuned with Optuna, tracked in MLflow, explained with SHAP.</p>
 					</div>
-					<a href="http://pitch-oracle.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
+					<div class="how-item">
+						<span class="how-num">03</span>
+						<h2>Find the edge</h2>
+						<p>Model probabilities meet market prices. Value bets, Kelly staking and nightly best picks — refreshed as the odds move.</p>
+					</div>
 				</div>
-			</article>
-
-			<article class="project-card" data-category="major-us" data-season-start="09-05" data-season-end="02-10" data-keywords="nfl football gridiron oracle props xgboost">
-				<img class="card-logo" src="data_files/gridiron-oracle.png" alt="Gridiron Oracle">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://gridiron-oracle.com" target="_blank" rel="noopener noreferrer">Gridiron Oracle</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/nfl-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">NFL</span>
-					<div class="meta-chips">
-						<span class="meta">XGBoost</span>
-						<span class="meta">Props</span>
-						<span class="meta">Kelly sizing</span>
-					</div>
-					<a href="http://gridiron-oracle.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="racing" data-season-start="03-15" data-season-end="12-10" data-keywords="formula 1 f1 gridlocked racing ensemble">
-				<img class="card-logo" src="data_files/gridlocked-logo-with-text.png" alt="Gridlocked Oracle">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://gridlocked.racing" target="_blank" rel="noopener noreferrer">Gridlocked Oracle</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/f1Analysis" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Formula 1</span>
-					<div class="meta-chips">
-						<span class="meta">Ensemble</span>
-						<span class="meta">86+ features</span>
-						<span class="meta">Race email</span>
-					</div>
-					<a href="http://gridlocked.racing" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="major-us" data-season-start="03-15" data-season-end="04-10" data-keywords="march madness college basketball bracket oracle">
-				<img class="card-logo" src="data_files/bracket-oracle.png" alt="Bracket Oracle">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://bracket-oracle.com" target="_blank" rel="noopener noreferrer">Bracket Oracle</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/march-madness" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">March Madness</span>
-					<div class="meta-chips">
-						<span class="meta">Ensemble</span>
-						<span class="meta">KenPom</span>
-						<span class="meta">Kelly sizing</span>
-					</div>
-					<a href="http://bracket-oracle.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="major-us" data-season-start="10-10" data-season-end="06-20" data-keywords="nhl hockey oracle on ice xg expected goals">
-				<img class="card-logo" src="data_files/oracle-on-ice.png" alt="Oracle on Ice">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://oracle-on-ice.com" target="_blank" rel="noopener noreferrer">Oracle on Ice</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/hockey-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">NHL</span>
-					<div class="meta-chips">
-						<span class="meta">xG model</span>
-						<span class="meta">11 pages</span>
-						<span class="meta">Live odds</span>
-					</div>
-					<a href="http://oracle-on-ice.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="racing" data-season="year-round" data-keywords="pga golf fairway oracle xgboost lstm weather">
-				<img class="card-logo" src="data_files/fairway-oracle.png" alt="Fairway Oracle">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.fairway-oracle.com" target="_blank" rel="noopener noreferrer">Fairway Oracle</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/golf-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">PGA Golf</span>
-					<div class="meta-chips">
-						<span class="meta">XGBoost</span>
-						<span class="meta">LSTM</span>
-						<span class="meta">Weather</span>
-					</div>
-					<a href="http://www.fairway-oracle.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="individual" data-season="year-round" data-keywords="tennis breakpoint oracle elo surface form live odds">
-				<img class="card-logo" src="data_files/breakpoint-oracle.png" alt="Breakpoint Oracle">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.breakpoint-oracle.com" target="_blank" rel="noopener noreferrer">Breakpoint Oracle</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/tennis-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Tennis</span>
-					<div class="meta-chips">
-						<span class="meta">ELO</span>
-						<span class="meta">Surface form</span>
-						<span class="meta">Live odds</span>
-					</div>
-					<a href="http://www.breakpoint-oracle.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="major-us" data-season-start="04-01" data-season-end="10-31" data-keywords="mlb baseball betting cleanup xgboost 7 pages live odds">
-				<img class="card-logo" src="data_files/betting-cleanup.png" alt="Betting Cleanup">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.betting-cleanup.com" target="_blank" rel="noopener noreferrer">Betting Cleanup</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/baseball-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">MLB</span>
-					<div class="meta-chips">
-						<span class="meta">XGBoost</span>
-						<span class="meta">7 pages</span>
-						<span class="meta">Live odds</span>
-					</div>
-					<a href="http://www.betting-cleanup.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="major-us" data-season-start="10-15" data-season-end="06-20" data-keywords="nba basketball betting baseline xgboost pick 6 nightly">
-				<img class="card-logo" src="data_files/betting-baseline.png" alt="Betting Baseline">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.betting-baseline.com" target="_blank" rel="noopener noreferrer">Betting Baseline</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/nba-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">NBA</span>
-					<div class="meta-chips">
-						<span class="meta">XGBoost</span>
-						<span class="meta">Pick 6</span>
-						<span class="meta">Nightly</span>
-					</div>
-					<a href="http://www.betting-baseline.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="major-us" data-season-start="08-25" data-season-end="01-10" data-keywords="college football tailgate edge xgboost value bets">
-				<img class="card-logo" src="data_files/tailgate-edge.png" alt="Tailgate Edge">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.tailgate-edge.com" target="_blank" rel="noopener noreferrer">Tailgate Edge</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/college-football-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">College Football</span>
-					<div class="meta-chips">
-						<span class="meta">XGBoost</span>
-						<span class="meta">Value bets</span>
-						<span class="meta">CFBD</span>
-					</div>
-					<a href="http://www.tailgate-edge.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="soccer" data-season-start="02-22" data-season-end="10-20" data-keywords="mls oracle soccer ensemble travel fatigue playoff race">
-				<img class="card-logo" src="data_files/mls.png" alt="MLS Oracle">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.mls-oracle.com" target="_blank" rel="noopener noreferrer">MLS Oracle</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/mls-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">MLS</span>
-					<div class="meta-chips">
-						<span class="meta">Ensemble</span>
-						<span class="meta">Travel fatigue</span>
-						<span class="meta">Playoff race</span>
-					</div>
-					<a href="http://www.mls-oracle.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="soccer" data-season-start="08-15" data-season-end="05-20" data-keywords="bundesliga bet bundesliga soccer ensemble value bets">
-				<img class="card-logo" src="data_files/bundesliga.png" alt="Bet Bundesliga">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.bet-bundesliga.com" target="_blank" rel="noopener noreferrer">Bet Bundesliga</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/bundesliga" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Bundesliga</span>
-					<div class="meta-chips">
-						<span class="meta">Ensemble</span>
-						<span class="meta">Value bets</span>
-						<span class="meta">Shannon entropy</span>
-					</div>
-					<a href="http://www.bet-bundesliga.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="soccer" data-season-start="08-15" data-season-end="05-25" data-keywords="la liga linea soccer ensemble best bets">
-				<img class="card-logo" src="data_files/laliga.png" alt="La Liga Linea">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.laliga-linea.com" target="_blank" rel="noopener noreferrer">La Liga Linea</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/la-liga" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">La Liga</span>
-					<div class="meta-chips">
-						<span class="meta">Weighted ensemble</span>
-						<span class="meta">xG rankings</span>
-						<span class="meta">Best Bets</span>
-					</div>
-					<a href="http://www.laliga-linea.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="individual" data-season="year-round" data-keywords="darts bullziq elo steam moves nightly">
-				<img class="card-logo" src="data_files/darts.png" alt="Bullziq">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.bullziq.com" target="_blank" rel="noopener noreferrer">Bullziq</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/darts" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Darts</span>
-					<div class="meta-chips">
-						<span class="meta">ELO</span>
-						<span class="meta">Steam moves</span>
-						<span class="meta">Nightly</span>
-					</div>
-					<a href="http://www.bullziq.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="soccer" data-season-start="06-11" data-season-end="07-19" data-keywords="world cup goallineiq elo poisson monte carlo tournament">
-				<img class="card-logo" src="data_files/world-cup.png" alt="GoallineIQ">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.goallineiq.com" target="_blank" rel="noopener noreferrer">GoallineIQ</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/world-cup" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">World Cup</span>
-					<div class="meta-chips">
-						<span class="meta">Elo + Poisson</span>
-						<span class="meta">Monte Carlo</span>
-						<span class="meta">Tournament</span>
-					</div>
-					<a href="http://www.goallineiq.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="individual" data-season="year-round" data-keywords="boxing knockoutiq elo live odds bet tracker">
-				<img class="card-logo" src="data_files/boxing.png" alt="KnockoutIQ">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.knockoutiq.com" target="_blank" rel="noopener noreferrer">KnockoutIQ</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/boxing" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Boxing</span>
-					<div class="meta-chips">
-						<span class="meta">ELO</span>
-						<span class="meta">Live odds</span>
-						<span class="meta">Bet tracker</span>
-					</div>
-					<a href="http://www.knockoutiq.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="soccer" data-season-start="08-10" data-season-end="05-20" data-keywords="ligue 1 ligue odds elo kelly tracker">
-				<img class="card-logo" src="data_files/ligue-1.png" alt="Ligue Odds">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.ligue-odds.com" target="_blank" rel="noopener noreferrer">Ligue Odds</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/ligue-1" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Ligue 1</span>
-					<div class="meta-chips">
-						<span class="meta">ELO</span>
-						<span class="meta">Kelly tracker</span>
-						<span class="meta">Odds movement</span>
-					</div>
-					<a href="http://www.ligue-odds.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="individual" data-season-start="08-20" data-season-end="06-25" data-keywords="wnba her hoops edge women basketball soccer womens xgboost props">
-				<img class="card-logo" src="data_files/her-hoops-edge.png" alt="Her Hoops Edge">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.herhoopsedge.com" target="_blank" rel="noopener noreferrer">Her Hoops Edge</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/wnba-predictions" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">WNBA</span>
-					<div class="meta-chips">
-						<span class="meta">XGBoost</span>
-						<span class="meta">Props</span>
-						<span class="meta">Nightly</span>
-					</div>
-					<a href="http://www.herhoopsedge.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="individual" data-season="year-round" data-keywords="table tennis pong odds ping pong nightly forecasts win probability">
-				<img class="card-logo" src="data_files/pong-odds.png" alt="Pong Odds">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.pongodds.com" target="_blank" rel="noopener noreferrer">Pong Odds</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/table-tennis" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Table Tennis</span>
-					<div class="meta-chips">
-						<span class="meta">Win probability</span>
-						<span class="meta">Factor breakdown</span>
-						<span class="meta">Nightly</span>
-					</div>
-					<a href="http://www.pongodds.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="individual" data-season="year-round" data-keywords="cricket wicket odds ipl playoff simulator xgboost lightgbm monte carlo player props">
-				<img class="card-logo" src="data_files/wicket-odds.png" alt="Wicket Odds">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.wicketodds.com" target="_blank" rel="noopener noreferrer">Wicket Odds</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/cricket" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Cricket</span>
-					<div class="meta-chips">
-						<span class="meta">XGBoost + LightGBM</span>
-						<span class="meta">Monte Carlo</span>
-						<span class="meta">Value bets</span>
-					</div>
-					<a href="http://www.wicketodds.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="individual" data-season="year-round" data-keywords="rugby scrum bet six nations dixon coles elo try scorer draftkings">
-				<img class="card-logo" src="data_files/scrumbet.png" alt="ScrumBet">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.scrumbet.com" target="_blank" rel="noopener noreferrer">ScrumBet</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/rugby" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Rugby</span>
-					<div class="meta-chips">
-						<span class="meta">Elo + Dixon-Coles</span>
-						<span class="meta">Try scorers</span>
-						<span class="meta">Parlay builder</span>
-					</div>
-					<a href="http://www.scrumbet.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="soccer" data-season-start="08-05" data-season-end="05-25" data-keywords="turkey super lig superliggoals soccer ensemble xgboost neural networks">
-				<img class="card-logo" src="data_files/super-lig.png" alt="Super Lig Goals">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.superliggoals.com" target="_blank" rel="noopener noreferrer">Super Lig Goals</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/turkey-soccer" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Süper Lig</span>
-					<div class="meta-chips">
-						<span class="meta">Ensemble</span>
-						<span class="meta">Neural network</span>
-						<span class="meta">xG features</span>
-					</div>
-					<a href="http://www.superliggoals.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="soccer" data-season-start="08-01" data-season-end="05-25" data-keywords="scotland premiership kilt the odds soccer elo value bets">
-				<img class="card-logo" src="data_files/kilt-the-odds.png" alt="Kilt The Odds">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.kilttheodds.com" target="_blank" rel="noopener noreferrer">Kilt The Odds</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/scotland-premiership" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Scottish Premiership</span>
-					<div class="meta-chips">
-						<span class="meta">Value bets</span>
-						<span class="meta">xG proxy</span>
-						<span class="meta">Odds adapter</span>
-					</div>
-					<a href="http://www.kilttheodds.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="soccer" data-season-start="08-10" data-season-end="05-20" data-keywords="netherlands eredivisie windmill wagers soccer neural models value bets">
-				<img class="card-logo" src="data_files/windmill-wagers.png" alt="Windmill Wagers">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.windmillwagers.com" target="_blank" rel="noopener noreferrer">Windmill Wagers</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/netherlands-soccer" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Eredivisie</span>
-					<div class="meta-chips">
-						<span class="meta">Neural models</span>
-						<span class="meta">xG proxy</span>
-						<span class="meta">Value bets</span>
-					</div>
-					<a href="http://www.windmillwagers.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="soccer" data-season-start="07-25" data-season-end="05-25" data-keywords="belgium pro league waffle wagers soccer value bets shot based xg">
-				<img class="card-logo" src="data_files/waffle-wagers.png" alt="Waffle Wagers">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.wafflewagers.com" target="_blank" rel="noopener noreferrer">Waffle Wagers</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/belgium-soccer" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Belgian Pro League</span>
-					<div class="meta-chips">
-						<span class="meta">Value bets</span>
-						<span class="meta">xG proxy</span>
-						<span class="meta">Odds adapter</span>
-					</div>
-					<a href="http://www.wafflewagers.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<article class="project-card" data-category="soccer" data-season-start="08-10" data-season-end="05-25" data-keywords="portugal primeira liga primeira goals soccer value bets bet predict win">
-				<img class="card-logo" src="data_files/primeira-goals.png" alt="Primeira Goals">
-				<div class="card-info">
-					<div class="card-header">
-						<h2 class="card-title"><a href="http://www.primeiragoals.com" target="_blank" rel="noopener noreferrer">Primeira Goals</a></h2>
-						<div class="card-actions">
-							<a href="https://github.com/gmalbert/portugal-soccer" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="data_files/github.png" alt="GitHub"></a>
-						</div>
-					</div>
-					<span class="sport-chip">Primeira Liga</span>
-					<div class="meta-chips">
-						<span class="meta">Value bets</span>
-						<span class="meta">xG proxy</span>
-						<span class="meta">Goal markets</span>
-					</div>
-					<a href="http://www.primeiragoals.com" class="btn-primary" target="_blank" rel="noopener noreferrer">Open App</a>
-				</div>
-			</article>
-
-			<div class="empty-state" id="empty-state">
-				<p>No projects match your search or filter.</p>
-			</div>
-		</section>
+			</section>
+		</div>
 	</main>
 
 	<footer class="site-footer">
-		<div class="container">© <span id="year"></span> Betting Oracle</div>
+		<div class="wrap footer-in">
+			<p>© <span id="year"></span> Betting Oracle</p>
+			<p>Built with Python · Streamlit · XGBoost</p>
+			<p>For research &amp; entertainment — bet responsibly</p>
+		</div>
 	</footer>
 
 	<script>
-		document.getElementById('year').textContent = new Date().getFullYear();
+		(function () {
+			var cards = Array.prototype.slice.call(document.querySelectorAll('.project-card'));
+			var searchInput = document.getElementById('project-search');
+			var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+			var emptyState = document.getElementById('empty-state');
+			var shownEl = document.getElementById('shown');
+			var totalEl = document.getElementById('total');
+			var statTotal = document.getElementById('stat-total');
+			var statLive = document.getElementById('stat-live');
+			var activeFilter = 'all';
 
-		const searchInput = document.getElementById('project-search');
-		const chips = document.querySelectorAll('#filter-chips .chip');
-		const cards = document.querySelectorAll('.project-card');
-		const emptyState = document.getElementById('empty-state');
-		const seasonCount = document.getElementById('season-count');
-		let activeFilter = 'all';
+			function inSeasonByDate(card) {
+				var start = card.dataset.seasonStart;
+				var end = card.dataset.seasonEnd;
+				if (!start || !end) return false;
+				var now = new Date();
+				var cur = (now.getMonth() + 1) * 100 + now.getDate();
+				var s = parseInt(start.split('-')[0], 10) * 100 + parseInt(start.split('-')[1], 10);
+				var e = parseInt(end.split('-')[0], 10) * 100 + parseInt(end.split('-')[1], 10);
+				if (s <= e) return cur >= s && cur <= e;
+				return cur >= s || cur <= e;
+			}
 
-		function isInSeason(card) {
-			if (card.dataset.season === 'year-round') return true;
-			const start = card.dataset.seasonStart;
-			const end = card.dataset.seasonEnd;
-			if (!start || !end) return false;
-			const today = new Date();
-			const cur = (today.getMonth() + 1) * 100 + today.getDate();
-			const s = parseInt(start.split('-')[0]) * 100 + parseInt(start.split('-')[1]);
-			const e = parseInt(end.split('-')[0]) * 100 + parseInt(end.split('-')[1]);
-			if (s <= e) return cur >= s && cur <= e;
-			return cur >= s || cur <= e;
-		}
+			var live = 0;
+			cards.forEach(function (card, i) {
+				card.querySelector('.card-index').textContent = String(i + 1).padStart(2, '0');
+				var statusText = card.querySelector('.status-text');
+				var cls = 'is-off';
+				var label = 'Offseason';
+				if (card.dataset.season === 'year-round') {
+					cls = 'is-year';
+					label = 'Year-round';
+				} else if (inSeasonByDate(card)) {
+					cls = 'is-live';
+					label = 'In season';
+				}
+				if (cls !== 'is-off') live++;
+				card.classList.add(cls);
+				statusText.textContent = label;
+			});
 
-		// auto-generate season badges and count
-		let inSeason = 0;
-		cards.forEach(card => {
-			if (isInSeason(card)) {
-				inSeason++;
-				const badge = document.createElement('span');
-				badge.className = 'season-badge';
-				badge.textContent = 'In Season';
-				const header = card.querySelector('.card-header');
-				if (header) {
-					const actions = header.querySelector('.card-actions');
-					if (actions) header.insertBefore(badge, actions);
-					else header.appendChild(badge);
+			totalEl.textContent = cards.length;
+			statTotal.textContent = cards.length;
+			statLive.textContent = live;
+			document.getElementById('year').textContent = new Date().getFullYear();
+
+			function update() {
+				var query = searchInput.value.trim().toLowerCase();
+				var visible = 0;
+				cards.forEach(function (card) {
+					var keywords = (card.dataset.keywords || '').toLowerCase();
+					var text = card.textContent.toLowerCase();
+					var category = card.dataset.category || '';
+					var matchesSearch = !query || keywords.indexOf(query) !== -1 || text.indexOf(query) !== -1;
+					var matchesFilter = activeFilter === 'all' ||
+						(activeFilter === 'in-season' && (card.classList.contains('is-live') || card.classList.contains('is-year'))) ||
+						activeFilter === category;
+					var show = matchesSearch && matchesFilter;
+					card.classList.toggle('hidden', !show);
+					if (show) visible++;
+				});
+				shownEl.textContent = visible;
+				emptyState.classList.toggle('visible', visible === 0);
+			}
+
+			searchInput.addEventListener('input', update);
+
+			chips.forEach(function (chip) {
+				chip.addEventListener('click', function () {
+					chips.forEach(function (c) {
+						c.classList.remove('active');
+						c.setAttribute('aria-pressed', 'false');
+					});
+					chip.classList.add('active');
+					chip.setAttribute('aria-pressed', 'true');
+					activeFilter = chip.dataset.filter;
+					update();
+				});
+			});
+
+			document.getElementById('reset-btn').addEventListener('click', function () {
+				searchInput.value = '';
+				chips.filter(function (c) { return c.dataset.filter === 'all'; })[0].click();
+			});
+
+			var themeBtn = document.getElementById('theme-toggle');
+			var rootEl = document.documentElement;
+			function currentTheme() {
+				return rootEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+			}
+			function applyTheme(theme, persist) {
+				if (theme === 'light') rootEl.setAttribute('data-theme', 'light');
+				else rootEl.removeAttribute('data-theme');
+				var meta = document.querySelector('meta[name="theme-color"]');
+				if (meta) meta.setAttribute('content', theme === 'light' ? '#f5f8fc' : '#070b14');
+				if (persist) {
+					try { localStorage.setItem('bo-theme', theme); } catch (e) {}
 				}
 			}
-		});
-		seasonCount.textContent = inSeason + ' apps are currently in season.';
+			function savedTheme() {
+				try { return localStorage.getItem('bo-theme'); } catch (e) { return null; }
+			}
+			function timeTheme() {
+				var h = new Date().getHours();
+				return h >= 6 && h < 18 ? 'light' : 'dark';
+			}
+			applyTheme(currentTheme(), false);
+			themeBtn.addEventListener('click', function () {
+				applyTheme(currentTheme() === 'light' ? 'dark' : 'light', true);
+			});
+			setInterval(function () {
+				var saved = savedTheme();
+				if (saved !== 'light' && saved !== 'dark') {
+					var want = timeTheme();
+					if (want !== currentTheme()) applyTheme(want, false);
+				}
+			}, 60000);
 
-		function updateVisibility() {
-			const query = searchInput.value.trim().toLowerCase();
-			let visibleCount = 0;
-
-			cards.forEach(card => {
-				const keywords = (card.dataset.keywords || '').toLowerCase();
-				const text = card.textContent.toLowerCase();
-				const category = card.dataset.category || '';
-
-				const matchesSearch = !query || keywords.includes(query) || text.includes(query);
-				const matchesFilter = activeFilter === 'all' ||
-					(activeFilter === 'in-season' && card.querySelector('.season-badge')) ||
-					activeFilter === category;
-
-				if (matchesSearch && matchesFilter) {
-					card.classList.remove('hidden');
-					visibleCount++;
-				} else {
-					card.classList.add('hidden');
+			document.addEventListener('keydown', function (e) {
+				var el = document.activeElement;
+				var typing = el === searchInput || /^(input|textarea|select)$/i.test(el.tagName);
+				if (e.key === '/' && !typing) {
+					e.preventDefault();
+					searchInput.focus();
 				}
 			});
-
-			emptyState.classList.toggle('visible', visibleCount === 0);
-		}
-
-		searchInput.addEventListener('input', updateVisibility);
-
-		chips.forEach(chip => {
-			chip.addEventListener('click', () => {
-				chips.forEach(c => c.classList.remove('active'));
-				chip.classList.add('active');
-				activeFilter = chip.dataset.filter;
-				updateVisibility();
-			});
-		});
+		})();
 	</script>
 </body>
 </html>
