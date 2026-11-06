@@ -4,147 +4,416 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<title>Packages — Betting Oracle</title>
+	<meta name="description" content="The Python packages powering every Betting Oracle app — data ingest, model training, testing and deployment." />
+	<meta name="theme-color" content="#070b14" />
 
-	<!-- Open Graph / Facebook -->
 	<meta property="og:title" content="Packages — Betting Oracle" />
-	<meta property="og:description" content="Common Python packages used across the Betting Oracle projects, with a short description and typical usage." />
+	<meta property="og:description" content="The Python packages powering every Betting Oracle app — data ingest, model training, testing and deployment." />
 	<meta property="og:image" content="/data_files/logo.png" />
 	<meta property="og:image:alt" content="Betting Oracle logo" />
 	<meta property="og:url" content="http://www.betting-oracle.com/packages.html" />
 	<meta property="og:type" content="website" />
 
-	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="Packages — Betting Oracle" />
-	<meta name="twitter:description" content="Common Python packages used across the Betting Oracle projects, with a short description and typical usage." />
+	<meta name="twitter:description" content="The Python packages powering every Betting Oracle app — data ingest, model training, testing and deployment." />
 	<meta name="twitter:image" content="/data_files/logo.png" />
 
 	<link rel="icon" type="image/x-icon" href="data_files/fav.ico">
-	<link rel="stylesheet" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<style>
-		.site-header .container { flex-direction: row; align-items: flex-end; justify-content: flex-start; gap: 16px; min-height: 0; padding: 8px 20px 4px; }
-		.header-brand { flex-direction: row; align-items: flex-end; gap: 16px; }
-		.logo { height: 120px; }
-		.site-nav { width: auto; gap: 6px; }
-		.site-nav--boxed a { padding: 8px 14px; font-size: 14px; border-bottom: 2px solid transparent; transition: border-color .12s ease, color .12s ease; border-radius: 0; }
-		.site-nav--boxed a:hover { transform: none; box-shadow: none; background: transparent; border-bottom-color: var(--accent); }
-	</style>
+		:root{
+			color-scheme:dark;
+			--bg:#070b14;
+			--panel:rgba(13,20,36,.6);
+			--card:#0e1626;
+			--plate:#e8edf4;
+			--plate-off:#dde3eb;
+			--border:rgba(148,163,184,.16);
+			--border-strong:rgba(148,163,184,.32);
+			--text:#e9eef7;
+			--muted:#8b97ab;
+			--faint:#5d6a80;
+			--accent:#38e07b;
+			--accent-dim:rgba(56,224,123,.13);
+			--accent-border:rgba(56,224,123,.45);
+			--sky:#6cb8ff;
+			--ink:#04150b;
+			--glow-1:rgba(56,224,123,.10);
+			--glow-2:rgba(108,184,255,.08);
+			--grid-line:rgba(148,163,184,.05);
+			--chrome:rgba(7,11,20,.85);
+			--chrome-solid:rgba(7,11,20,.93);
+			--hover-bg:rgba(148,163,184,.08);
+			--field-bg:rgba(148,163,184,.07);
+			--card-sheen:rgba(148,163,184,.04);
+			--shadow-lift:0 18px 44px rgba(2,6,16,.55);
+			--scroll-thumb:#1b2842;
+			--footer-bg:rgba(10,16,29,.65);
+			--pulse-ring:rgba(56,224,123,.55);
+			--font-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+			--font-body:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+			--font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Consolas,monospace;
+			--header-h:108px;
+		}
+		html[data-theme="light"]{
+			color-scheme:light;
+			--bg:#f5f8fc;
+			--panel:rgba(255,255,255,.72);
+			--card:#ffffff;
+			--plate:#eef2f8;
+			--plate-off:#e3e9f1;
+			--border:rgba(15,23,42,.10);
+			--border-strong:rgba(15,23,42,.24);
+			--text:#101b2d;
+			--muted:#4e5d73;
+			--faint:#7e8ca0;
+			--accent:#0b8a4b;
+			--accent-dim:rgba(11,138,75,.10);
+			--accent-border:rgba(11,138,75,.40);
+			--sky:#2563ab;
+			--ink:#ffffff;
+			--glow-1:rgba(11,138,75,.07);
+			--glow-2:rgba(46,119,201,.06);
+			--grid-line:rgba(15,23,42,.045);
+			--chrome:rgba(247,250,253,.88);
+			--chrome-solid:rgba(247,250,253,.95);
+			--hover-bg:rgba(15,23,42,.05);
+			--field-bg:rgba(15,23,42,.045);
+			--card-sheen:rgba(15,23,42,.02);
+			--shadow-lift:0 18px 40px rgba(15,23,42,.14);
+			--scroll-thumb:#c3cedd;
+			--footer-bg:rgba(238,243,249,.85);
+			--pulse-ring:rgba(11,138,75,.40);
+		}
+		*{box-sizing:border-box}
+		html{scroll-padding-top:calc(var(--header-h) + 16px)}
+		body{margin:0;min-height:100vh;font-family:var(--font-body);color:var(--text);background:radial-gradient(1100px 520px at 78% -6%,var(--glow-1),transparent 62%),radial-gradient(900px 480px at 8% 2%,var(--glow-2),transparent 58%),var(--bg);-webkit-font-smoothing:antialiased}
+		body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 25%,transparent 78%);mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 25%,transparent 78%)}
+		::selection{background:var(--accent);color:var(--ink)}
+		::-webkit-scrollbar{width:11px}
+		::-webkit-scrollbar-track{background:var(--bg)}
+		::-webkit-scrollbar-thumb{background:var(--scroll-thumb);border-radius:6px;border:3px solid var(--bg)}
+		:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+		.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+		.site-header{position:sticky;top:0;z-index:40;background:var(--chrome);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+		.header-in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:var(--header-h)}
+		.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+		.brand img{display:block;height:90px;width:auto}
+		.nav{display:flex;align-items:center;gap:2px}
+		.nav a{font:600 12px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:10px 13px;border-radius:8px;transition:color .15s,background .15s}
+		.nav a:hover{color:var(--text);background:var(--hover-bg)}
+		.nav a[aria-current="page"]{color:var(--accent);background:var(--accent-dim)}
+		.nav-gh{display:inline-flex;align-items:center;justify-content:center;margin-left:8px}
+		.nav-gh svg{width:17px;height:17px;fill:currentColor}
+		.nav-theme{display:inline-flex;align-items:center;justify-content:center;margin-left:8px;padding:10px 13px;border-radius:8px;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:color .15s,background .15s}
+		.nav-theme:hover{color:var(--text);background:var(--hover-bg)}
+		.nav-theme svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+		html[data-theme="light"] .icon-sun{display:none}
+		html:not([data-theme="light"]) .icon-moon{display:none}
+
+		.hero{padding:84px 0 52px}
+		.eyebrow{display:flex;align-items:center;gap:10px;font:600 12px var(--font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin:0 0 20px}
+		.pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite}
+		.hero-title{font-family:var(--font-display);font-weight:800;font-size:clamp(46px,9vw,102px);line-height:.92;letter-spacing:.015em;margin:0 0 22px;text-transform:uppercase}
+		.hero-title .stroke{color:var(--accent)}
+		@supports (-webkit-text-stroke:1px #000){.hero-title .stroke{color:transparent;-webkit-text-stroke:2px var(--accent)}}
+		.hero-sub{max-width:660px;margin:0 0 38px;color:var(--muted);font-size:17px;line-height:1.65}
+		.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:12px;background:var(--panel);overflow:hidden}
+		.stat{padding:18px 22px;border-left:1px solid var(--border)}
+		.stat:first-child{border-left:0}
+		.stat-num{display:block;font:600 25px/1.1 var(--font-mono);color:var(--text)}
+		.stat-num.accent{color:var(--accent)}
+		.stat-label{font:600 10px var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+		@keyframes pulse{0%{box-shadow:0 0 0 0 var(--pulse-ring)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+		.controls-sticky{position:sticky;top:var(--header-h);z-index:30;background:var(--chrome-solid);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+		.controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:12px 0}
+		.search-wrap{position:relative;flex:1 1 250px;max-width:430px}
+		.search-wrap svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--faint);pointer-events:none}
+		.search{width:100%;padding:11px 40px 11px 38px;font:500 14px var(--font-body);color:var(--text);background:var(--field-bg);border:1px solid var(--border);border-radius:9px;outline:none;transition:border-color .15s,box-shadow .15s}
+		.search::placeholder{color:var(--faint)}
+		.search:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+		.search-kbd{position:absolute;right:11px;top:50%;transform:translateY(-50%);font:600 10px var(--font-mono);color:var(--faint);border:1px solid var(--border-strong);border-radius:4px;padding:2px 6px;pointer-events:none}
+		.search-wrap:focus-within .search-kbd{display:none}
+		.chips{display:flex;flex-wrap:wrap;gap:8px}
+		.chip{font:700 11px var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:999px;padding:9px 14px;cursor:pointer;transition:color .15s,border-color .15s,background .15s}
+		.chip:hover{color:var(--text);border-color:var(--border-strong)}
+		.chip.active{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+		.count{margin-left:auto;font:600 11px var(--font-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
+
+		.catalog{display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:16px;padding:24px 0 8px}
+		.project-card{display:flex;flex-direction:column;background:linear-gradient(180deg,var(--card-sheen),transparent 45%),var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+		.project-card:hover,.project-card:focus-within{transform:translateY(-4px);border-color:var(--accent-border);box-shadow:var(--shadow-lift)}
+		.project-card.hidden{display:none}
+		.card-top{display:flex;align-items:center;justify-content:space-between;min-height:16px;margin-bottom:10px}
+		.card-index{font:600 11px var(--font-mono);letter-spacing:.12em;color:var(--faint)}
+		.card-status{display:inline-flex;align-items:center;gap:6px}
+		.status-dot{width:7px;height:7px;border-radius:50%;background:var(--faint)}
+		.status-text{font:700 10px var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+		.is-live .status-dot{background:var(--accent);animation:pulse 2.4s infinite}
+		.is-live .status-text{color:var(--accent)}
+		.is-year .status-dot{background:var(--sky)}
+		.is-year .status-text{color:var(--sky)}
+		.is-off .logo-plate{background:var(--plate-off)}
+		.is-off .logo-plate img{opacity:.9}
+		.logo-plate{height:116px;display:flex;align-items:center;justify-content:center;padding:14px;background:var(--plate);border-radius:10px;margin-bottom:12px;overflow:hidden}
+		.logo-plate img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;transition:transform .18s ease}
+		.project-card:hover .logo-plate img,.project-card:focus-within .logo-plate img{transform:scale(1.05)}
+		.card-league{margin:0 0 5px;font:600 10.5px var(--font-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+		.card-name{margin:0 0 10px;font-family:var(--font-display);font-weight:700;font-size:26px;line-height:1.02;letter-spacing:.02em;text-transform:uppercase}
+		.card-name a{color:var(--text);text-decoration:none}
+		.card-name a:hover{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+		.card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+		.tag{font:500 10.5px var(--font-mono);color:var(--muted);border:1px solid var(--border);border-radius:5px;padding:3px 8px;white-space:nowrap}
+		.tag:first-child{color:var(--accent);border-color:var(--accent-border);background:var(--accent-dim)}
+		.card-foot{margin-top:auto;display:flex;gap:8px}
+		.btn-open{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;height:38px;font:700 11px var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);background:transparent;border:1px solid var(--accent-border);border-radius:8px;text-decoration:none;transition:background .15s,color .15s,border-color .15s}
+		.btn-open .arrow{transition:transform .15s}
+		.btn-open:hover{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+		.btn-open:hover .arrow{transform:translate(2px,-2px)}
+		.btn-gh{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:8px;transition:color .15s,border-color .15s}
+		.btn-gh svg{width:16px;height:16px;fill:currentColor}
+		.btn-gh:hover{color:var(--text);border-color:var(--border-strong)}
+		.empty{display:none;grid-column:1/-1;text-align:center;padding:64px 24px;border:1px dashed var(--border-strong);border-radius:12px}
+		.empty.visible{display:block}
+		.empty-title{margin:0 0 6px;font-family:var(--font-display);font-weight:700;font-size:34px;letter-spacing:.04em;text-transform:uppercase}
+		.empty-sub{margin:0 0 20px;color:var(--muted);font-size:14.5px}
+		#reset-btn{font:700 11px var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:transparent;border:1px solid var(--accent-border);border-radius:999px;padding:10px 18px;cursor:pointer;transition:background .15s,color .15s}
+		#reset-btn:hover{background:var(--accent);color:var(--ink)}
+
+		.how{margin:56px 0 0;border-top:1px solid var(--border);padding-top:44px}
+		.how .eyebrow{margin-bottom:22px}
+		.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+		.how-item{border:1px solid var(--border);border-radius:12px;background:var(--panel);padding:24px}
+		.how-num{font:700 11px var(--font-mono);letter-spacing:.22em;color:var(--accent)}
+		.how-item h2{margin:10px 0 8px;font-family:var(--font-display);font-weight:700;font-size:25px;letter-spacing:.03em;text-transform:uppercase}
+		.how-item p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.62}
+
+		.site-footer{margin-top:72px;border-top:1px solid var(--border);background:var(--footer-bg)}
+		.footer-in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:22px 24px;font:600 10.5px var(--font-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+		.footer-in p{margin:0}
+
+		@media (max-width:880px){
+			.hero{padding:64px 0 44px}
+			.stats{grid-template-columns:1fr 1fr}
+			.stat:nth-child(odd){border-left:0}
+			.stat:nth-child(n+3){border-top:1px solid var(--border)}
+			.how-grid{grid-template-columns:1fr}
+		}
+		@media (max-width:620px){
+			.nav a{font-size:11px;padding:8px 10px}
+			.nav-theme{padding:8px 10px}
+			.count{display:none}
+			.controls{gap:8px}
+			.footer-in{flex-direction:column;align-items:center;text-align:center}
+		}
+		@media (prefers-reduced-motion:reduce){
+			*,*::before,*::after{animation:none!important;transition:none!important}
+		}
+	
+		.page-hero{padding:64px 0 44px}
+		.page-hero .hero-title{font-size:clamp(40px,7vw,78px);margin:0 0 16px}
+		.page-hero .hero-sub{margin:0}
+		.stack-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+		.stack-item{border:1px solid var(--border);border-radius:12px;background:var(--panel);padding:24px}
+		.stack-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+		.stack-head img{width:42px;height:42px;object-fit:contain;flex-shrink:0}
+		.stack-head h2{margin:0;font-family:var(--font-display);font-weight:700;font-size:25px;letter-spacing:.03em;line-height:1.05;text-transform:uppercase}
+		.stack-count{margin-left:auto;font:700 12px var(--font-mono);letter-spacing:.14em;color:var(--faint);white-space:nowrap}
+		.stack-intro{margin:0 0 10px;color:var(--muted);font-size:14px;line-height:1.55}
+		.pkg-list{list-style:none;margin:0;padding:0}
+		.pkg-list li{padding:8px 0;border-bottom:1px dashed var(--border);font-size:13.5px;line-height:1.55;color:var(--muted)}
+		.pkg-list li:last-child{border-bottom:none;padding-bottom:0}
+		.pkg-list a{font:600 13px var(--font-mono);color:var(--accent);text-decoration:none}
+		.pkg-list a:hover{text-decoration:underline;text-underline-offset:3px}
+		.pkg-list strong{color:var(--text);font-weight:600}
+		.model-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:16px}
+		.model-card{display:flex;flex-direction:column;background:linear-gradient(180deg,var(--card-sheen),transparent 45%),var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+		.model-card:hover{transform:translateY(-4px);border-color:var(--accent-border);box-shadow:var(--shadow-lift)}
+		.model-card .logo-plate{height:130px}
+		.model-card .card-tags{margin-bottom:10px}
+		.model-desc{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
+		.model-card.wide{grid-column:1/-1;flex-direction:row;gap:22px;align-items:center}
+		.model-card.wide .logo-plate{width:150px;height:150px;flex-shrink:0;margin-bottom:0}
+		.model-card.wide .wide-body{flex:1;min-width:0}
+		@media (max-width:880px){
+			.stack-grid{grid-template-columns:1fr}
+			.model-card.wide{flex-direction:column;align-items:center}
+		}
+</style>
+	<script>(function(){var t;try{t=localStorage.getItem("bo-theme")}catch(e){}if(t!=="light"&&t!=="dark"){var h=new Date().getHours();t=h>=6&&h<18?"light":"dark"}if(t==="light"){document.documentElement.setAttribute("data-theme","light")}})();</script>
 </head>
 <body>
+	<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+		<symbol id="gh-mark" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></symbol>
+		<symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+		<symbol id="icon-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></symbol>
+	</svg>
+
 	<header class="site-header">
-		<div class="container">
-			<div class="header-brand">
-				<a href="index.html"><img class="logo" src="data_files/logo.png" alt="Logo"></a>
-				<nav class="site-nav site-nav--boxed">
+		<div class="wrap header-in">
+			<a class="brand" href="index.html">
+				<img src="data_files/logo.png" alt="Betting Oracle">
+			</a>
+			<nav class="nav" aria-label="Primary">
 				<a href="index.html">Home</a>
-				<a href="packages.html">Packages</a>
+				<a href="packages.html" aria-current="page">Packages</a>
 				<a href="machine-learning-models.html">Models</a>
+				<a class="nav-gh" href="https://github.com/gmalbert" target="_blank" rel="noopener noreferrer" aria-label="Betting Oracle on GitHub"><svg aria-hidden="true"><use href="#gh-mark"></use></svg></a>
+				<button class="nav-theme" id="theme-toggle" type="button" aria-label="Toggle light and dark theme">
+					<svg class="icon-sun" aria-hidden="true"><use href="#icon-sun"></use></svg>
+					<svg class="icon-moon" aria-hidden="true"><use href="#icon-moon"></use></svg>
+				</button>
 			</nav>
-			</div>
-			
 		</div>
-	</header>
+	</header>	<section class="hero page-hero">
+		<div class="wrap">
+			<p class="eyebrow">Under the hood — dependencies</p>
+			<h1 class="hero-title">The Python <span class="stroke">stack.</span></h1>
+			<p class="hero-sub">Every package that powers the Betting Oracle apps — data ingest, model training, testing and deployment. All free, all open source.</p>
+		</div>
+	</section>
 
-	<main class="container">
-		<h1>Python Packages</h1>
-		<br>
-		<section class="grid">
-			
-			<article class="card">
-				<div class="card-left">
-					<a href="#"><img src="data_files/python.png" alt="Python"></a>
-				</div>
-				<div class="card-body">
-					<h2>Python / Machine Learning</h2>
-					<ul>
-						<li><strong><a href="https://pypi.org/project/pandas">pandas</a></strong>: data manipulation and I/O for CSV/JSON/SQL.</li>
-						<li><strong><a href="https://pypi.org/project/numpy">numpy</a></strong>: numerical arrays and fast computations.</li>
-						<li><strong><a href="https://pypi.org/project/scikit-learn">scikit-learn</a></strong>: model building, validation, and preprocessing utilities.</li>
-						<li><strong><a href="https://pypi.org/project/xgboost">xgboost</a></strong>: gradient-boosted trees for classification/regression.</li>
-						<li><strong><a href="https://pypi.org/project/lightgbm">lightgbm</a></strong>: fast gradient boosting optimized for large datasets.</li>
-						<li><strong><a href="https://pypi.org/project/catboost">catboost</a></strong>: gradient boosting that handles categorical features.</li>
-						<li><strong><a href="https://pypi.org/project/optuna">optuna</a></strong>: hyperparameter tuning framework.</li>
-						<li><strong><a href="https://pypi.org/project/mlflow">mlflow</a></strong>: experiment tracking for ML results.</li>
-						<li><strong><a href="https://pypi.org/project/shap">shap</a></strong>: model explainability tools.</li>
-						<li><strong><a href="https://pypi.org/project/statsmodels">statsmodels</a></strong>: statistical models and tests.</li>
-						<li><strong><a href="https://pypi.org/project/scipy">scipy</a></strong>: scientific computations and statistics.</li>
-						<li><strong><a href="https://pypi.org/project/joblib">joblib</a></strong>: model persistence and parallel utilities.</li>
-						<li><strong><a href="https://pypi.org/project/tensorflow">tensorflow</a></strong> / <strong><a href="https://pypi.org/project/torch">torch</a></strong>: optional deep learning frameworks for neural models.</li>
-					</ul>
-				</div>
-			</article>
+	<main>
+		<div class="wrap">
+			<section class="stack-grid">
 
-			<article class="card">
-				<div class="card-left">
-					<a href="#"><img src="data_files/data.png" alt="Data"></a>
-				</div>
-				<div class="card-body">
-					<h2>Data &amp; Web</h2>
-					<ul>
-						<li><strong><a href="https://pypi.org/project/streamlit">Streamlit</a></strong>: generates UI and hosting via cloud.</li>
-						<li><strong><a href="https://pypi.org/project/requests">requests</a></strong>: HTTP requests for fetching APIs and pages.</li>
-						<li><strong><a href="https://pypi.org/project/requests-cache">requests-cache</a></strong>: caching layer for requests responses.</li>
-						<li><strong><a href="https://pypi.org/project/retry-requests">retry-requests</a></strong>: retry-on-failure helper for requests.</li>
-						<li><strong><a href="https://pypi.org/project/beautifulsoup4">beautifulsoup4</a></strong>: HTML parsing and scraping utilities.</li>
-						<li><strong><a href="https://pypi.org/project/lxml">lxml</a></strong>: fast XML/HTML handling for scrapers.</li>
-						<li><strong><a href="https://pypi.org/project/openmeteo-requests">openmeteo-requests</a></strong>: weather API fetch helper.</li>
-						<li><strong><a href="https://pypi.org/project/httpx">httpx</a></strong>: modern async HTTP client.</li>
-						<li><strong><a href="https://pypi.org/project/sqlalchemy">SQLAlchemy</a></strong>: database access and ORM helpers.</li>
-						<li><strong><a href="https://pypi.org/project/pyarrow">pyarrow</a></strong>: Apache Arrow/Parquet data handling.</li>
-						<li><strong><a href="https://pypi.org/project/openpyxl">openpyxl</a></strong>: Excel file processing.</li>
+				<article class="stack-item">
+					<div class="stack-head">
+						<img src="data_files/python.png" alt="Python">
+						<h2>Python &amp; Machine Learning</h2>
+						<span class="stack-count">13</span>
+					</div>
+					<ul class="pkg-list">
+						<li><a href="https://pypi.org/project/pandas">pandas</a> — data manipulation and I/O for CSV/JSON/SQL.</li>
+						<li><a href="https://pypi.org/project/numpy">numpy</a> — numerical arrays and fast computations.</li>
+						<li><a href="https://pypi.org/project/scikit-learn">scikit-learn</a> — model building, validation, and preprocessing utilities.</li>
+						<li><a href="https://pypi.org/project/xgboost">xgboost</a> — gradient-boosted trees for classification/regression.</li>
+						<li><a href="https://pypi.org/project/lightgbm">lightgbm</a> — fast gradient boosting optimized for large datasets.</li>
+						<li><a href="https://pypi.org/project/catboost">catboost</a> — gradient boosting that handles categorical features.</li>
+						<li><a href="https://pypi.org/project/optuna">optuna</a> — hyperparameter tuning framework.</li>
+						<li><a href="https://pypi.org/project/mlflow">mlflow</a> — experiment tracking for ML results.</li>
+						<li><a href="https://pypi.org/project/shap">shap</a> — model explainability tools.</li>
+						<li><a href="https://pypi.org/project/statsmodels">statsmodels</a> — statistical models and tests.</li>
+						<li><a href="https://pypi.org/project/scipy">scipy</a> — scientific computations and statistics.</li>
+						<li><a href="https://pypi.org/project/joblib">joblib</a> — model persistence and parallel utilities.</li>
+						<li><a href="https://pypi.org/project/tensorflow">tensorflow</a> / <a href="https://pypi.org/project/torch">torch</a> — optional deep learning frameworks for neural models.</li>
 					</ul>
-				</div>
-			</article>
+				</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="#"><img src="data_files/utilities.png" alt="Utilities"></a>
-				</div>
-				<div class="card-body">
-					<h2>Utilities & Testing</h2>
-					<ul>
-						<li><strong><a href="https://pypi.org/project/pytest">pytest</a></strong>: tests and assertions.</li>
-						<li><strong><a href="https://pypi.org/project/pytest-cov">pytest-cov</a></strong>: coverage reporting for pytest suites.</li>
-						<li><strong><a href="https://pypi.org/project/pytest-asyncio">pytest-asyncio</a></strong>: asyncio test support for pytest.</li>
-						<li><strong><a href="https://pypi.org/project/black">black</a></strong>: code formatter for consistent style.</li>
-						<li><strong><a href="https://pypi.org/project/ruff">ruff</a></strong>: linter and format checker.</li>
-						<li><strong><a href="https://pypi.org/project/mypy">mypy</a></strong>: static typing analysis.</li>
-						<li><strong><a href="https://pypi.org/project/plotly">plotly</a></strong>: graphing capabilities.</li>
-						<li><strong><a href="https://pypi.org/project/flake8">flake8</a></strong>: style and linting for Python source.</li>
-						<li><strong><a href="https://pypi.org/project/pre-commit">pre-commit</a></strong>: git hooks for code quality checks.</li>
-						<li><strong><a href="https://pypi.org/project/pandas-stubs">pandas-stubs</a></strong>: type stubs for pandas.</li>
+				<article class="stack-item">
+					<div class="stack-head">
+						<img src="data_files/data.png" alt="Data and web">
+						<h2>Data &amp; Web</h2>
+						<span class="stack-count">11</span>
+					</div>
+					<ul class="pkg-list">
+						<li><a href="https://pypi.org/project/streamlit">Streamlit</a> — generates UI and hosting via cloud.</li>
+						<li><a href="https://pypi.org/project/requests">requests</a> — HTTP requests for fetching APIs and pages.</li>
+						<li><a href="https://pypi.org/project/requests-cache">requests-cache</a> — caching layer for requests responses.</li>
+						<li><a href="https://pypi.org/project/retry-requests">retry-requests</a> — retry-on-failure helper for requests.</li>
+						<li><a href="https://pypi.org/project/beautifulsoup4">beautifulsoup4</a> — HTML parsing and scraping utilities.</li>
+						<li><a href="https://pypi.org/project/lxml">lxml</a> — fast XML/HTML handling for scrapers.</li>
+						<li><a href="https://pypi.org/project/openmeteo-requests">openmeteo-requests</a> — weather API fetch helper.</li>
+						<li><a href="https://pypi.org/project/httpx">httpx</a> — modern async HTTP client.</li>
+						<li><a href="https://pypi.org/project/sqlalchemy">SQLAlchemy</a> — database access and ORM helpers.</li>
+						<li><a href="https://pypi.org/project/pyarrow">pyarrow</a> — Apache Arrow/Parquet data handling.</li>
+						<li><a href="https://pypi.org/project/openpyxl">openpyxl</a> — Excel file processing.</li>
 					</ul>
-				</div>
-			</article>
+				</article>
 
-			<article class="card">
-				<div class="card-left">
-					<a href="#"><img src="data_files/repo-specific-libraries.png" alt="Repo specific"></a>
-				</div>
-				<div class="card-body">
-					<h2>Repo-specific Libraries</h2>
-					<p class="desc">Specialized libraries used in individual projects (F1, MLB, NBA, etc.).</p>
-					<ul>
-						<li><strong><a href="https://pypi.org/project/fastf1">fastf1</a></strong>: Formula 1 telemetry (f1Analysis).</li>
-						<li><strong><a href="https://pypi.org/project/mlb-statsapi">mlb-statsapi</a></strong>: MLB data service (baseball-predictions).</li>
-						<li><strong><a href="https://pypi.org/project/nba_api">nba_api</a></strong>: NBA game stats service (nba-predictions).</li>
-						<li><strong><a href="https://pypi.org/project/pybaseball">pybaseball</a></strong>: baseball metrics (baseball-predictions).</li>
-						<li><strong><a href="https://pypi.org/project/cbbd">cbbd</a></strong>: college basketball stats (march-madness).</li>
-						<li><strong><a href="https://pypi.org/project/cfbd">cfbd</a></strong>: college football stats (tailgate-edge).</li>
-						<li><strong><a href="https://pypi.org/project/betfairlightweight">betfairlightweight</a></strong>: Betfair market data (horse-racing-predictions).</li>
-						<li><strong><a href="https://pypi.org/project/sbrscrape">sbrscrape</a></strong>: sportsbook odds scraping helper (multiple repos).</li>
+				<article class="stack-item">
+					<div class="stack-head">
+						<img src="data_files/utilities.png" alt="Utilities and testing">
+						<h2>Utilities &amp; Testing</h2>
+						<span class="stack-count">10</span>
+					</div>
+					<ul class="pkg-list">
+						<li><a href="https://pypi.org/project/pytest">pytest</a> — tests and assertions.</li>
+						<li><a href="https://pypi.org/project/pytest-cov">pytest-cov</a> — coverage reporting for pytest suites.</li>
+						<li><a href="https://pypi.org/project/pytest-asyncio">pytest-asyncio</a> — asyncio test support for pytest.</li>
+						<li><a href="https://pypi.org/project/black">black</a> — code formatter for consistent style.</li>
+						<li><a href="https://pypi.org/project/ruff">ruff</a> — linter and format checker.</li>
+						<li><a href="https://pypi.org/project/mypy">mypy</a> — static typing analysis.</li>
+						<li><a href="https://pypi.org/project/plotly">plotly</a> — graphing capabilities.</li>
+						<li><a href="https://pypi.org/project/flake8">flake8</a> — style and linting for Python source.</li>
+						<li><a href="https://pypi.org/project/pre-commit">pre-commit</a> — git hooks for code quality checks.</li>
+						<li><a href="https://pypi.org/project/pandas-stubs">pandas-stubs</a> — type stubs for pandas.</li>
 					</ul>
-				</div>
-			</article>
-		</section>
+				</article>
+
+				<article class="stack-item">
+					<div class="stack-head">
+						<img src="data_files/repo-specific-libraries.png" alt="Repo-specific libraries">
+						<h2>Repo-specific Libraries</h2>
+						<span class="stack-count">8</span>
+					</div>
+					<p class="stack-intro">Specialized libraries used in individual projects (F1, MLB, NBA, etc.).</p>
+					<ul class="pkg-list">
+						<li><a href="https://pypi.org/project/fastf1">fastf1</a> — Formula 1 telemetry (f1Analysis).</li>
+						<li><a href="https://pypi.org/project/mlb-statsapi">mlb-statsapi</a> — MLB data service (baseball-predictions).</li>
+						<li><a href="https://pypi.org/project/nba_api">nba_api</a> — NBA game stats service (nba-predictions).</li>
+						<li><a href="https://pypi.org/project/pybaseball">pybaseball</a> — baseball metrics (baseball-predictions).</li>
+						<li><a href="https://pypi.org/project/cbbd">cbbd</a> — college basketball stats (march-madness).</li>
+						<li><a href="https://pypi.org/project/cfbd">cfbd</a> — college football stats (tailgate-edge).</li>
+						<li><a href="https://pypi.org/project/betfairlightweight">betfairlightweight</a> — Betfair market data (horse-racing-predictions).</li>
+						<li><a href="https://pypi.org/project/sbrscrape">sbrscrape</a> — sportsbook odds scraping helper (multiple repos).</li>
+					</ul>
+				</article>
+
+			</section>
+		</div>
 	</main>
 
-	<footer class="site-footer">
-		<div class="container">© <span id="year"></span> Betting Oracle</div>
+<footer class="site-footer">
+		<div class="wrap footer-in">
+			<p>© <span id="year"></span> Betting Oracle</p>
+			<p>Built with Python · Streamlit · XGBoost</p>
+			<p>For research &amp; entertainment — bet responsibly</p>
+		</div>
 	</footer>
 
 	<script>
-		document.getElementById('year').textContent = new Date().getFullYear();
+		(function () {
+			document.getElementById('year').textContent = new Date().getFullYear();
+
+			var themeBtn = document.getElementById('theme-toggle');
+			var rootEl = document.documentElement;
+			function currentTheme() {
+				return rootEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+			}
+			function applyTheme(theme, persist) {
+				if (theme === 'light') rootEl.setAttribute('data-theme', 'light');
+				else rootEl.removeAttribute('data-theme');
+				var meta = document.querySelector('meta[name="theme-color"]');
+				if (meta) meta.setAttribute('content', theme === 'light' ? '#f5f8fc' : '#070b14');
+				if (persist) {
+					try { localStorage.setItem('bo-theme', theme); } catch (e) {}
+				}
+			}
+			function savedTheme() {
+				try { return localStorage.getItem('bo-theme'); } catch (e) { return null; }
+			}
+			function timeTheme() {
+				var h = new Date().getHours();
+				return h >= 6 && h < 18 ? 'light' : 'dark';
+			}
+			applyTheme(currentTheme(), false);
+			themeBtn.addEventListener('click', function () {
+				applyTheme(currentTheme() === 'light' ? 'dark' : 'light', true);
+			});
+			setInterval(function () {
+				var saved = savedTheme();
+				if (saved !== 'light' && saved !== 'dark') {
+					var want = timeTheme();
+					if (want !== currentTheme()) applyTheme(want, false);
+				}
+			}, 60000);
+		})();
 	</script>
 </body>
 </html>
