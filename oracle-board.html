@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oracle Board — Betting Oracle</title>
+  <meta name="description" content="Explore Betting Oracle sports prediction apps by season, sport, and update cadence.">
+  <link rel="icon" type="image/x-icon" href="data_files/fav.ico">
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #f6f8fb;
+      --surface: #ffffff;
+      --surface-soft: #f0f4f9;
+      --surface-blue: #edf5ff;
+      --text: #172033;
+      --muted: #687386;
+      --line: #dce3ec;
+      --blue: #2f7df4;
+      --blue-dark: #1e63cf;
+      --green: #14804a;
+      --shadow: 0 14px 40px rgba(23, 32, 51, 0.07);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--page);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.drawer-open { overflow: hidden; }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid rgba(47, 125, 244, 0.32); outline-offset: 2px; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+    .topbar-inner {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 68px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .brand img { width: 42px; height: 42px; object-fit: contain; }
+    .nav { display: flex; align-items: center; gap: 24px; }
+    .nav a {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      text-decoration: none;
+    }
+    .nav a:hover, .nav a[aria-current="page"] { color: var(--text); }
+    .menu-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+    .intro {
+      display: flex;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+    .intro h1 { margin: 0; font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.035em; }
+    .intro p { margin: 6px 0 0; color: var(--muted); font-size: 16px; }
+    .search-shell {
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 8px 24px rgba(23, 32, 51, 0.04);
+    }
+    .search-icon { color: var(--muted); font-size: 20px; }
+    .search-shell input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 16px;
+    }
+    .search-shell input::placeholder { color: #8a94a5; }
+    .shortcut {
+      padding: 4px 8px;
+      border-radius: 7px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 26px; }
+    .filter {
+      min-height: 40px;
+      padding: 0 13px;
+      border: 0;
+      border-radius: 9px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 650;
+    }
+    .filter:hover { background: var(--surface-soft); color: var(--text); }
+    .filter.active { background: var(--surface-soft); color: var(--text); }
+    .more-filter { position: relative; }
+    .more-filter select {
+      width: 165px;
+      min-height: 40px;
+      padding: 0 32px 0 13px;
+      border: 0;
+      border-radius: 9px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 650;
+    }
+    .more-filter select:hover, .more-filter select.active { background: var(--surface-soft); color: var(--text); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 0 0 12px;
+    }
+    .section-heading h2 { margin: 0; font-size: 19px; }
+    .section-heading p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .featured-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 30px; }
+    .featured-card {
+      position: relative;
+      min-height: 188px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(23, 32, 51, 0.04);
+      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+    .featured-card:first-child { background: linear-gradient(145deg, var(--surface-blue), var(--surface)); }
+    .featured-card:hover { transform: translateY(-2px); border-color: #b9cce7; box-shadow: var(--shadow); }
+    .featured-top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    .featured-logo, .row-logo, .detail-logo {
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      flex: 0 0 auto;
+      border-radius: 11px;
+      background: var(--surface-blue);
+      border: 1px solid var(--line);
+      padding: 4px;
+    }
+    .featured-logo { width: 96px; height: 68px; }
+    .featured-logo img, .row-logo img, .detail-logo img {
+      position: absolute;
+      inset: 4px;
+      display: block;
+      width: calc(100% - 8px);
+      height: calc(100% - 8px);
+      object-fit: contain;
+      object-position: center;
+    }
+    .featured-reason { color: var(--green); font-size: 12px; font-weight: 750; }
+    .featured-title-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .featured-card h3 { margin: 0 0 3px; font-size: 19px; }
+    .featured-launch { color: var(--muted); font-size: 18px; }
+    .why-label { display: block; margin-bottom: 4px; color: var(--text); font-size: 12px; font-weight: 800; letter-spacing: .02em; text-transform: uppercase; }
+    .featured-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.45; }
+
+    .board-layout { min-width: 0; }
+    .board { min-width: 0; }
+    .group { margin-bottom: 22px; }
+    .group:last-child { margin-bottom: 0; }
+    .group[hidden], .project-row[hidden] { display: none; }
+    .group-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 8px;
+      padding: 0 4px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .group-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .project-row {
+      width: 100%;
+      min-width: 0;
+      min-height: 92px;
+      display: grid;
+      grid-template-columns: 84px minmax(0, 1fr) auto;
+      grid-template-rows: auto auto;
+      align-items: center;
+      gap: 4px 10px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 5px 16px rgba(23, 32, 51, 0.025);
+    }
+    .project-row:hover, .project-row.selected { border-color: #b9cce7; background: var(--surface-blue); }
+    .row-logo { grid-row: 1 / span 2; width: 84px; height: 58px; }
+    .row-copy { min-width: 0; align-self: end; }
+    .row-name { display: block; font-weight: 750; }
+    .row-sport { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .row-cadence { grid-column: 2; grid-row: 2; align-self: start; color: var(--muted); font-size: 12px; }
+    .row-state { grid-column: 3; grid-row: 1; align-self: start; padding: 4px 7px; border-radius: 999px; background: #fff2e2; color: #9a4d00; font-size: 11px; font-weight: 750; white-space: nowrap; }
+
+    .detail-panel {
+      position: fixed;
+      z-index: 50;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(430px, 100%);
+      padding: 22px;
+      overflow-y: auto;
+      border-left: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: -18px 0 50px rgba(23, 32, 51, 0.18);
+      transform: translateX(105%);
+      transition: transform .22s ease;
+    }
+    .detail-panel.open { transform: translateX(0); }
+    .detail-panel[aria-hidden="true"] { pointer-events: none; }
+    .drawer-backdrop {
+      position: fixed;
+      z-index: 40;
+      inset: 0;
+      background: rgba(23, 32, 51, 0.28);
+      backdrop-filter: blur(2px);
+    }
+    .drawer-backdrop[hidden] { display: none; }
+    .detail-toolbar { display: flex; align-items: center; justify-content: flex-end; margin-bottom: 18px; }
+    .detail-close { width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--text); cursor: pointer; font-size: 22px; line-height: 1; }
+    .detail-close:hover { background: var(--surface-soft); }
+    .detail-head { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+    .detail-logo { width: 116px; height: 82px; }
+    .detail-panel h2 { margin: 0; font-size: 21px; }
+    .detail-sport { margin-top: 3px; color: var(--muted); font-size: 14px; }
+    .detail-description { color: var(--muted); font-size: 15px; line-height: 1.55; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 16px 0; }
+    .tag { padding: 6px 8px; border-radius: 7px; background: var(--surface-soft); color: var(--muted); font-size: 12px; }
+    .detail-actions { display: grid; gap: 9px; }
+    .detail-actions a { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 9px; text-decoration: none; font-weight: 750; }
+    .open-link { background: var(--blue); color: #fff; }
+    .open-link:hover { background: var(--blue-dark); }
+    .github-link { background: var(--surface-soft); color: var(--text); }
+    .empty { display: none; padding: 44px 20px; text-align: center; color: var(--muted); }
+    .empty.visible { display: block; }
+
+    footer { padding: 18px 0 28px; color: var(--muted); text-align: center; font-size: 13px; }
+
+    @media (max-width: 900px) {
+      .board-layout { min-width: 0; }
+    }
+    @media (max-width: 720px) {
+      .topbar-inner, main { width: min(100% - 24px, 1180px); }
+      .nav { display: none; position: absolute; left: 12px; right: 12px; top: 61px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); }
+      .nav.open { display: grid; gap: 4px; }
+      .nav a { padding: 11px 10px; border-radius: 8px; }
+      .nav a:hover { background: var(--surface-soft); }
+      .menu-button { display: inline-grid; place-items: center; }
+      main { padding-top: 24px; }
+      .intro { display: block; }
+      .shortcut { display: none; }
+      .group-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .project-row { grid-template-columns: 72px minmax(0, 1fr) auto; }
+    }
+    @media (max-width: 480px) {
+      .brand span { display: none; }
+      .brand img { width: 46px; height: 46px; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .section-heading { align-items: flex-start; }
+      .section-heading p { text-align: right; }
+      .filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 3px; }
+      .filter, .more-filter { white-space: nowrap; }
+      .group-grid { grid-template-columns: 1fr; }
+      .project-row { padding-left: 10px; padding-right: 10px; }
+      .row-logo { width: 72px; height: 50px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="oracle-board.html" aria-label="Betting Oracle home">
+        <img src="data_files/logo.png" alt="">
+        <span>Betting Oracle</span>
+      </a>
+      <nav class="nav" id="site-nav" aria-label="Primary navigation">
+        <a href="oracle-board.html" aria-current="page">Oracle Board</a>
+        <a href="index.html">Original site</a>
+        <a href="packages.html">Packages</a>
+        <a href="machine-learning-models.html">Models</a>
+      </nav>
+      <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <h1 id="page-title">Oracle Board</h1>
+        <p>Your sports prediction apps, organized around what is in season now.</p>
+      </div>
+    </section>
+
+    <label class="search-shell" for="project-search">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <input id="project-search" type="search" placeholder="Search sport, league, model, or app…" autocomplete="off">
+      <span class="shortcut" aria-hidden="true">Ctrl K</span>
+    </label>
+
+    <div class="filters" id="filters" aria-label="Project filters">
+      <button class="filter active" type="button" data-filter="active">In season</button>
+      <button class="filter" type="button" data-filter="soccer">Soccer</button>
+      <button class="filter" type="button" data-filter="major-us">US sports</button>
+      <button class="filter" type="button" data-filter="all">All sports</button>
+      <label class="more-filter">
+        <span class="sr-only">More sport categories</span>
+        <select id="more-filter" aria-label="More sport categories">
+          <option value="">More</option>
+          <option value="racing">Racing &amp; Golf</option>
+          <option value="individual">Individual &amp; Match</option>
+        </select>
+      </label>
+    </div>
+
+    <section aria-labelledby="featured-title">
+      <div class="section-heading">
+        <h2 id="featured-title">Featured this week</h2>
+        <p>Season relevance, priority, and sport diversity</p>
+      </div>
+      <div class="featured-grid" id="featured-grid"></div>
+    </section>
+
+    <section aria-labelledby="board-title">
+      <div class="section-heading">
+        <h2 id="board-title">All prediction apps</h2>
+        <p id="result-count" aria-live="polite"></p>
+      </div>
+      <div class="board-layout" id="board-layout">
+        <div class="board" id="project-board"></div>
+      </div>
+      <div class="empty" id="empty-state">No projects match that search.</div>
+    </section>
+  </main>
+
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="detail-panel" id="detail-panel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="detail-title"></aside>
+
+  <footer>© <span id="year"></span> Betting Oracle</footer>
+
+  <script>
+    const projects = [
+      { name: 'Equine Edge', url: 'http://equine-edge.horse', github: 'https://github.com/gmalbert/horse-racing-predictions', logo: 'data_files/equine-edge.png', category: 'racing', season: 'year-round', sport: 'Horse Racing', cadence: 'Daily', tags: ['XGBoost', 'Value bets', 'Daily'], priority: 10, description: 'Daily UK horse-racing probabilities, race-quality scoring, and tools for identifying potential value.' },
+      { name: 'Pitch Oracle', url: 'http://pitch-oracle.com', github: 'https://github.com/gmalbert/premier-league', logo: 'data_files/pitch-oracle.png', category: 'soccer', start: '08-10', end: '05-25', sport: 'Premier League', cadence: 'Nightly', tags: ['Ensemble', 'ESPN fixtures', 'Match context'], priority: 9, description: 'Premier League match probabilities built from ensemble models, upcoming fixtures, and contextual data.' },
+      { name: 'Gridiron Oracle', url: 'http://gridiron-oracle.com', github: 'https://github.com/gmalbert/nfl-predictions', logo: 'data_files/gridiron-oracle.png', category: 'major-us', start: '09-05', end: '02-10', sport: 'NFL', cadence: 'Weekly', tags: ['XGBoost', 'Player props', 'Kelly sizing'], priority: 10, description: 'NFL game, spread, and player-prop predictions with bankroll and bet-sizing tools.' },
+      { name: 'Gridlocked Oracle', url: 'http://gridlocked.racing', github: 'https://github.com/gmalbert/f1Analysis', logo: 'data_files/gridlocked-logo-with-text.png', category: 'racing', start: '03-15', end: '12-10', sport: 'Formula 1', cadence: 'Race week', tags: ['Ensemble', '86+ features', 'Race email'], priority: 8, description: 'Formula 1 race-finish analytics powered by extensive feature engineering and multiple models.' },
+      { name: 'Bracket Oracle', url: 'http://bracket-oracle.com', github: 'https://github.com/gmalbert/march-madness', logo: 'data_files/bracket-oracle.png', category: 'major-us', start: '03-15', end: '04-10', sport: 'March Madness', cadence: 'Tournament', tags: ['Ensemble', 'KenPom', 'Kelly sizing'], priority: 8, description: 'Tournament predictions combining historical results, efficiency ratings, and value-bet sizing.' },
+      { name: 'Oracle on Ice', url: 'http://oracle-on-ice.com', github: 'https://github.com/gmalbert/hockey-predictions', logo: 'data_files/oracle-on-ice.png', category: 'major-us', start: '10-10', end: '06-20', sport: 'NHL', cadence: 'Daily', tags: ['xG model', 'Live odds', '11 views'], priority: 8, description: 'NHL game forecasts, expected-goals analysis, and live odds across a multi-page dashboard.' },
+      { name: 'Fairway Oracle', url: 'http://www.fairway-oracle.com', github: 'https://github.com/gmalbert/golf-predictions', logo: 'data_files/fairway-oracle.png', category: 'racing', season: 'year-round', sport: 'PGA Golf', cadence: 'Tournament', tags: ['XGBoost', 'LSTM', 'Weather'], priority: 7, description: 'PGA tournament predictions incorporating player form, weather, and machine-learning models.' },
+      { name: 'Breakpoint Oracle', url: 'http://www.breakpoint-oracle.com', github: 'https://github.com/gmalbert/tennis-predictions', logo: 'data_files/breakpoint-oracle.png', category: 'individual', season: 'year-round', sport: 'Tennis', cadence: 'Daily', tags: ['ELO', 'Surface form', 'Live odds'], priority: 7, description: 'Tennis match probabilities shaped by ELO ratings, playing surface, recent form, and live odds.' },
+      { name: 'Betting Cleanup', url: 'http://www.betting-cleanup.com', github: 'https://github.com/gmalbert/baseball-predictions', logo: 'data_files/betting-cleanup.png', category: 'major-us', start: '04-01', end: '10-31', sport: 'MLB', cadence: 'Daily', tags: ['XGBoost', 'Live odds', '7 views'], priority: 8, description: 'Daily baseball forecasts, matchup analysis, and live odds presented across seven focused views.' },
+      { name: 'Betting Baseline', url: 'http://www.betting-baseline.com', github: 'https://github.com/gmalbert/nba-predictions', logo: 'data_files/betting-baseline.png', category: 'major-us', start: '10-15', end: '06-20', sport: 'NBA', cadence: 'Nightly', tags: ['XGBoost', 'Pick 6', 'Nightly'], priority: 8, description: 'Nightly NBA predictions and Pick 6 analysis powered by an XGBoost modeling pipeline.' },
+      { name: 'Tailgate Edge', url: 'http://www.tailgate-edge.com', github: 'https://github.com/gmalbert/college-football-predictions', logo: 'data_files/tailgate-edge.png', category: 'major-us', start: '08-25', end: '01-10', sport: 'College Football', cadence: 'Weekly', tags: ['XGBoost', 'Value bets', 'CFBD'], priority: 8, description: 'College football value predictions using CFBD data, recent form, and an XGBoost model.' },
+      { name: 'MLS Oracle', url: 'http://www.mls-oracle.com', github: 'https://github.com/gmalbert/mls-predictions', logo: 'data_files/mls.png', category: 'soccer', start: '02-22', end: '10-20', sport: 'MLS', cadence: 'Weekly', tags: ['Ensemble', 'Travel fatigue', 'Playoff race'], priority: 8, description: 'MLS match predictions incorporating travel, fatigue, recent performance, and playoff context.' },
+      { name: 'Bet Bundesliga', url: 'http://www.bet-bundesliga.com', github: 'https://github.com/gmalbert/bundesliga', logo: 'data_files/bundesliga.png', category: 'soccer', start: '08-15', end: '05-20', sport: 'Bundesliga', cadence: 'Matchday', tags: ['Ensemble', 'Value bets', 'Entropy'], priority: 7, description: 'Bundesliga probabilities and value signals from an ensemble model with uncertainty measures.' },
+      { name: 'La Liga Linea', url: 'http://www.laliga-linea.com', github: 'https://github.com/gmalbert/la-liga', logo: 'data_files/laliga.png', category: 'soccer', start: '08-15', end: '05-25', sport: 'La Liga', cadence: 'Matchday', tags: ['Weighted ensemble', 'xG rankings', 'Best bets'], priority: 7, description: 'La Liga match forecasts using weighted models, expected-goal rankings, and best-bet views.' },
+      { name: 'Bullziq', url: 'http://www.bullziq.com', github: 'https://github.com/gmalbert/darts', logo: 'data_files/darts.png', category: 'individual', season: 'year-round', sport: 'Darts', cadence: 'Nightly', tags: ['ELO', 'Steam moves', 'Nightly'], priority: 6, description: 'Nightly darts probabilities with ELO ratings, form analysis, and market-movement signals.' },
+      { name: 'GoallineIQ', url: 'http://www.goallineiq.com', github: 'https://github.com/gmalbert/world-cup', logo: 'data_files/world-cup.png', category: 'soccer', start: '06-11', end: '07-19', sport: 'World Cup', cadence: 'Tournament', tags: ['Elo + Poisson', 'Monte Carlo', 'Tournament'], priority: 10, description: 'World Cup match and tournament forecasts using ELO, Poisson scoring, and Monte Carlo simulation.' },
+      { name: 'KnockoutIQ', url: 'http://www.knockoutiq.com', github: 'https://github.com/gmalbert/boxing', logo: 'data_files/boxing.png', category: 'individual', season: 'year-round', sport: 'Boxing', cadence: 'Fight week', tags: ['ELO', 'Live odds', 'Bet tracker'], priority: 6, description: 'Boxing forecasts pairing ELO-based ratings with live odds and a focused betting tracker.' },
+      { name: 'Ligue Odds', url: 'http://www.ligue-odds.com', github: 'https://github.com/gmalbert/ligue-1', logo: 'data_files/ligue-1.png', category: 'soccer', start: '08-10', end: '05-20', sport: 'Ligue 1', cadence: 'Matchday', tags: ['ELO', 'Kelly tracker', 'Odds movement'], priority: 6, description: 'Ligue 1 probabilities with ELO ratings, odds movement, and Kelly-based tracking.' },
+      { name: 'Her Hoops Edge', url: 'http://www.herhoopsedge.com', github: 'https://github.com/gmalbert/wnba-predictions', logo: 'data_files/her-hoops-edge.png', category: 'individual', start: '08-20', end: '06-25', sport: 'WNBA', cadence: 'Nightly', tags: ['XGBoost', 'Player props', 'Nightly'], priority: 7, description: 'WNBA game and player-prop predictions generated nightly with an XGBoost model.' },
+      { name: 'Pong Odds', url: 'http://www.pongodds.com', github: 'https://github.com/gmalbert/table-tennis', logo: 'data_files/pong-odds.png', category: 'individual', season: 'year-round', sport: 'Table Tennis', cadence: 'Nightly', tags: ['Win probability', 'Factor breakdown', 'Nightly'], priority: 6, description: 'Nightly table-tennis win probabilities with a transparent breakdown of contributing factors.' },
+      { name: 'Wicket Odds', url: 'http://www.wicketodds.com', github: 'https://github.com/gmalbert/cricket', logo: 'data_files/wicket-odds.png', category: 'individual', season: 'year-round', sport: 'Cricket', cadence: 'Matchday', tags: ['XGBoost + LightGBM', 'Monte Carlo', 'Value bets'], priority: 7, description: 'Cricket match and player insights using boosted models, simulation, and value identification.' },
+      { name: 'ScrumBet', url: 'http://www.scrumbet.com', github: 'https://github.com/gmalbert/rugby', logo: 'data_files/scrumbet.png', category: 'individual', season: 'year-round', sport: 'Rugby', cadence: 'Matchday', tags: ['Elo + Dixon-Coles', 'Try scorers', 'Parlay builder'], priority: 7, description: 'Rugby match and try-scorer predictions with ELO, Dixon-Coles, and parlay-building tools.' },
+      { name: 'Super Lig Goals', url: 'http://www.superliggoals.com', github: 'https://github.com/gmalbert/turkey-soccer', logo: 'data_files/super-lig.png', category: 'soccer', start: '08-05', end: '05-25', sport: 'Süper Lig', cadence: 'Matchday', tags: ['Ensemble', 'Neural network', 'xG features'], priority: 6, description: 'Süper Lig forecasts combining ensemble and neural models with expected-goal features.' },
+      { name: 'Kilt The Odds', url: 'http://www.kilttheodds.com', github: 'https://github.com/gmalbert/scotland-premiership', logo: 'data_files/kilt-the-odds.png', category: 'soccer', start: '08-01', end: '05-25', sport: 'Scottish Premiership', cadence: 'Matchday', tags: ['Value bets', 'xG proxy', 'Odds adapter'], priority: 6, description: 'Scottish Premiership value forecasts supported by expected-goal proxies and normalized odds.' },
+      { name: 'Windmill Wagers', url: 'http://www.windmillwagers.com', github: 'https://github.com/gmalbert/netherlands-soccer', logo: 'data_files/windmill-wagers.png', category: 'soccer', start: '08-10', end: '05-20', sport: 'Eredivisie', cadence: 'Matchday', tags: ['Neural models', 'xG proxy', 'Value bets'], priority: 6, description: 'Eredivisie predictions using neural models, expected-goal proxies, and value detection.' },
+      { name: 'Waffle Wagers', url: 'http://www.wafflewagers.com', github: 'https://github.com/gmalbert/belgium-soccer', logo: 'data_files/waffle-wagers.png', category: 'soccer', start: '07-25', end: '05-25', sport: 'Belgian Pro League', cadence: 'Matchday', tags: ['Value bets', 'xG proxy', 'Odds adapter'], priority: 6, description: 'Belgian Pro League value forecasts built from shot-based features and normalized odds.' },
+      { name: 'Primeira Goals', url: 'http://www.primeiragoals.com', github: 'https://github.com/gmalbert/portugal-soccer', logo: 'data_files/primeira-goals.png', category: 'soccer', start: '08-10', end: '05-25', sport: 'Primeira Liga', cadence: 'Matchday', tags: ['Value bets', 'xG proxy', 'Goal markets'], priority: 6, description: 'Primeira Liga match and goal-market predictions with expected-goal proxies and value signals.' },
+      { name: 'Tip the King', url: 'https://www.tiptheking.com', logo: 'data_files/chess.png', category: 'individual', season: 'year-round', sport: 'Chess', cadence: 'Matchday', tags: ['Lichess data', 'Kalshi markets', 'Benchmarks'], priority: 6, description: 'Chess event schedules, real Lichess game benchmarks, and Kalshi market research with saved calibration runs.' },
+      { name: 'Frozen Odds', url: 'https://www.frozenodds.com', logo: 'data_files/college-hockey.png', category: 'major-us', start: '10-05', end: '04-10', sport: 'College Hockey', cadence: 'Daily', tags: ['Team ratings', 'Model predictions', 'DraftKings odds'], priority: 8, description: 'College hockey predictions built from NCAA and College Hockey News records, with team ratings and daily DraftKings odds.' },
+      { name: 'Jai Alai Odds', url: 'https://www.jaialaiodds.com', logo: 'data_files/jaialai.png', category: 'individual', season: 'year-round', sport: 'Jai Alai', cadence: 'Matchday', tags: ['AI predictions', 'Player analytics', 'Value bets'], priority: 6, description: 'Jai alai match forecasts with nightly data collection, player analytics, and market-vs-model value detection.' }
+    ];
+
+    // Set pinned: true on any project to override the automatic weekly selection.
+    projects.forEach(project => { project.pinned ??= false; });
+
+    const categoryLabels = {
+      soccer: 'Soccer',
+      'major-us': 'US Sports',
+      racing: 'Racing & Golf',
+      individual: 'Individual & Match'
+    };
+
+    const featuredGrid = document.getElementById('featured-grid');
+    const projectBoard = document.getElementById('project-board');
+    const detailPanel = document.getElementById('detail-panel');
+    const drawerBackdrop = document.getElementById('drawer-backdrop');
+    const searchInput = document.getElementById('project-search');
+    const filters = [...document.querySelectorAll('.filter')];
+    const moreFilter = document.getElementById('more-filter');
+    const emptyState = document.getElementById('empty-state');
+    const resultCount = document.getElementById('result-count');
+    let currentFilter = 'active';
+    let selectedProject = null;
+    let lastTrigger = null;
+
+    function isInSeason(project, date = new Date()) {
+      if (project.season === 'year-round') return true;
+      if (!project.start || !project.end) return false;
+      const current = (date.getMonth() + 1) * 100 + date.getDate();
+      const [startMonth, startDay] = project.start.split('-').map(Number);
+      const [endMonth, endDay] = project.end.split('-').map(Number);
+      const start = startMonth * 100 + startDay;
+      const end = endMonth * 100 + endDay;
+      return start <= end ? current >= start && current <= end : current >= start || current <= end;
+    }
+
+    function weekKey(date = new Date()) {
+      const copy = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+      copy.setUTCDate(copy.getUTCDate() + 4 - (copy.getUTCDay() || 7));
+      const yearStart = new Date(Date.UTC(copy.getUTCFullYear(), 0, 1));
+      const week = Math.ceil((((copy - yearStart) / 86400000) + 1) / 7);
+      return `${copy.getUTCFullYear()}-${week}`;
+    }
+
+    function stableJitter(value) {
+      let hash = 2166136261;
+      for (const char of value) {
+        hash ^= char.charCodeAt(0);
+        hash = Math.imul(hash, 16777619);
+      }
+      return Math.abs(hash % 30);
+    }
+
+    function selectFeatured() {
+      const week = weekKey();
+      const active = projects.filter(project => isInSeason(project));
+      const scored = active.map(project => ({
+        project,
+        score: project.priority * 100 + stableJitter(`${project.name}-${week}`)
+      })).sort((a, b) => b.score - a.score);
+
+      const chosen = projects.filter(project => project.pinned && isInSeason(project)).slice(0, 2);
+      const usedCategories = new Set(chosen.map(project => project.category));
+
+      for (const { project } of scored) {
+        if (chosen.length >= 2) break;
+        if (chosen.includes(project) || usedCategories.has(project.category)) continue;
+        chosen.push(project);
+        usedCategories.add(project.category);
+      }
+      for (const { project } of scored) {
+        if (chosen.length >= 2) break;
+        if (!chosen.includes(project)) chosen.push(project);
+      }
+      return chosen;
+    }
+
+    function logoMarkup(project, className) {
+      const initials = project.name.split(/\s+/).map(word => word[0]).join('').slice(0, 2).toUpperCase();
+      return `<span class="${className}"><img src="${project.logo}" alt="${project.name} logo" data-fallback="${initials}"></span>`;
+    }
+
+    function featuredReason(project) {
+      if (project.pinned) return 'Editor’s pick';
+      if (project.season === 'year-round') return 'Available year-round';
+      return `${project.sport} is in season`;
+    }
+
+    function featuredNarrative(project) {
+      if (project.season === 'year-round') return `${project.cadence} forecasts keep this app useful throughout the calendar.`;
+      const cadenceNarratives = {
+        Daily: `Fresh ${project.sport} forecasts are available throughout the current season.`,
+        Nightly: `${project.sport} is underway, with matchup forecasts refreshing nightly.`,
+        Weekly: `${project.sport} is underway, with the next weekly slate taking shape.`,
+        Matchday: `${project.sport} matchdays are underway, with current fixtures ready to review.`,
+        Tournament: `${project.sport} tournament coverage is currently in season.`,
+        'Race week': `${project.sport} race-week forecasts are available during the current calendar.`,
+        'Fight week': `${project.sport} fight-week forecasts are available for current cards.`
+      };
+      return cadenceNarratives[project.cadence] || `${project.sport} is in season and ready to explore.`;
+    }
+
+    function renderFeatured() {
+      featuredGrid.innerHTML = selectFeatured().map(project => `
+        <a class="featured-card" href="${project.url}" target="_blank" rel="noopener noreferrer" aria-label="Open ${project.name} in a new tab">
+          <div class="featured-top">
+            ${logoMarkup(project, 'featured-logo')}
+            <span class="featured-reason">${featuredReason(project)}</span>
+          </div>
+          <div>
+            <div class="featured-title-row"><h3>${project.name}</h3><span class="featured-launch" aria-hidden="true">↗</span></div>
+            <span class="why-label">Why now</span>
+            <p>${featuredNarrative(project)}</p>
+          </div>
+        </a>
+      `).join('');
+      wireImageFallbacks(featuredGrid);
+    }
+
+    function matchesProject(project) {
+      const query = searchInput.value.trim().toLowerCase();
+      const haystack = [project.name, project.sport, project.cadence, project.category, project.description, ...project.tags].join(' ').toLowerCase();
+      const searchMatch = !query || haystack.includes(query);
+      let filterMatch = true;
+      if (currentFilter === 'active') filterMatch = isInSeason(project);
+      else if (currentFilter !== 'all') filterMatch = project.category === currentFilter;
+      return searchMatch && filterMatch;
+    }
+
+    function renderBoard() {
+      const visible = projects.filter(matchesProject);
+      const groups = ['soccer', 'major-us', 'racing', 'individual'];
+      projectBoard.innerHTML = groups.map(category => {
+        const groupProjects = visible.filter(project => project.category === category);
+        if (!groupProjects.length) return '';
+        return `
+          <section class="group" data-category="${category}">
+            <div class="group-heading"><span>${categoryLabels[category]}</span><span>${groupProjects.length}</span></div>
+            <div class="group-grid">
+              ${groupProjects.map(project => {
+                const active = isInSeason(project);
+                return `
+                  <button class="project-row${selectedProject === project ? ' selected' : ''}" type="button" data-project="${project.name}">
+                    ${logoMarkup(project, 'row-logo')}
+                    <span class="row-copy"><span class="row-name">${project.name}</span><span class="row-sport">${project.sport}</span></span>
+                    <span class="row-cadence">${project.cadence}</span>
+                    ${active ? '' : '<span class="row-state">Off season</span>'}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          </section>
+        `;
+      }).join('');
+
+      resultCount.textContent = `${visible.length} ${visible.length === 1 ? 'app' : 'apps'}`;
+      emptyState.classList.toggle('visible', visible.length === 0);
+      projectBoard.style.display = visible.length ? '' : 'none';
+
+      if (selectedProject && !visible.includes(selectedProject)) closeDetail({ restoreFocus: false });
+
+      projectBoard.querySelectorAll('.project-row').forEach(row => {
+        row.addEventListener('click', () => {
+          selectedProject = projects.find(project => project.name === row.dataset.project);
+          lastTrigger = row;
+          projectBoard.querySelectorAll('.project-row').forEach(item => item.classList.toggle('selected', item === row));
+          renderDetail(selectedProject);
+        });
+      });
+      wireImageFallbacks(projectBoard);
+    }
+
+    function renderDetail(project) {
+      detailPanel.innerHTML = `
+        <div class="detail-toolbar"><button class="detail-close" type="button" aria-label="Close app details">×</button></div>
+        <div class="detail-head">
+          ${logoMarkup(project, 'detail-logo')}
+          <div><h2 id="detail-title">${project.name}</h2><div class="detail-sport">${project.sport} · ${project.cadence}</div></div>
+        </div>
+        <p class="detail-description">${project.description}</p>
+        <div class="tags">${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>
+        <div class="detail-actions">
+          <a class="open-link" href="${project.url}" target="_blank" rel="noopener noreferrer">Open app ↗</a>
+          ${project.github ? `<a class="github-link" href="${project.github}" target="_blank" rel="noopener noreferrer">View GitHub ↗</a>` : ''}
+        </div>
+      `;
+      wireImageFallbacks(detailPanel);
+      detailPanel.classList.add('open');
+      detailPanel.setAttribute('aria-hidden', 'false');
+      drawerBackdrop.hidden = false;
+      document.body.classList.add('drawer-open');
+      const closeButton = detailPanel.querySelector('.detail-close');
+      closeButton.addEventListener('click', closeDetail);
+      closeButton.focus();
+    }
+
+    function closeDetail({ restoreFocus = true } = {}) {
+      const trigger = lastTrigger;
+      selectedProject = null;
+      detailPanel.classList.remove('open');
+      detailPanel.setAttribute('aria-hidden', 'true');
+      drawerBackdrop.hidden = true;
+      document.body.classList.remove('drawer-open');
+      projectBoard.querySelectorAll('.project-row').forEach(row => row.classList.remove('selected'));
+      detailPanel.innerHTML = '';
+      if (restoreFocus && trigger?.isConnected) trigger.focus();
+      lastTrigger = null;
+    }
+
+    function wireImageFallbacks(root) {
+      root.querySelectorAll('img[data-fallback]').forEach(image => {
+        image.addEventListener('error', () => {
+          const parent = image.parentElement;
+          parent.textContent = image.dataset.fallback;
+          parent.setAttribute('aria-label', `${image.alt} unavailable`);
+        }, { once: true });
+      });
+    }
+
+    filters.forEach(button => {
+      button.setAttribute('aria-pressed', String(button.classList.contains('active')));
+      button.addEventListener('click', () => {
+        currentFilter = button.dataset.filter;
+        filters.forEach(filter => {
+          const selected = filter === button;
+          filter.classList.toggle('active', selected);
+          filter.setAttribute('aria-pressed', String(selected));
+        });
+        moreFilter.value = '';
+        moreFilter.classList.remove('active');
+        renderBoard();
+      });
+    });
+    moreFilter.addEventListener('change', () => {
+      if (!moreFilter.value) return;
+      currentFilter = moreFilter.value;
+      filters.forEach(filter => {
+        filter.classList.remove('active');
+        filter.setAttribute('aria-pressed', 'false');
+      });
+      moreFilter.classList.add('active');
+      renderBoard();
+    });
+    searchInput.addEventListener('input', renderBoard);
+    drawerBackdrop.addEventListener('click', closeDetail);
+    document.addEventListener('keydown', event => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
+        searchInput.focus();
+      }
+      if (event.key === 'Escape' && detailPanel.classList.contains('open')) closeDetail();
+    });
+
+    const menuButton = document.getElementById('menu-button');
+    const siteNav = document.getElementById('site-nav');
+    menuButton.addEventListener('click', () => {
+      const open = siteNav.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    renderFeatured();
+    renderBoard();
+  </script>
+</body>
+</html>
